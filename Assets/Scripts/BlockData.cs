@@ -6,6 +6,7 @@ public class BlockData : MonoBehaviour {
 
 	public string color;
 	public Vector3 position;
+	public Vector2 gridCoord;
 	public Material texture;
 
 	public float boardWidth;
@@ -36,6 +37,13 @@ public class BlockData : MonoBehaviour {
 
 	void OnMouseUp(){
 		transform.position = new Vector3 (transform.position.x, transform.position.y, 0f);
-		this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		this.GetComponent<Rigidbody> ().velocity = new Vector3(0,1,0);
+	}
+
+	void onCollisionEnter(Collision collision){
+		if(collision.gameObject.tag == "Block"){
+			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		}
 	}
 }
