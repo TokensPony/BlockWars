@@ -12,6 +12,8 @@ public class BoutManager : MonoBehaviour {
 	public float yOffset = .15f;
 	private float spawnHeight = 1f;
 
+	public List<Material> textures;
+
 	// Use this for initialization
 	void Start () {
 		/*for (int x = 0; x < 10; x++) {
@@ -28,6 +30,7 @@ public class BoutManager : MonoBehaviour {
 
 	public void createBlock(int xPos, int yPos){
 		GameObject newBlock = Instantiate (block);
+		newBlock.GetComponent<Renderer> ().material = textures[Random.Range(0, textures.Count)];
 		//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
 		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), yPos + spawnHeight + (yPos*yOffset), 0f);
 		if (spawnPoint.x > 0f) {
@@ -57,6 +60,7 @@ public class BoutManager : MonoBehaviour {
 		}
 	}
 
+	/*Prints a text representation of the 2D array to the console. Used for debugging*/
 	public void printGrid(){
 		string grid = "";
 		for (int y = blocks.GetLength (0)-1; y >= 0; y--) {
