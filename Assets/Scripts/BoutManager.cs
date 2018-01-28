@@ -25,7 +25,7 @@ public class BoutManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		isMarked ();
 	}
 
 	public void createBlock(int xPos, int yPos){
@@ -33,13 +33,16 @@ public class BoutManager : MonoBehaviour {
 		newBlock.GetComponent<Renderer> ().material = textures[Random.Range(0, textures.Count)];
 		//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
 		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), yPos + spawnHeight + (yPos*yOffset), 0f);
+		//Debug.Log (spawnPoint.y);
 		if (spawnPoint.x > 0f) {
 			spawnPoint.x += (xOffset*spawnPoint.x);
 		} else if (spawnPoint.x < 0f) {
 			spawnPoint.x -= (xOffset*Mathf.Abs(spawnPoint.x));
 		}
-		block.transform.position = spawnPoint;
-		newBlock.GetComponent<BlockData> ().gridCoord = new Vector2 (yPos, xPos);
+		newBlock.transform.position = spawnPoint;
+		newBlock.GetComponent<BlockData> ().gridCoord = new Vector2 (xPos, yPos);
+		//Debug.Log (newBlock.GetComponent<BlockData> ().spawnY);
+		//Debug.Log ("X: " + xPos + "Y: " + yPos);
 		blocks [yPos, xPos] = newBlock;
 	}
 
@@ -50,14 +53,24 @@ public class BoutManager : MonoBehaviour {
 	public void populatePile(){
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < 5; y++) {
+				//.25f
 				if (Random.value > .25f) {
 					createBlock (x, y);
-					//WaitForSeconds (1);
+					//StartCoroutine (waiting (x, y));
 				} else {
 					break;
 				}
 			}
 		}
+	}
+		
+	IEnumerator waiting(int x, int y){
+		yield return new WaitForSeconds (1 * y);
+		createBlock (x, y);
+	}
+
+	void OnMouseDown(){
+		
 	}
 
 	/*Prints a text representation of the 2D array to the console. Used for debugging*/
@@ -74,5 +87,20 @@ public class BoutManager : MonoBehaviour {
 			grid += "\n";
 		}
 		Debug.Log (grid);
+	}
+
+	public void isMarked(){
+		for (int y = blocks.GetLength (0)-1; y >= 0; y--) {
+			for (int x = 0; x < blocks.GetLength (1); x++) {
+				if (blocks [y, x] != null && blocks[y,x].GetComponent<BlockData>().marked) {
+					//Debug.Log ("Before: " + blocks [y, x]);
+					Destroy (blocks [y, x].gameObject);
+					blocks [y, x] = null;
+					//Debug.Log ("After: " + blocks [y, x]);
+					printGrid ();
+				} else {
+				}
+			}
+		}
 	}
 }
