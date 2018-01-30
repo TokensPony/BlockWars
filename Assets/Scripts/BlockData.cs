@@ -9,6 +9,8 @@ public class BlockData : MonoBehaviour{
 	public string color;
 	public Vector3 position;
 	public Vector2 gridCoord;
+
+	public BoutManager manager;
 	//public float spawnY;
 	//public List<Material> textures;
 
@@ -19,6 +21,7 @@ public class BlockData : MonoBehaviour{
 	public bool marked;
 
 	public void Start(){
+		manager = GameObject.Find("BoutManager").GetComponent<BoutManager>();
 		marked = false;
 		boardWidth = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().boardWidth;
 		xOffset = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().xOffset;
@@ -31,7 +34,7 @@ public class BlockData : MonoBehaviour{
 		//onMouseDown ();
 	}
 
-	void OnMouseDrag()
+	/*void OnMouseDrag()
 	{
 		float distance_to_screen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
 		Vector3 pos_move = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, distance_to_screen));
@@ -41,7 +44,7 @@ public class BlockData : MonoBehaviour{
 			snapPosition += (xOffset * snapPosition);
 		}
 		transform.position = new Vector3 (snapPosition, pos_move.y, -2f);
-	}
+	}*/
 
 	/*public void OnDrag(PointerEventData ped){
 		float distance_to_screen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
@@ -75,10 +78,12 @@ public class BlockData : MonoBehaviour{
 			bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
 			if (hit) 
 			{
-				Debug.Log("Hit " + hitInfo.transform.gameObject.name);
+			GameObject target = hitInfo.transform.gameObject;
+			Debug.Log("Hit " + target.name);
 				if (hitInfo.transform.gameObject.tag == "Block")
 				{
-					Debug.Log ("It's working!");
+				manager.findBlock (this.gameObject);
+					//Debug.Log ("It's working!");
 				//Destroy (hitInfo.transform.gameObject);
 				} else {
 					Debug.Log ("nopz");
