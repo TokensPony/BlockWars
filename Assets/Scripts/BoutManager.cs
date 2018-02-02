@@ -35,6 +35,17 @@ public class BoutManager : MonoBehaviour {
 		}*/
 	}
 
+	public void addBlock(GameObject dropBlock){
+		int xPos = Mathf.RoundToInt(dropBlock.GetComponent<BlockData> ().gridCoord.x);
+		for (int y = 0; y < blocks.GetLength (0); y++) {
+			if (blocks [y, xPos] == null) {
+				dropBlock.GetComponent<BlockData> ().gridCoord.y = y;
+				blocks [y, xPos] = dropBlock;
+				break;
+			}
+		}
+	}
+
 	public void createBlock(int xPos, int yPos){
 		GameObject newBlock = Instantiate (block);
 		int randIndex = Random.Range (0, textures.Count);
@@ -127,7 +138,7 @@ public class BoutManager : MonoBehaviour {
 			}
 		}
 		collapseBoard ();
-		printGrid ();
+		//printGrid ();
 	}
 
 	/*Readjusts the positions of the objects in the Grid after a move has been made.*/
@@ -145,6 +156,7 @@ public class BoutManager : MonoBehaviour {
 			yIndex = 0;
 		}
 		blocks = temp;
+		printGrid ();
 	}
 
 	public bool matchMade(GameObject startBlock){

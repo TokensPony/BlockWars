@@ -34,17 +34,22 @@ public class BlockData : MonoBehaviour{
 		//onMouseDown ();
 	}
 
-	/*void OnMouseDrag()
+	void OnMouseDrag()
 	{
-		float distance_to_screen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-		Vector3 pos_move = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, distance_to_screen));
-		float snapPosition = ((pos_move.x - Mathf.Floor (pos_move.x)) > .5f) ? Mathf.Ceil (pos_move.x) : Mathf.Floor (pos_move.x);
-		snapPosition = (Mathf.Abs (snapPosition) > boardWidth / 2) ? transform.position.x : snapPosition;
-		if (snapPosition != 0f && Mathf.Abs(snapPosition) + (xOffset* Mathf.Abs(snapPosition)) < (boardWidth/2)+ xOffset*boardWidth) {
-			snapPosition += (xOffset * snapPosition);
+		if(this.tag == "inHand"){
+			float distance_to_screen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+			Vector3 pos_move = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, distance_to_screen));
+			float snapPosition = ((pos_move.x - Mathf.Floor (pos_move.x)) > .5f) ? Mathf.Ceil (pos_move.x) : Mathf.Floor (pos_move.x);
+			snapPosition = (Mathf.Abs (snapPosition) > boardWidth / 2) ? transform.position.x : snapPosition;
+			//Debug.Log (snapPosition);
+			this.gridCoord = new Vector2 (snapPosition + (boardWidth/2), 10);
+			Debug.Log (this.gridCoord.x);
+			if (snapPosition != 0f && Mathf.Abs(snapPosition) + (xOffset* Mathf.Abs(snapPosition)) < (boardWidth/2)+ xOffset*boardWidth) {
+				snapPosition += (xOffset * snapPosition);
+			}
+			transform.position = new Vector3 (snapPosition, pos_move.y, -2f);
 		}
-		transform.position = new Vector3 (snapPosition, pos_move.y, -2f);
-	}*/
+	}
 
 	/*public void OnDrag(PointerEventData ped){
 		float distance_to_screen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
@@ -59,7 +64,25 @@ public class BlockData : MonoBehaviour{
 
 	void OnMouseUp(){
 		transform.position = new Vector3 (transform.position.x, transform.position.y, 0f);
-		this.GetComponent<Rigidbody> ().velocity = new Vector3(0,1,0);
+		if (this.tag == "Block") {
+			this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, 1, 0);
+		}
+		if(this.tag == "inHand"){
+			manager.addBlock(this.gameObject);
+			manager.collapseBoard ();
+			//this.GetComponent<Rigidbody> ().velocity = new Vector3(0,1,0);
+			this.GetComponent<Rigidbody>().useGravity = true;
+			this.tag = "Block";
+			this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, -1, 0);
+			/*while (this.GetComponent<Rigidbody> ().velocity != Vector3.zero) {
+			
+			}*/
+
+		}
+	}
+
+	IEnumerable waitToCollide(){
+		yield return null;
 	}
 
 	void onCollisionEnter(Collision collision){
