@@ -30,6 +30,7 @@ public class HandManager : MonoBehaviour {
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
 		newBlock.GetComponent<Rigidbody> ().useGravity = false;
 		newBlock.tag = "inHand";
+		newBlock.GetComponent<BlockData> ().handPos = new Vector3 (xPos, -1, 0);
 		newBlock.transform.position = new Vector3 (xPos, -1f, 0);
 		return newBlock;
 	}

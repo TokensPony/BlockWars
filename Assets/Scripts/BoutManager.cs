@@ -35,6 +35,8 @@ public class BoutManager : MonoBehaviour {
 		}*/
 	}
 
+	/*Adds a dropped block to the existing board by reading it's X coordinate and placing it
+	into the first available Y coordinate.*/
 	public void addBlock(GameObject dropBlock){
 		int xPos = Mathf.RoundToInt(dropBlock.GetComponent<BlockData> ().gridCoord.x);
 		for (int y = 0; y < blocks.GetLength (0); y++) {
@@ -118,7 +120,8 @@ public class BoutManager : MonoBehaviour {
 						removeMarked ();
 					} else {
 						matchCount = 0;
-						blocks [y, x].GetComponent<BlockData> ().marked = false;
+						//blocks [y, x].GetComponent<BlockData> ().marked = false;
+						unmark();
 					}
 				}
 			}
@@ -150,6 +153,9 @@ public class BoutManager : MonoBehaviour {
 				if (blocks [y, x] != null) {
 					temp [yIndex, x] = blocks [y, x];
 					temp [yIndex, x].GetComponent<BlockData> ().gridCoord = new Vector2 (x, yIndex);
+					if (yIndex < y) {
+						//temp [yIndex, x].GetComponent<BlockData> ().marked = true;
+					}
 					yIndex++;
 				}
 			}
@@ -207,6 +213,10 @@ public class BoutManager : MonoBehaviour {
 			matchCount++;
 		}
 
+		/*if (matchCount < 2) {
+			startBlock.GetComponent<BlockData> ().marked = false;
+		}*/
+
 		return found;
 	}
 
@@ -224,6 +234,16 @@ public class BoutManager : MonoBehaviour {
 					Debug.Log ("X: " + x + "Y: " + y);*/
 					bl.GetComponent<BlockData> ().marked = true;
 					isMarked ();
+				}
+			}
+		}
+	}
+
+	public void unmark(){
+		for (int x = 0; x < blocks.GetLength (1); x++) {
+			for (int y = 0; y < blocks.GetLength (0); y++) {
+				if (blocks [y, x] != null) {
+					blocks [y, x].GetComponent<BlockData> ().marked = false;
 				}
 			}
 		}
