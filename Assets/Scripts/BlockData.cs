@@ -11,15 +11,15 @@ public class BlockData : MonoBehaviour{
 	public Vector2 gridCoord;
 	public Vector3 handPos;
 
-	public GameObject bar;
+	GameObject bar;
 
 	public BoutManager manager;
-	//public float spawnY;
-	//public List<Material> textures;
 
 	public float boardWidth;
 	private float xOffset;
 	private float offset = .15f;
+
+	public float barOffset;
 
 	public bool marked;
 
@@ -28,7 +28,7 @@ public class BlockData : MonoBehaviour{
 		marked = false;
 		boardWidth = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().boardWidth;
 		xOffset = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().xOffset;
-		bar = GameObject.Find ("Plane");
+		bar = GameObject.Find ("Bar");
 	}
 
 	void Update(){
@@ -38,6 +38,14 @@ public class BlockData : MonoBehaviour{
 		//onMouseDown ();
 	}
 
+	/*Controls what happens when dragging a block. If the item being dragged is "inHand", it
+	calculates the move position based on worldToScreenPoint Coords from the camera. It then
+	creates a "SnapPosition for the x axis, which causes the block to "Snap" into an x position
+	that is perfectly in-line with the rest of the blocks in the pile. It also calculates an offset
+	added onto the snap position to account for spacing. It also floors the absolute value of the
+	SnapPosition and sets it as the x value for the grid coord. which dictates where in the grid the
+	block will be placed, if the block is dropped. It also creates a ySnap that snaps the block to
+	the bar when it is close to it.*/
 	void OnMouseDrag()
 	{
 		if(this.tag == "inHand"){
@@ -52,7 +60,7 @@ public class BlockData : MonoBehaviour{
 			if (snapPosition != 0f && Mathf.Abs(snapPosition) + (xOffset* Mathf.Abs(snapPosition)) < (boardWidth/2)+ xOffset*boardWidth) {
 				snapPosition += (xOffset * snapPosition);
 			}
-			float ySnap = (pos_move.y > bar.transform.position.y - .5f) ? bar.transform.position.y : pos_move.y;
+			float ySnap = (pos_move.y > bar.transform.position.y - 1.5f) ? bar.transform.position.y-1f : pos_move.y;
 
 			transform.position = new Vector3 (snapPosition, ySnap, -2f);
 		}
@@ -75,14 +83,12 @@ public class BlockData : MonoBehaviour{
 			this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, 1, 0);
 		}
 		if(this.tag == "inHand"){
-			if (this.transform.position.y >= bar.transform.position.y) {
+			if (this.transform.position.y >= bar.transform.position.y - 1f) {
 				manager.addBlock (this.gameObject);
 				manager.collapseBoard ();
-				//this.GetComponent<Rigidbody> ().velocity = new Vector3(0,1,0);
 				this.GetComponent<Rigidbody> ().useGravity = true;
 				this.tag = "Block";
 				this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, -1, 0);
-				//GameObject.Find("HandManager").GetComponent<HandManager>().drawBlock(
 				marked = true;
 				StartCoroutine (waitToCollide ());
 			} else {
@@ -103,10 +109,16 @@ public class BlockData : MonoBehaviour{
 	}
 
 	/*Slow down velocity upon hitting a block*/
-	void onCollisionEnter(Collision collision){
-		if(collision.gameObject.tag == "Block"){
+	void OnCollisionEnter(Collision collision){
+		if(collision.gameObject.tag == "Block" || collision.gameObject.tag == "Floor"){
+			//Debug.Log ("Hit");
 			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
-			collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			if (collision.gameObject.tag == "Block") {
+				collision.gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			}
+		}
+		if (collision.gameObject == bar) {
+			Debug.Log ("Bar Hit");
 		}
 	}
 

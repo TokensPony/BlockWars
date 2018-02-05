@@ -52,9 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 1166482198688414, guid: 895a07da0052d294a9a8d3a888bf2f7c, type: 2}
+  bar: {fileID: 0}
   boardWidth: 8
   xOffset: 0.15
   yOffset: 0.15
+  minMatch: 3
+  minForce: 3
   textures:
   - {fileID: 2100000, guid: 9fe69349063a88e4aadab7e507234b56, type: 2}
   - {fileID: 2100000, guid: 077f0b3b1c44f1d4c8f1c967c87122a2, type: 2}
@@ -63,3 +66,4 @@ MonoBehaviour:
   - Red
   - Blue
   - Green
+  matchCount: 0

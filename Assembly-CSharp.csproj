@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BarScript.cs" />
      <Compile Include="Assets\Scripts\BlockData.cs" />
      <Compile Include="Assets\Scripts\BoutManager.cs" />
      <Compile Include="Assets\Scripts\HandManager.cs" />

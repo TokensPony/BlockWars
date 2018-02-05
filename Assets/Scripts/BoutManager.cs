@@ -6,11 +6,15 @@ public class BoutManager : MonoBehaviour {
 
 	public GameObject block;
 	public GameObject[,] blocks = new GameObject[12,9];
+	public GameObject bar;
 
 	public float boardWidth;
 	public float xOffset = .15f;
 	public float yOffset = .15f;
 	private float spawnHeight = 1f;
+
+	public int minMatch;
+	public float minForce;
 
 	public List<Material> textures;
 	public List<string> colorNames;
@@ -19,20 +23,14 @@ public class BoutManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		/*for (int x = 0; x < 10; x++) {
-			createBlock ();
-		}*/
+		//bar = this.
 		populatePile ();
 		printGrid ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//isMarked ();
-		/*if (Input.GetKeyDown (KeyCode.T)) {
-			Debug.Log ("Pressed");
-			isMarked ();
-		}*/
+		
 	}
 
 	/*Adds a dropped block to the existing board by reading it's X coordinate and placing it
@@ -88,10 +86,6 @@ public class BoutManager : MonoBehaviour {
 		createBlock (x, y);
 	}
 
-	void OnMouseDown(){
-		
-	}
-
 	/*Prints a text representation of the 2D array to the console. Used for debugging*/
 	public void printGrid(){
 		string grid = "";
@@ -114,12 +108,12 @@ public class BoutManager : MonoBehaviour {
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				if (blocks [y, x] != null && blocks [y, x].GetComponent<BlockData> ().marked) {
-					matchCount = 0;
-					if (matchMade (blocks [y, x]) && matchCount >= 2) {
+					matchCount = 1;
+					if (matchMade (blocks [y, x]) && matchCount >= minMatch) {
 						//if (matchMade (blocks [y, x])) {
 						removeMarked ();
 					} else {
-						matchCount = 0;
+						matchCount = 1;
 						//blocks [y, x].GetComponent<BlockData> ().marked = false;
 						unmark();
 					}
@@ -134,14 +128,11 @@ public class BoutManager : MonoBehaviour {
 				if (blocks [y, x] != null && blocks[y,x].GetComponent<BlockData>().marked) {
 					Destroy (blocks [y, x].gameObject);
 					blocks [y, x] = null;
-					//matchMade (blocks [y, x]);
-					//collapseBoard ();
-					//printGrid ();
 				}
 			}
 		}
 		collapseBoard ();
-		//printGrid ();
+		bar.GetComponent<BarScript>().pushAway(minForce);
 	}
 
 	/*Readjusts the positions of the objects in the Grid after a move has been made.*/
@@ -213,10 +204,6 @@ public class BoutManager : MonoBehaviour {
 			matchCount++;
 		}
 
-		/*if (matchCount < 2) {
-			startBlock.GetComponent<BlockData> ().marked = false;
-		}*/
-
 		return found;
 	}
 
@@ -226,12 +213,6 @@ public class BoutManager : MonoBehaviour {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				
 				if (blocks[y,x] != null && bl.GetInstanceID () == blocks [y, x].GetInstanceID()) {
-					/*if (y - 1 >= 0 && blocks [y - 1, x] != null) {
-						Debug.Log ("There is a block below this block");
-					} else {
-						Debug.Log ("No block below");
-					}
-					Debug.Log ("X: " + x + "Y: " + y);*/
 					bl.GetComponent<BlockData> ().marked = true;
 					isMarked ();
 				}
