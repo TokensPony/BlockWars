@@ -9,8 +9,13 @@ public class BarScript : MonoBehaviour {
 	public Vector3 maxHeight;
 	public Rigidbody rb;
 
+	public GameObject gameOver;
+
+	public bool locked;
+
 	// Use this for initialization
 	void Start () {
+		locked = false;
 		rb = this.GetComponent<Rigidbody> ();
 		this.GetComponent<Rigidbody> ().velocity = sVelocity;
 		maxHeight = new Vector3(0,15.8f,0);
@@ -62,6 +67,8 @@ public class BarScript : MonoBehaviour {
 			Debug.Log ("Touched Block");
 			sVelocity.y = 0f;
 			//GameObject.Find ("GameOver").SetActive (true);
+			gameOver.transform.GetChild(0).gameObject.SetActive(true);
+			locked = true;
 		}
 	}
 }

@@ -35,6 +35,7 @@ public class BlockData : MonoBehaviour{
 		if (marked) {
 			//Destroy (this.gameObject);
 		}
+
 		//onMouseDown ();
 	}
 
@@ -48,21 +49,23 @@ public class BlockData : MonoBehaviour{
 	the bar when it is close to it.*/
 	void OnMouseDrag()
 	{
-		if(this.tag == "inHand"){
-			float distance_to_screen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-			Vector3 pos_move = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, distance_to_screen));
-			float snapPosition = ((pos_move.x - Mathf.Floor (pos_move.x)) > .5f) ? Mathf.Ceil (pos_move.x) : Mathf.Floor (pos_move.x);
-			snapPosition = (Mathf.Abs (snapPosition) > boardWidth / 2) ? transform.position.x : snapPosition;
-			//Debug.Log (snapPosition);
-			this.gridCoord = new Vector2 (Mathf.Floor(Mathf.Abs(snapPosition + (boardWidth/2))), 10);
-			//this.gridCoord = new Vector2 (snapPosition + (boardWidth/2), 10);
-			Debug.Log (this.gridCoord.x);
-			if (snapPosition != 0f && Mathf.Abs(snapPosition) + (xOffset* Mathf.Abs(snapPosition)) < (boardWidth/2)+ xOffset*boardWidth) {
-				snapPosition += (xOffset * snapPosition);
-			}
-			float ySnap = (pos_move.y > bar.transform.position.y - 1.5f) ? bar.transform.position.y-1f : pos_move.y;
+		if (!GameObject.Find ("Bar").GetComponent<BarScript> ().locked) {
+			if (this.tag == "inHand") {
+				float distance_to_screen = Camera.main.WorldToScreenPoint (gameObject.transform.position).z;
+				Vector3 pos_move = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, distance_to_screen));
+				float snapPosition = ((pos_move.x - Mathf.Floor (pos_move.x)) > .5f) ? Mathf.Ceil (pos_move.x) : Mathf.Floor (pos_move.x);
+				snapPosition = (Mathf.Abs (snapPosition) > boardWidth / 2) ? transform.position.x : snapPosition;
+				//Debug.Log (snapPosition);
+				this.gridCoord = new Vector2 (Mathf.Floor (Mathf.Abs (snapPosition + (boardWidth / 2))), 10);
+				//this.gridCoord = new Vector2 (snapPosition + (boardWidth/2), 10);
+				//Debug.Log (this.gridCoord.x);
+				if (snapPosition != 0f && Mathf.Abs (snapPosition) + (xOffset * Mathf.Abs (snapPosition)) < (boardWidth / 2) + xOffset * boardWidth) {
+					snapPosition += (xOffset * snapPosition);
+				}
+				float ySnap = (pos_move.y > bar.transform.position.y - 1.5f) ? bar.transform.position.y - 1f : pos_move.y;
 
-			transform.position = new Vector3 (snapPosition, ySnap, -2f);
+				transform.position = new Vector3 (snapPosition, ySnap, -2f);
+			}
 		}
 	}
 
@@ -131,10 +134,10 @@ public class BlockData : MonoBehaviour{
 		Debug.Log("Hit " + target.name);
 			if (hitInfo.transform.gameObject.tag == "Block"){
 			} else {
-				Debug.Log ("nopz");
+				//Debug.Log ("nopz");
 			}
 		} else {
-			Debug.Log("No hit");
+			//Debug.Log("No hit");
 		}
 	}
 }

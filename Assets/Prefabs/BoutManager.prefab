@@ -58,10 +58,14 @@ MonoBehaviour:
   yOffset: 0.15
   minMatch: 3
   minForce: 3
+  boostCount: 0
+  boostBase: 1
   textures:
   - {fileID: 2100000, guid: 9fe69349063a88e4aadab7e507234b56, type: 2}
   - {fileID: 2100000, guid: 077f0b3b1c44f1d4c8f1c967c87122a2, type: 2}
   - {fileID: 2100000, guid: a03696af2da50dc418ae5f7ed5e88601, type: 2}
+  - {fileID: 2100000, guid: d0f96c48934567f458d63caa5c1ceb04, type: 2}
+  - {fileID: 2100000, guid: fc5c5d09b664e144a9a93406d2b53f23, type: 2}
   colorNames:
   - Red
   - Blue

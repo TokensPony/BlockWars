@@ -1,11 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BarScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PowerUpManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\BoutManager.cs" Line="135" Column="52" />
-      <File FileName="Assets\Scripts\BarScript.cs" Line="56" Column="36" />
+      <File FileName="Assets\Scripts\BoutManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BarScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PowerUpManager.cs" Line="21" Column="3" />
       <File FileName="Assets\Scripts\HandManager.cs" Line="18" Column="36" NotebookId="1" />
-      <File FileName="Assets\Scripts\BlockData.cs" Line="4" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\BlockData.cs" Line="1" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

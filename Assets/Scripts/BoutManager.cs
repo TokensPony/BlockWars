@@ -15,6 +15,8 @@ public class BoutManager : MonoBehaviour {
 
 	public int minMatch;
 	public float minForce;
+	public int boostCount;
+	public float boostBase;
 
 	public List<Material> textures;
 	public List<string> colorNames;
@@ -109,11 +111,14 @@ public class BoutManager : MonoBehaviour {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				if (blocks [y, x] != null && blocks [y, x].GetComponent<BlockData> ().marked) {
 					matchCount = 1;
+					boostCount = 0;
 					if (matchMade (blocks [y, x]) && matchCount >= minMatch) {
 						//if (matchMade (blocks [y, x])) {
+						boostCount = (matchCount > minMatch)?matchCount-minMatch:0;
 						removeMarked ();
 					} else {
 						matchCount = 1;
+						boostCount = 0;
 						//blocks [y, x].GetComponent<BlockData> ().marked = false;
 						unmark();
 					}
@@ -132,7 +137,8 @@ public class BoutManager : MonoBehaviour {
 			}
 		}
 		collapseBoard ();
-		bar.GetComponent<BarScript>().pushAway(minForce);
+		Debug.Log ("Boosted: " + (minForce + (boostCount * boostBase)));
+		bar.GetComponent<BarScript>().pushAway(minForce + (boostCount * boostBase));
 	}
 
 	/*Readjusts the positions of the objects in the Grid after a move has been made.*/
