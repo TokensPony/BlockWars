@@ -57,9 +57,9 @@ MonoBehaviour:
   xOffset: 0.15
   yOffset: 0.15
   minMatch: 3
-  minForce: 3
+  minForce: 2.5
   boostCount: 0
-  boostBase: 1
+  boostBase: 0.75
   textures:
   - {fileID: 2100000, guid: 9fe69349063a88e4aadab7e507234b56, type: 2}
   - {fileID: 2100000, guid: 077f0b3b1c44f1d4c8f1c967c87122a2, type: 2}
