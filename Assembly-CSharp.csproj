@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\HandManager.cs" />
      <Compile Include="Assets\Scripts\PowerUp.cs" />
      <Compile Include="Assets\Scripts\PowerUpManager.cs" />
+     <Compile Include="Assets\Scripts\TestPowerUp.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

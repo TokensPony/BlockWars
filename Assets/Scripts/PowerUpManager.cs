@@ -5,11 +5,13 @@ using UnityEngine;
 public class PowerUpManager : MonoBehaviour {
 
 	public GameObject currentPowUp;
+	public List<GameObject> pUpList;
 
 	public Vector3 powPos;
 
 	void Start () {
-		
+		currentPowUp = Instantiate (currentPowUp);
+		currentPowUp.transform.position = powPos;
 	}
 	
 	// Update is called once per frame
@@ -17,7 +19,9 @@ public class PowerUpManager : MonoBehaviour {
 		
 	}
 
-	public void addPowerUp(Material mat){
+	public void addPowerUp(string type){
+		if (currentPowUp != null) {
 
+		}
 	}
 }

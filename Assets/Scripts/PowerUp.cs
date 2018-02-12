@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PowerUp : MonoBehaviour {
 
+	protected bool mouseDown;
+	protected GameObject board;
+
 	// Use this for initialization
-	void Start () {
-		
+	protected virtual void Start () {
+		mouseDown = false;
+		board = GameObject.Find ("BoutManager").gameObject;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		
 	}
 
@@ -19,9 +24,10 @@ public class PowerUp : MonoBehaviour {
 		bool hit = Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out hitInfo);
 		if (hit) {
 			GameObject target = hitInfo.transform.gameObject;
-			Debug.Log ("Hit " + target.name);
+			//Debug.Log ("Hit " + target.name);
 			if (hitInfo.transform.gameObject.tag == "Power Up") {
-				
+				Debug.Log ("Power Up");
+				mouseDown = true;
 			} else {
 				//Debug.Log ("nopz");
 			}
@@ -30,7 +36,12 @@ public class PowerUp : MonoBehaviour {
 		}
 	}
 
-	public virtual void Action(){
+	public virtual void OnMouseUp(){
+		mouseDown = false;
+	}
 
+
+	public virtual void Action(){
+		Destroy (this.gameObject);
 	}
 }
