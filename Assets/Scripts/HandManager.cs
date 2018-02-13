@@ -8,10 +8,12 @@ public class HandManager : MonoBehaviour {
 	public GameObject block;
 	public int handSize = 5;
 	public List<Material> textures;
+	public List<string> colorNames;
 
 	void Start () {
 		textures = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().textures;
 		block = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().block;
+		colorNames = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().colorNames;
 		populateHand ();
 	}
 	
@@ -28,6 +30,7 @@ public class HandManager : MonoBehaviour {
 		GameObject newBlock = Instantiate (block);
 		int randIndex = Random.Range (0, textures.Count);
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
+		newBlock.GetComponent<BlockData> ().color = randIndex;
 		newBlock.GetComponent<Rigidbody> ().useGravity = false;
 		newBlock.tag = "inHand";
 		newBlock.GetComponent<BlockData> ().handPos = new Vector3 (xPos, -1, 0);

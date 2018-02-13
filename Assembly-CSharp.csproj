@@ -55,9 +55,10 @@
      <Compile Include="Assets\Scripts\BlockData.cs" />
      <Compile Include="Assets\Scripts\BoutManager.cs" />
      <Compile Include="Assets\Scripts\HandManager.cs" />
-     <Compile Include="Assets\Scripts\PowerUp.cs" />
-     <Compile Include="Assets\Scripts\PowerUpManager.cs" />
-     <Compile Include="Assets\Scripts\TestPowerUp.cs" />
+     <Compile Include="Assets\Scripts\Power Ups\BombPowerUp.cs" />
+     <Compile Include="Assets\Scripts\Power Ups\FreezePowerUp.cs" />
+     <Compile Include="Assets\Scripts\Power Ups\PowerUp.cs" />
+     <Compile Include="Assets\Scripts\Power Ups\PowerUpManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

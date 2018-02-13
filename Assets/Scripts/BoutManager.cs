@@ -52,6 +52,7 @@ public class BoutManager : MonoBehaviour {
 		GameObject newBlock = Instantiate (block);
 		int randIndex = Random.Range (0, textures.Count);
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
+		newBlock.GetComponent<BlockData> ().color = randIndex;
 		//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
 		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), yPos + spawnHeight + (yPos*yOffset), 0f);
 		//Debug.Log (spawnPoint.y);
@@ -128,9 +129,11 @@ public class BoutManager : MonoBehaviour {
 	}
 
 	public void removeMarked(){
+		int tempColor = 0;
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				if (blocks [y, x] != null && blocks[y,x].GetComponent<BlockData>().marked) {
+					tempColor = blocks [y, x].GetComponent<BlockData> ().color;
 					Destroy (blocks [y, x].gameObject);
 					blocks [y, x] = null;
 				}
@@ -139,6 +142,7 @@ public class BoutManager : MonoBehaviour {
 		collapseBoard ();
 		Debug.Log ("Boosted: " + (minForce + (boostCount * boostBase)));
 		bar.GetComponent<BarScript>().pushAway(minForce + (boostCount * boostBase));
+		GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
 	}
 
 	/*Readjusts the positions of the objects in the Grid after a move has been made.*/

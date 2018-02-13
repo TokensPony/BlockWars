@@ -7,11 +7,13 @@ public class PowerUp : MonoBehaviour {
 
 	protected bool mouseDown;
 	protected GameObject board;
+	protected GameObject bar;
 
 	// Use this for initialization
 	protected virtual void Start () {
 		mouseDown = false;
 		board = GameObject.Find ("BoutManager").gameObject;
+		bar = GameObject.Find ("Bar").gameObject;
 	}
 	
 	// Update is called once per frame
@@ -42,6 +44,7 @@ public class PowerUp : MonoBehaviour {
 
 
 	public virtual void Action(){
+		GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().currentPowUp = null;
 		Destroy (this.gameObject);
 	}
 }

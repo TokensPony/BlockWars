@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestPowerUp : PowerUp {
+public class BombPowerUp : PowerUp {
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +23,7 @@ public class TestPowerUp : PowerUp {
 	}
 
 	public override void Action(){
-		Debug.Log ("Override Success");
+		//Debug.Log ("Override Success");
 		//GameObject[,] currBlocks = GameObject.Find ("BoutManager").gameObject.GetComponent<BoutManager> ().blocks;
 		GameObject[,] currBlocks = board.GetComponent<BoutManager>().blocks;
 		for (int x = 0; x < currBlocks.GetLength (1); x++) {

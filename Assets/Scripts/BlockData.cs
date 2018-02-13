@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class BlockData : MonoBehaviour{
 
-	public string color;
+	public int color;
 	//public Vector3 position;
 	public Vector2 gridCoord;
 	public Vector3 handPos;

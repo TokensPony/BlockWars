@@ -51,7 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125a3d2ec629ae249a98ae4017b10309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPowUp: {fileID: 1001055934950062, guid: 0e03e1c5d37656645a5f8a3241d34e2e,
-    type: 2}
-  pUpList: []
+  currentPowUp: {fileID: 0}
+  pUpList:
+  - {fileID: 1725655985517554, guid: 9699392f267ed8744bf6d27933155ca2, type: 2}
+  - {fileID: 1076189319510782, guid: 8c7aef759f05618478a657b94b7ba6cd, type: 2}
+  - {fileID: 1725655985517554, guid: 9699392f267ed8744bf6d27933155ca2, type: 2}
+  - {fileID: 1725655985517554, guid: 9699392f267ed8744bf6d27933155ca2, type: 2}
+  - {fileID: 1725655985517554, guid: 9699392f267ed8744bf6d27933155ca2, type: 2}
   powPos: {x: -4, y: -1, z: 0}
