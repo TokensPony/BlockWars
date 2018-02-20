@@ -24,8 +24,11 @@ public class BoutManager : MonoBehaviour {
 
 	public int matchCount;
 
+	public bool p1Turn;
+
 	// Use this for initialization
 	void Start () {
+		p1Turn = true;
 		//bar = this.
 		populatePile ();
 		printGrid ();
@@ -151,19 +154,26 @@ public class BoutManager : MonoBehaviour {
 		}
 		collapseBoard ();
 		Debug.Log ("Boosted: " + (minForce + (boostCount * boostBase)));
-		bar.GetComponent<BarScript>().pushAway(minForce + (boostCount * boostBase));
+		float forceApplied = minForce + (boostCount * boostBase);
+		forceApplied *= (p1Turn) ? 1f : -1f; 
+		bar.GetComponent<BarScript>().pushAway(forceApplied);
 		GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
 	}
 
 	/*Readjusts the positions of the objects in the Grid after a move has been made.*/
 	public void collapseBoard(){
-		GameObject[,] temp = new GameObject[12,9];
+		GameObject[,] temp = new GameObject[32,9];
 		int yIndex = 0;
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < blocks.GetLength(0); y++) {
-				if (blocks [y, x] != null) {
-					temp [yIndex, x] = blocks [y, x];
-					temp [yIndex, x].GetComponent<BlockData> ().gridCoord = new Vector2 (x, yIndex);
+				if (blocks [y, x] != null ) {
+					if (blocks [y, x].GetComponent<BlockData> ().playerOne) {
+						temp [yIndex, x] = blocks [y, x];
+						temp [yIndex, x].GetComponent<BlockData> ().gridCoord = new Vector2 (x, yIndex);
+					} else {
+						temp [y, x] = blocks [y, x];
+					}
+					//}
 					if (yIndex < y) {
 						//temp [yIndex, x].GetComponent<BlockData> ().marked = true;
 					}

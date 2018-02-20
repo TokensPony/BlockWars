@@ -48,6 +48,7 @@ public class BarScript : MonoBehaviour {
 			yield return null;
 		}
 		rb.useGravity = false;
+		sVelocity *= -1f;
 		rb.velocity = sVelocity;
 	}
 		
