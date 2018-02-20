@@ -31,6 +31,10 @@ public class BombPowerUp : PowerUp {
 				Destroy (currBlocks [0, x]);
 				currBlocks [0, x] = null;
 			}
+			if (currBlocks [31, x] != null) {
+				Destroy (currBlocks [31, x]);
+				currBlocks [31, x] = null;
+			}
 		}
 		board.GetComponent<BoutManager> ().blocks = currBlocks;
 		board.GetComponent<BoutManager> ().collapseBoard ();

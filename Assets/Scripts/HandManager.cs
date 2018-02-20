@@ -31,10 +31,11 @@ public class HandManager : MonoBehaviour {
 		int randIndex = Random.Range (0, textures.Count);
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
 		newBlock.GetComponent<BlockData> ().color = randIndex;
-		newBlock.GetComponent<Rigidbody> ().useGravity = false;
+		//newBlock.GetComponent<Rigidbody> ().useGravity = false;
 		newBlock.tag = "inHand";
 		newBlock.GetComponent<BlockData> ().handPos = new Vector3 (xPos, -1, 0);
 		newBlock.transform.position = new Vector3 (xPos, -1f, 0);
+		newBlock.GetComponent<ConstantForce> ().enabled = false;
 		return newBlock;
 	}
 

@@ -22,6 +22,7 @@ public class BlockData : MonoBehaviour{
 	public float barOffset;
 
 	public bool marked;
+	public bool playerOne;
 
 	public void Start(){
 		manager = GameObject.Find("BoutManager").GetComponent<BoutManager>();
@@ -29,6 +30,9 @@ public class BlockData : MonoBehaviour{
 		boardWidth = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().boardWidth;
 		xOffset = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().xOffset;
 		bar = GameObject.Find ("Bar");
+		if (!playerOne) {
+			this.GetComponent<ConstantForce> ().force *= -1f; 
+		}
 	}
 
 	void Update(){
@@ -86,10 +90,12 @@ public class BlockData : MonoBehaviour{
 		}
 		if(this.tag == "inHand"){
 			if (this.transform.position.y >= .5f) {
+				this.tag = "Block";
+				this.GetComponent<ConstantForce> ().enabled = true;
 				manager.addBlock (this.gameObject);
 				manager.collapseBoard ();
-				this.GetComponent<Rigidbody> ().useGravity = true;
-				this.tag = "Block";
+				//this.GetComponent<Rigidbody> ().useGravity = true;
+
 				this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, -1, 0);
 				marked = true;
 				StartCoroutine (waitToCollide ());

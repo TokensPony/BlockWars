@@ -18,7 +18,7 @@ public class BarScript : MonoBehaviour {
 		locked = false;
 		rb = this.GetComponent<Rigidbody> ();
 		this.GetComponent<Rigidbody> ().velocity = sVelocity;
-		maxHeight = new Vector3(0,15.8f,0);
+		maxHeight = new Vector3(0,16.8f,0);
 	}
 	
 	// Update is called once per frame

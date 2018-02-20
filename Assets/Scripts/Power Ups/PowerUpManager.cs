@@ -10,7 +10,7 @@ public class PowerUpManager : MonoBehaviour {
 	public Vector3 powPos;
 
 	void Start () {
-		currentPowUp = pUpList [1];
+		currentPowUp = pUpList [0];
 		initializePowUp ();
 		//currentPowUp = Instantiate (currentPowUp);
 		//currentPowUp.transform.position = powPos;

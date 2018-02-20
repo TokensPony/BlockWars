@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoutManager : MonoBehaviour {
 
 	public GameObject block;
-	public GameObject[,] blocks = new GameObject[12,9];
+	public GameObject[,] blocks = new GameObject[32,9];
 	public GameObject bar;
 
 	public float boardWidth;
@@ -17,6 +17,7 @@ public class BoutManager : MonoBehaviour {
 	public float minForce;
 	public int boostCount;
 	public float boostBase;
+	public int maxPile;
 
 	public List<Material> textures;
 	public List<string> colorNames;
@@ -48,13 +49,18 @@ public class BoutManager : MonoBehaviour {
 		}
 	}
 
-	public void createBlock(int xPos, int yPos){
+	public void createBlock(int xPos, int yPos, bool p1){
 		GameObject newBlock = Instantiate (block);
 		int randIndex = Random.Range (0, textures.Count);
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
 		newBlock.GetComponent<BlockData> ().color = randIndex;
 		//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
-		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), yPos + spawnHeight + (yPos*yOffset), 0f);
+		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
+		if (p1) {
+			spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
+		} else {
+			spawnPoint.y = yPos - spawnHeight;
+		}
 		//Debug.Log (spawnPoint.y);
 		if (spawnPoint.x > 0f) {
 			spawnPoint.x += (xOffset*spawnPoint.x);
@@ -63,6 +69,7 @@ public class BoutManager : MonoBehaviour {
 		}
 		newBlock.transform.position = spawnPoint;
 		newBlock.GetComponent<BlockData> ().gridCoord = new Vector2 (xPos, yPos);
+		newBlock.GetComponent<BlockData> ().playerOne = p1;
 		blocks [yPos, xPos] = newBlock;
 	}
 
@@ -72,22 +79,25 @@ public class BoutManager : MonoBehaviour {
 	row and moves onto the next one. */
 	public void populatePile(){
 		for (int x = 0; x < blocks.GetLength (1); x++) {
-			for (int y = 0; y < 7; y++) {
+			for (int y = 0; y < maxPile; y++) {
 				//.25f
 				if (Random.value > .1f) {
-					createBlock (x, y);
+					createBlock (x, y, true);
 					//StartCoroutine (waiting (x, y));
 				} else {
 					break;
 				}
 			}
+			for (int y = blocks.GetLength (0)-1; y >= blocks.GetLength (0)-maxPile; y--) {
+				createBlock (x, y, false);
+			}
 		}
 	}
 		
-	IEnumerator waiting(int x, int y){
+	/*IEnumerator waiting(int x, int y){
 		yield return new WaitForSeconds (1 * y);
 		createBlock (x, y);
-	}
+	}*/
 
 	/*Prints a text representation of the 2D array to the console. Used for debugging*/
 	public void printGrid(){
