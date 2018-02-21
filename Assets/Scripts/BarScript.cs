@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class BarScript : MonoBehaviour {
 
 	public Vector3 sVelocity;
+	public Vector3 gForce;
 	public Vector3 maxHeight;
 	public Rigidbody rb;
 
@@ -15,6 +16,7 @@ public class BarScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		this.GetComponent<ConstantForce> ().force = gForce;
 		locked = false;
 		rb = this.GetComponent<Rigidbody> ();
 		this.GetComponent<Rigidbody> ().velocity = sVelocity;
@@ -25,41 +27,46 @@ public class BarScript : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.P)) {
 			
-			pushAway (3f);
+			//pushAway (3f);
 
 		}
 		//Debug.Log (rb.velocity.y);
 
-		if (rb.transform.position.y > maxHeight.y) {
+		/*if (rb.transform.position.y > maxHeight.y) {
 			rb.velocity = Vector3.zero;
 			rb.transform.position = maxHeight;
 			//break;
-		}
-		/*if (rb.velocity.y < 0) {
-			Debug.Log ("Entered");
-			rb.useGravity = false;
-			this.GetComponent<Rigidbody> ().velocity = sVelocity;
 		}*/
-		//this.GetComponent<Rigidbody> ().velocity = sVelocity;
 	}
 
-	IEnumerator waitForBoost(){
-		while (rb.velocity.y >= 0) {
-			yield return null;
+	IEnumerator waitForBoost(bool p1){
+		if (p1) {
+			while (rb.velocity.y >= 0) {
+				yield return null;
+			}
+		} else {
+			while (rb.velocity.y <= 0) {
+				yield return null;
+			}
 		}
-		rb.useGravity = false;
+		//rb.useGravity = false;
+		this.GetComponent<ConstantForce>().enabled= false;
 		sVelocity *= -1f;
 		rb.velocity = sVelocity;
+		GameObject.Find ("Main Camera").GetComponent<CameraControls> ().setCamera (!p1);
 	}
 		
 
-	public void pushAway(float yForce){
+	public void pushAway(float yForce, bool p1){
 		//rb = this.GetComponent<Rigidbody> ();
-		rb.useGravity = true;
+		//rb.useGravity = true;
+		this.GetComponent<ConstantForce> ().force = (p1)?gForce:gForce*-1f;
+		
+		this.GetComponent<ConstantForce>().enabled= true;
 		rb.velocity = Vector3.zero;
 		Debug.Log ("Pushed");
 		rb.AddForce(new Vector3(0, yForce, 0), ForceMode.Impulse);
-		StartCoroutine (waitForBoost ());
+		StartCoroutine (waitForBoost (p1));
 		Debug.Log ("Force Applied");
 	}
 

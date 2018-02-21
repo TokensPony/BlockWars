@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\BarScript.cs" />
      <Compile Include="Assets\Scripts\BlockData.cs" />
      <Compile Include="Assets\Scripts\BoutManager.cs" />
+     <Compile Include="Assets\Scripts\CameraControls.cs" />
      <Compile Include="Assets\Scripts\HandManager.cs" />
      <Compile Include="Assets\Scripts\Power Ups\BombPowerUp.cs" />
      <Compile Include="Assets\Scripts\Power Ups\FreezePowerUp.cs" />

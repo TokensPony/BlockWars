@@ -66,7 +66,12 @@ public class BlockData : MonoBehaviour{
 				if (snapPosition != 0f && Mathf.Abs (snapPosition) + (xOffset * Mathf.Abs (snapPosition)) < (boardWidth / 2) + xOffset * boardWidth) {
 					snapPosition += (xOffset * snapPosition);
 				}
-				float ySnap = (pos_move.y > bar.transform.position.y - 1f) ? bar.transform.position.y - 1f : pos_move.y;
+				float ySnap = 0f;
+				if (playerOne) { 
+					ySnap = (pos_move.y > bar.transform.position.y - 1f) ? bar.transform.position.y - 1f : pos_move.y;
+				} else {
+					ySnap = (pos_move.y < bar.transform.position.y + 1f) ? bar.transform.position.y + 1f : pos_move.y;
+				}
 				transform.position = new Vector3 (snapPosition, ySnap, -2f);
 			}
 		}
@@ -96,7 +101,7 @@ public class BlockData : MonoBehaviour{
 				manager.collapseBoard ();
 				//this.GetComponent<Rigidbody> ().useGravity = true;
 
-				this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, -1, 0);
+				this.GetComponent<Rigidbody> ().velocity = (playerOne)? new Vector3 (0, -1, 0) : new Vector3 (0, 1, 0);
 				marked = true;
 				StartCoroutine (waitToCollide ());
 			} else {
@@ -108,9 +113,14 @@ public class BlockData : MonoBehaviour{
 	/*Coroutine to delay the activation of the match checking until after
 	 * the block has fallen and hit the ground.*/
 	IEnumerator waitToCollide(){
-		while (this.GetComponent<Rigidbody> ().velocity.y < 0f) {
-			
-			yield return null;
+		if (playerOne) {
+			while (this.GetComponent<Rigidbody> ().velocity.y < 0f) {
+				yield return null;
+			}
+		} else {
+			while (this.GetComponent<Rigidbody> ().velocity.y > 0f) {
+				yield return null;
+			}
 		}
 		manager.isMarked();
 		//yield return null;

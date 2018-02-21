@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23424814125012472}
   - component: {fileID: 114141399709881622}
   - component: {fileID: 54459032509442884}
+  - component: {fileID: 75489728948583980}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -112,6 +113,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!75 &75489728948583980
+ConstantForce:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1589313474062812}
+  m_Enabled: 0
+  m_Force: {x: 0, y: -9.8, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!114 &114141399709881622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sVelocity: {x: 0, y: -0.25, z: 0}
+  gForce: {x: 0, y: -7.25, z: 0}
   maxHeight: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   gameOver: {fileID: 0}

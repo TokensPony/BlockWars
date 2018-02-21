@@ -156,32 +156,53 @@ public class BoutManager : MonoBehaviour {
 		Debug.Log ("Boosted: " + (minForce + (boostCount * boostBase)));
 		float forceApplied = minForce + (boostCount * boostBase);
 		forceApplied *= (p1Turn) ? 1f : -1f; 
-		bar.GetComponent<BarScript>().pushAway(forceApplied);
+		bar.GetComponent<BarScript>().pushAway(forceApplied, p1Turn);
 		GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
+		p1Turn = !p1Turn;
 	}
 
 	/*Readjusts the positions of the objects in the Grid after a move has been made.*/
 	public void collapseBoard(){
 		GameObject[,] temp = new GameObject[32,9];
 		int yIndex = 0;
-		for (int x = 0; x < blocks.GetLength (1); x++) {
-			for (int y = 0; y < blocks.GetLength(0); y++) {
-				if (blocks [y, x] != null ) {
-					if (blocks [y, x].GetComponent<BlockData> ().playerOne) {
-						temp [yIndex, x] = blocks [y, x];
-						temp [yIndex, x].GetComponent<BlockData> ().gridCoord = new Vector2 (x, yIndex);
-					} else {
-						temp [y, x] = blocks [y, x];
+		if (p1Turn) {
+			for (int x = 0; x < blocks.GetLength (1); x++) {
+				yIndex = 0;
+				for (int y = 0; y < blocks.GetLength (0); y++) {
+					if (blocks [y, x] != null) {
+						if (blocks [y, x].GetComponent<BlockData> ().playerOne) {
+							temp [yIndex, x] = blocks [y, x];
+							temp [yIndex, x].GetComponent<BlockData> ().gridCoord = new Vector2 (x, yIndex);
+						} else {
+							temp [y, x] = blocks [y, x];
+						}
+						//}
+						/*if (yIndex < y) {
+							//temp [yIndex, x].GetComponent<BlockData> ().marked = true;
+						}*/
+						yIndex++;
 					}
-					//}
-					if (yIndex < y) {
-						//temp [yIndex, x].GetComponent<BlockData> ().marked = true;
+				}
+				//yIndex = 0;
+			}
+		} else {
+			for (int x = 0; x < blocks.GetLength (1); x++) {
+				yIndex = blocks.GetLength (0)-1;
+				for (int y = blocks.GetLength (0)-1; y >= 0; y--) {
+					if (blocks [y, x] != null) {
+						if (!blocks [y, x].GetComponent<BlockData> ().playerOne) {
+							temp [yIndex, x] = blocks [y, x];
+							temp [yIndex, x].GetComponent<BlockData> ().gridCoord = new Vector2 (x, yIndex);
+						} else {
+							temp [y, x] = blocks [y, x];
+						}
+						yIndex--;
 					}
-					yIndex++;
 				}
 			}
-			yIndex = 0;
 		}
+
+
 		blocks = temp;
 		printGrid ();
 	}

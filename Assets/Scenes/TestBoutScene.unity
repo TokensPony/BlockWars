@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 15033317}
   - component: {fileID: 15033316}
   - component: {fileID: 15033315}
+  - component: {fileID: 15033319}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -192,6 +193,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &15033319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15033314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c075e40277ff4b042bc1659c420779d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p1Position: {x: 0, y: 7, z: -10}
+  p1Rotation: {x: 0, y: 0, z: 0}
+  p2Position: {x: 0, y: 25, z: -10}
+  p2Rotation: {x: 0, y: 0, z: 180}
 --- !u!1001 &80009144
 Prefab:
   m_ObjectHideFlags: 0
@@ -417,7 +433,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!1001 &1030717658
 Prefab:
@@ -469,6 +485,52 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 895a07da0052d294a9a8d3a888bf2f7c, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1329630153
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416147753811546, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
+      propertyPath: m_Name
+      value: HandManager (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1470789345
 GameObject:
@@ -560,7 +622,7 @@ RectTransform:
   m_GameObject: {fileID: 1470789345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 7, z: 90}
-  m_LocalScale: {x: 0.089108914, y: 0.089108914, z: 0.089108914}
+  m_LocalScale: {x: 0.055384614, y: 0.055384614, z: 0.055384614}
   m_Children:
   - {fileID: 1697555775}
   m_Father: {fileID: 0}
@@ -810,6 +872,11 @@ Prefab:
     - target: {fileID: 4909993411840774, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114511831691739992, guid: 40ed62e612f0e864689be256d7f01956,
+        type: 2}
+      propertyPath: p1
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40ed62e612f0e864689be256d7f01956, type: 2}
