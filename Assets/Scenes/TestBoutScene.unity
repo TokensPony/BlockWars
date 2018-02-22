@@ -247,6 +247,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114454036656590654, guid: 9ccec2ac200f3d74ca18917f2b956335,
+        type: 2}
+      propertyPath: playerOne
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
   m_IsPrefabParent: 0
@@ -349,6 +354,52 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 895cc36a007f7e045a20e8865d15b275, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &783378735
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4639393115056948, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639393115056948, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639393115056948, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639393115056948, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639393115056948, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639393115056948, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639393115056948, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639393115056948, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510628597365206, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+      propertyPath: m_Name
+      value: PowerUpManager (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9ccec2ac200f3d74ca18917f2b956335, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &936373635
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +484,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!1001 &1030717658
 Prefab:

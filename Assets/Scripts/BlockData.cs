@@ -94,7 +94,7 @@ public class BlockData : MonoBehaviour{
 			this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, 1, 0);
 		}
 		if(this.tag == "inHand"){
-			if (this.transform.position.y >= .5f) {
+			if ((this.transform.position.y >= .5f && playerOne) || this.transform.position.y <= 32f && !playerOne) {
 				this.tag = "Block";
 				this.GetComponent<ConstantForce> ().enabled = true;
 				manager.addBlock (this.gameObject);

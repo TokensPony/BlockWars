@@ -7,10 +7,13 @@ public class PowerUpManager : MonoBehaviour {
 	public GameObject currentPowUp;
 	public List<GameObject> pUpList;
 
-	public Vector3 powPos;
+	public Vector3 p1PowPos;
+	public Vector3 p2PowPos;
+
+	public bool playerOne;
 
 	void Start () {
-		currentPowUp = pUpList [0];
+		currentPowUp = pUpList [1];
 		initializePowUp ();
 		//currentPowUp = Instantiate (currentPowUp);
 		//currentPowUp.transform.position = powPos;
@@ -23,7 +26,8 @@ public class PowerUpManager : MonoBehaviour {
 
 	public void initializePowUp(){
 		currentPowUp = Instantiate (currentPowUp);
-		currentPowUp.transform.position = powPos;
+		currentPowUp.GetComponent<PowerUp> ().setPlayer (playerOne);
+		currentPowUp.transform.position = (playerOne)? p1PowPos:p2PowPos;
 	}
 
 	public void addPowerUp(int type){

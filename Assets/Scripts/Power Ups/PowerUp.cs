@@ -8,6 +8,7 @@ public class PowerUp : MonoBehaviour {
 	protected bool mouseDown;
 	protected GameObject board;
 	protected GameObject bar;
+	protected bool playerOne;
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -42,9 +43,22 @@ public class PowerUp : MonoBehaviour {
 		mouseDown = false;
 	}
 
+	public void setPlayer(bool p1){
+		playerOne = p1;
+	}
+
 
 	public virtual void Action(){
-		GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().currentPowUp = null;
+		//GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().currentPowUp = null;
+		GameObject[] managers;
+		managers = GameObject.FindGameObjectsWithTag ("PowerUpManager");
+		foreach (GameObject man in managers) {
+			if (man.GetComponent<PowerUpManager> ().playerOne == playerOne) {
+				Debug.Log (playerOne);
+				man.GetComponent<PowerUpManager> ().currentPowUp = null;
+				break;
+			}
+		}
 		Destroy (this.gameObject);
 	}
 }

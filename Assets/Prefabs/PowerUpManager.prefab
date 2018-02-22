@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114454036656590654}
   m_Layer: 0
   m_Name: PowerUpManager
-  m_TagString: Untagged
+  m_TagString: PowerUpManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,4 +58,6 @@ MonoBehaviour:
   - {fileID: 1725655985517554, guid: 9699392f267ed8744bf6d27933155ca2, type: 2}
   - {fileID: 1725655985517554, guid: 9699392f267ed8744bf6d27933155ca2, type: 2}
   - {fileID: 1725655985517554, guid: 9699392f267ed8744bf6d27933155ca2, type: 2}
-  powPos: {x: -4, y: -1, z: 0}
+  p1PowPos: {x: -4, y: -1, z: 0}
+  p2PowPos: {x: 4, y: 33, z: 0}
+  playerOne: 0

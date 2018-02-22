@@ -8,6 +8,7 @@ TagManager:
   - inHand
   - Floor
   - Power Up
+  - PowerUpManager
   layers:
   - Default
   - TransparentFX

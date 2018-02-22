@@ -26,10 +26,11 @@ public class BombPowerUp : PowerUp {
 		//Debug.Log ("Override Success");
 		//GameObject[,] currBlocks = GameObject.Find ("BoutManager").gameObject.GetComponent<BoutManager> ().blocks;
 		GameObject[,] currBlocks = board.GetComponent<BoutManager>().blocks;
+		int targetRow = (playerOne)? 0 : 31;
 		for (int x = 0; x < currBlocks.GetLength (1); x++) {
-			if (currBlocks [0, x] != null) {
-				Destroy (currBlocks [0, x]);
-				currBlocks [0, x] = null;
+			if (currBlocks [targetRow, x] != null) {
+				Destroy (currBlocks [targetRow, x]);
+				currBlocks [targetRow, x] = null;
 			}
 			/*if (currBlocks [31, x] != null) {
 				Destroy (currBlocks [31, x]);

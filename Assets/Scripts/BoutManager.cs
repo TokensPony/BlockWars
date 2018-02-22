@@ -91,8 +91,16 @@ public class BoutManager : MonoBehaviour {
 					break;
 				}
 			}
+		}
+
+		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = blocks.GetLength (0)-1; y >= blocks.GetLength (0)-maxPile; y--) {
-				createBlock (x, y, false);
+				if (Random.value > .1f) {
+					createBlock (x, y, false);
+					//StartCoroutine (waiting (x, y));
+				} else {
+					break;
+				}
 			}
 		}
 	}
@@ -157,7 +165,17 @@ public class BoutManager : MonoBehaviour {
 		float forceApplied = minForce + (boostCount * boostBase);
 		forceApplied *= (p1Turn) ? 1f : -1f; 
 		bar.GetComponent<BarScript>().pushAway(forceApplied, p1Turn);
-		GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
+		//GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
+		GameObject[] managers;
+		managers = GameObject.FindGameObjectsWithTag ("PowerUpManager");
+		foreach (GameObject man in managers) {
+			if (man.GetComponent<PowerUpManager> ().playerOne == p1Turn) {
+				//Debug.Log (playerOne);
+				//man.GetComponent<PowerUpManager> ().currentPowUp = null;
+				man.GetComponent<PowerUpManager> ().addPowerUp (tempColor);
+				break;
+			}
+		}
 		p1Turn = !p1Turn;
 	}
 
@@ -235,7 +253,7 @@ public class BoutManager : MonoBehaviour {
 		}
 
 		/*Up*/
-		if (pos.y < blocks.GetLength(0) &&
+		if (pos.y < blocks.GetLength(0)-1 &&
 			blocks [(int)pos.y + 1, (int)pos.x] != null &&
 			startMat == blocks [(int)pos.y + 1, (int)pos.x].GetComponent<Renderer>().sharedMaterial &&
 			!blocks [(int)pos.y + 1, (int)pos.x].GetComponent<BlockData> ().marked) {
@@ -245,7 +263,7 @@ public class BoutManager : MonoBehaviour {
 			matchCount++;
 		}
 
-		/*Down*/
+		/*Right*/
 		if(pos.x < blocks.GetLength(1)-1 &&
 			blocks [(int)pos.y, (int)pos.x + 1] != null &&
 			startMat == blocks [(int)pos.y, (int)pos.x+1].GetComponent<Renderer>().sharedMaterial &&
