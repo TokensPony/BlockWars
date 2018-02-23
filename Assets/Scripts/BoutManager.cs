@@ -6,6 +6,7 @@ public class BoutManager : MonoBehaviour {
 
 	public GameObject block;
 	public GameObject[,] blocks = new GameObject[32,9];
+	//public GameObject[]
 	public GameObject bar;
 
 	public float boardWidth;
@@ -22,13 +23,15 @@ public class BoutManager : MonoBehaviour {
 	public List<Material> textures;
 	public List<string> colorNames;
 
-	public int matchCount;
+	private int matchCount;
+	private int turnCount;
 
 	public bool p1Turn;
 
 	// Use this for initialization
 	void Start () {
 		p1Turn = true;
+		turnCount = 0;
 		//bar = this.
 		populatePile ();
 		printGrid ();
@@ -43,11 +46,27 @@ public class BoutManager : MonoBehaviour {
 	into the first available Y coordinate.*/
 	public void addBlock(GameObject dropBlock){
 		int xPos = Mathf.RoundToInt(dropBlock.GetComponent<BlockData> ().gridCoord.x);
-		for (int y = 0; y < blocks.GetLength (0); y++) {
-			if (blocks [y, xPos] == null) {
-				dropBlock.GetComponent<BlockData> ().gridCoord.y = y;
-				blocks [y, xPos] = dropBlock;
-				break;
+		if (p1Turn) {
+			for (int y = 0; y < blocks.GetLength (0); y++) {
+				if (blocks [y, xPos] == null) {
+					if (y > 0 && p1Turn && dropBlock.transform.position.y < blocks [y - 1, xPos].transform.position.y + 1f) {
+						dropBlock.transform.position = blocks [y - 1, xPos].transform.position + new Vector3 (0, 1, 0);
+					}
+					dropBlock.GetComponent<BlockData> ().gridCoord.y = y;
+					blocks [y, xPos] = dropBlock;
+					break;
+				}
+			}
+		} else {
+			for (int y = blocks.GetLength (0) - 1; y >= 0; y--) {
+				if (blocks [y, xPos] == null) {
+					if (y < 31 && !p1Turn && dropBlock.transform.position.y > blocks [y + 1, xPos].transform.position.y - 1f) {
+						dropBlock.transform.position = blocks [y + 1, xPos].transform.position - new Vector3 (0, 1, 0);
+					}
+					dropBlock.GetComponent<BlockData> ().gridCoord.y = y;
+					blocks [y, xPos] = dropBlock;
+					break;
+				}
 			}
 		}
 	}
@@ -170,13 +189,14 @@ public class BoutManager : MonoBehaviour {
 		managers = GameObject.FindGameObjectsWithTag ("PowerUpManager");
 		foreach (GameObject man in managers) {
 			if (man.GetComponent<PowerUpManager> ().playerOne == p1Turn) {
-				//Debug.Log (playerOne);
-				//man.GetComponent<PowerUpManager> ().currentPowUp = null;
 				man.GetComponent<PowerUpManager> ().addPowerUp (tempColor);
 				break;
 			}
 		}
 		p1Turn = !p1Turn;
+		if (++turnCount % 10 == 0) {
+			bar.GetComponent<BarScript> ().increaseSpeed ();
+		}
 	}
 
 	/*Readjusts the positions of the objects in the Grid after a move has been made.*/
@@ -194,14 +214,9 @@ public class BoutManager : MonoBehaviour {
 						} else {
 							temp [y, x] = blocks [y, x];
 						}
-						//}
-						/*if (yIndex < y) {
-							//temp [yIndex, x].GetComponent<BlockData> ().marked = true;
-						}*/
 						yIndex++;
 					}
 				}
-				//yIndex = 0;
 			}
 		} else {
 			for (int x = 0; x < blocks.GetLength (1); x++) {

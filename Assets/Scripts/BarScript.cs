@@ -25,18 +25,6 @@ public class BarScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.P)) {
-			
-			//pushAway (3f);
-
-		}
-		//Debug.Log (rb.velocity.y);
-
-		/*if (rb.transform.position.y > maxHeight.y) {
-			rb.velocity = Vector3.zero;
-			rb.transform.position = maxHeight;
-			//break;
-		}*/
 	}
 
 	IEnumerator waitForBoost(bool p1){
@@ -78,5 +66,10 @@ public class BarScript : MonoBehaviour {
 			gameOver.transform.GetChild(0).gameObject.SetActive(true);
 			locked = true;
 		}
+	}
+
+	public void increaseSpeed(){
+		sVelocity.y += .05f;
+		rb.velocity = sVelocity;
 	}
 }

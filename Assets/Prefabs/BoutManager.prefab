@@ -56,10 +56,10 @@ MonoBehaviour:
   boardWidth: 8
   xOffset: 0.15
   yOffset: 0.15
-  minMatch: 3
-  minForce: 2.5
+  minMatch: 5
+  minForce: 4
   boostCount: 0
-  boostBase: 0.75
+  boostBase: 1
   maxPile: 7
   textures:
   - {fileID: 2100000, guid: 9fe69349063a88e4aadab7e507234b56, type: 2}
@@ -74,3 +74,4 @@ MonoBehaviour:
   - Orange
   - Yellow
   matchCount: 0
+  p1Turn: 0
