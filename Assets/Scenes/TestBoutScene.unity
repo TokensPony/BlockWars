@@ -383,11 +383,60 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b76295451627645a5c560fa2032bcd, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &178392069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 178392070}
+  - component: {fileID: 178392071}
+  m_Layer: 0
+  m_Name: AI Opponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &178392070
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 178392069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &178392071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 178392069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36ae29bdf49d9d469b1c6df272a7560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handObject: {fileID: 2105497545}
+  boardMan: {fileID: 533055810}
+  moveDelay: 0
+  waiting: 0
 --- !u!1 &443754136 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1589313474062812, guid: 98b76295451627645a5c560fa2032bcd,
     type: 2}
   m_PrefabInternal: {fileID: 144481724}
+--- !u!1 &533055810 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1026516709453974, guid: 895cc36a007f7e045a20e8865d15b275,
+    type: 2}
+  m_PrefabInternal: {fileID: 624128327}
 --- !u!1001 &624128327
 Prefab:
   m_ObjectHideFlags: 0
@@ -754,7 +803,7 @@ RectTransform:
   m_GameObject: {fileID: 1470789345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 7, z: 90}
-  m_LocalScale: {x: 0.044665013, y: 0.044665013, z: 0.044665013}
+  m_LocalScale: {x: 0.048780486, y: 0.048780486, z: 0.048780486}
   m_Children:
   - {fileID: 1697555775}
   m_Father: {fileID: 0}
@@ -1099,3 +1148,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2105497545 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1416147753811546, guid: 40ed62e612f0e864689be256d7f01956,
+    type: 2}
+  m_PrefabInternal: {fileID: 1827285455}

@@ -53,10 +53,16 @@ public class BlockData : MonoBehaviour{
 	the bar when it is close to it.*/
 	void OnMouseDrag()
 	{
+		dragBlock (Input.mousePosition, true);
+		//dragBlock (new Vector2(0f, 10f));
+	}
+
+	public void dragBlock(Vector2 inputPos, bool human){
 		if (!GameObject.Find ("Bar").GetComponent<BarScript> ().locked) {
 			if (this.tag == "inHand") {
+				Debug.Log (inputPos.x + ", " + inputPos.y);
 				float distance_to_screen = Camera.main.WorldToScreenPoint (gameObject.transform.position).z;
-				Vector3 pos_move = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, distance_to_screen));
+				Vector3 pos_move = (human)?Camera.main.ScreenToWorldPoint (new Vector3 (inputPos.x, inputPos.y, distance_to_screen)):new Vector3 (inputPos.x, inputPos.y, distance_to_screen);
 				float snapPosition = ((pos_move.x - Mathf.Floor (pos_move.x)) > .5f) ? Mathf.Ceil (pos_move.x) : Mathf.Floor (pos_move.x);
 				snapPosition = (Mathf.Abs (snapPosition) > boardWidth / 2) ? transform.position.x : snapPosition;
 				//Debug.Log (snapPosition);
@@ -77,8 +83,7 @@ public class BlockData : MonoBehaviour{
 		}
 	}
 
-
-	void OnMouseUp(){
+	public void release(){
 		transform.position = new Vector3 (transform.position.x, transform.position.y, 0f);
 		if (this.tag == "Block") {
 			this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, 1, 0);
@@ -98,6 +103,11 @@ public class BlockData : MonoBehaviour{
 				this.transform.position = handPos;
 			}
 		}
+	}
+
+
+	void OnMouseUp(){
+		release ();
 	}
 
 	/*Coroutine to delay the activation of the match checking until after

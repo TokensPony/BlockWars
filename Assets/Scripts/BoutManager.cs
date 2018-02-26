@@ -30,6 +30,8 @@ public class BoutManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Screen.fullScreen = false;
+		Screen.orientation = ScreenOrientation.Portrait;
 		p1Turn = true;
 		turnCount = 0;
 		//bar = this.
@@ -182,7 +184,8 @@ public class BoutManager : MonoBehaviour {
 		collapseBoard ();
 		Debug.Log ("Boosted: " + (minForce + (boostCount * boostBase)));
 		float forceApplied = minForce + (boostCount * boostBase);
-		forceApplied *= (p1Turn) ? 1f : -1f; 
+		forceApplied *= (p1Turn) ? 1f : -1f;
+
 		bar.GetComponent<BarScript>().pushAway(forceApplied, p1Turn);
 		//GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
 		GameObject[] managers;
