@@ -35,7 +35,7 @@ public class HandManager : MonoBehaviour {
 		newBlock.GetComponent<BlockData> ().color = randIndex;
 		//newBlock.GetComponent<Rigidbody> ().useGravity = false;
 		newBlock.tag = "inHand";
-		Vector3 finalPos = (p1) ? new Vector3 (xPos, -1f, 0) : new Vector3 (-xPos, 33f, 0);
+		Vector3 finalPos = (p1) ? new Vector3 (xPos, -1f, 0) : new Vector3 (-xPos, 32f, 0);
 		newBlock.GetComponent<BlockData> ().handPos = finalPos;
 		newBlock.transform.position = finalPos;
 		newBlock.GetComponent<ConstantForce> ().enabled = false;

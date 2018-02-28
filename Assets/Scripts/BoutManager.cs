@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BoutManager : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class BoutManager : MonoBehaviour {
 	public float boardWidth;
 	public float xOffset = .15f;
 	public float yOffset = .15f;
-	private float spawnHeight = 1f;
+	private float spawnHeight = .56f;
 
 	public int minMatch;
 	public float minForce;
@@ -41,7 +42,9 @@ public class BoutManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown (KeyCode.A)) {
+			addRows ();
+		}
 	}
 
 	/*Adds a dropped block to the existing board by reading it's X coordinate and placing it
@@ -82,8 +85,10 @@ public class BoutManager : MonoBehaviour {
 		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
 		if (p1) {
 			spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
+			Debug.Log ("P1 Block: " + spawnPoint.y);
 		} else {
-			spawnPoint.y = yPos - spawnHeight;
+			spawnPoint.y = (yPos - spawnHeight) - ((31 - yPos) * yOffset);
+			Debug.Log ("P2 Block: " + spawnPoint.y);
 		}
 		//Debug.Log (spawnPoint.y);
 		if (spawnPoint.x > 0f) {
@@ -98,7 +103,7 @@ public class BoutManager : MonoBehaviour {
 	}
 
 	/*Populates the board by columns. It starts at the bottom of a column and randomly
-	generateds a number. if it's greater than .5f, then a block is spawned, then it moves
+	generateds a number. if it's greater than .1f, then a block is spawned, then it moves
 	to the next row above that slot. If it's less than .5f then it breaks out of that
 	row and moves onto the next one. */
 	public void populatePile(){
@@ -199,6 +204,7 @@ public class BoutManager : MonoBehaviour {
 		p1Turn = !p1Turn;
 		if (++turnCount % 10 == 0) {
 			bar.GetComponent<BarScript> ().increaseSpeed ();
+			addRows ();
 		}
 	}
 
@@ -315,5 +321,54 @@ public class BoutManager : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void addRows(){
+		GameObject[,] newGrid = new GameObject[32,9];
+		GameObject[,] tempGrid = blocks;
+		for (int x = 0; x < tempGrid.GetLength (1); x++) {
+			for (int y = 0; y < tempGrid.GetLength (0); y++) {
+				if (tempGrid [y, x] != null) {
+					Vector3 temp = tempGrid [y, x].transform.position;
+					temp.y += (tempGrid[y,x].GetComponent<BlockData>().playerOne)? 1.2f:-1.3f;
+					Vector2 coord = tempGrid [y, x].GetComponent<BlockData> ().gridCoord;
+					coord.y += (tempGrid[y,x].GetComponent<BlockData>().playerOne)? 1: -1;
+					tempGrid [y, x].GetComponent<BlockData> ().gridCoord = coord;
+					tempGrid [y, x].transform.position = temp;
+					if (tempGrid [y, x].GetComponent<BlockData> ().playerOne && y < 31) {
+						Debug.Log (y);
+						newGrid [y + 1, x] = tempGrid [y, x];
+					} else {
+						newGrid [y - 1, x] = tempGrid [y, x];
+					}
+				}
+			}
+			blocks = newGrid;
+			Destroy (blocks [0, x]);
+			blocks [0, x] = null;
+
+			createBlock (x, 0, true);
+			Destroy (blocks [31, x]);
+			blocks [31, x] = null;
+			//Destroy (blocks [31, x]);
+			//blocks [31, x] = null;
+			createBlock (x, 31, false);
+		}
+
+		//blocks = tempGrid;
+
+		/*for (int x = 0; x < blocks.GetLength (1); x++) {
+			/*Destroy (blocks [0, x]);
+			blocks [0, x] = null;
+			createBlock (x, 0, true);
+			Destroy (blocks [31, x]);
+			blocks [31, x] = null;
+			createBlock (x, 31, false);
+		}*/
+		printGrid ();
+	}
+
+	public void restart(){
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }

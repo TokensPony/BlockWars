@@ -60,7 +60,7 @@ public class BlockData : MonoBehaviour{
 	public void dragBlock(Vector2 inputPos, bool human){
 		if (!GameObject.Find ("Bar").GetComponent<BarScript> ().locked) {
 			if (this.tag == "inHand") {
-				Debug.Log (inputPos.x + ", " + inputPos.y);
+				//Debug.Log (inputPos.x + ", " + inputPos.y);
 				float distance_to_screen = Camera.main.WorldToScreenPoint (gameObject.transform.position).z;
 				Vector3 pos_move = (human)?Camera.main.ScreenToWorldPoint (new Vector3 (inputPos.x, inputPos.y, distance_to_screen)):new Vector3 (inputPos.x, inputPos.y, distance_to_screen);
 				float snapPosition = ((pos_move.x - Mathf.Floor (pos_move.x)) > .5f) ? Mathf.Ceil (pos_move.x) : Mathf.Floor (pos_move.x);
@@ -137,6 +137,16 @@ public class BlockData : MonoBehaviour{
 		}
 		if (collision.gameObject == bar) {
 			Debug.Log ("Bar Hit");
+		}
+	}
+		
+	void OnCollisionExit(Collision collision){
+		if(collision.gameObject.tag == "Block" || collision.gameObject.tag == "Floor"){
+			//Debug.Log ("Hit");
+			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			if (collision.gameObject.tag == "Block") {
+				collision.gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			}
 		}
 	}
 

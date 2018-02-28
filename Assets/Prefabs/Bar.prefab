@@ -139,5 +139,6 @@ MonoBehaviour:
   gForce: {x: 0, y: -6.5, z: 0}
   maxHeight: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
+  p1Turn: 0
   gameOver: {fileID: 0}
   locked: 0
