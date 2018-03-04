@@ -37,13 +37,17 @@ public class BoutManager : MonoBehaviour {
 		turnCount = 0;
 		//bar = this.
 		populatePile ();
+		clearStart ();
 		printGrid ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.A)) {
-			addRows ();
+			//addRows ();
+			//recolor();
+			clearStart();
+			printGrid ();
 		}
 	}
 
@@ -152,6 +156,24 @@ public class BoutManager : MonoBehaviour {
 		Debug.Log (grid);
 	}
 
+	public void clearStart(){
+		for (int x = 0; x < blocks.GetLength (1); x++) {
+			for (int y = 0; y < blocks.GetLength (0); y++) {
+				if (blocks [y, x] != null) {
+					matchCount = 1;
+					boostCount = 0;
+					if (matchMade (blocks [y, x]) && matchCount >= minMatch) {
+						removeMarked (false);
+					} else {
+						matchCount = 1;
+						//blocks [y, x].GetComponent<BlockData> ().marked = false;
+						unmark();
+					}
+				}
+			}
+		}
+	}
+
 	/*Checks if any blocks in the grid have been "marked". This is being used as a temporary
 	means of triggering the match search.*/
 	public void isMarked(){
@@ -163,7 +185,7 @@ public class BoutManager : MonoBehaviour {
 					if (matchMade (blocks [y, x]) && matchCount >= minMatch) {
 						//if (matchMade (blocks [y, x])) {
 						boostCount = (matchCount > minMatch)?matchCount-minMatch:0;
-						removeMarked ();
+						removeMarked (true);
 					} else {
 						matchCount = 1;
 						boostCount = 0;
@@ -175,7 +197,7 @@ public class BoutManager : MonoBehaviour {
 		}
 	}
 
-	public void removeMarked(){
+	public void removeMarked(bool inGame){
 		int tempColor = 0;
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
@@ -187,24 +209,27 @@ public class BoutManager : MonoBehaviour {
 			}
 		}
 		collapseBoard ();
-		Debug.Log ("Boosted: " + (minForce + (boostCount * boostBase)));
-		float forceApplied = minForce + (boostCount * boostBase);
-		forceApplied *= (p1Turn) ? 1f : -1f;
+		if (inGame) {
+			Debug.Log ("Boosted: " + (minForce + (boostCount * boostBase)));
+			float forceApplied = minForce + (boostCount * boostBase);
+			forceApplied *= (p1Turn) ? 1f : -1f;
 
-		bar.GetComponent<BarScript>().pushAway(forceApplied, p1Turn);
-		//GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
-		GameObject[] managers;
-		managers = GameObject.FindGameObjectsWithTag ("PowerUpManager");
-		foreach (GameObject man in managers) {
-			if (man.GetComponent<PowerUpManager> ().playerOne == p1Turn) {
-				man.GetComponent<PowerUpManager> ().addPowerUp (tempColor);
-				break;
+			bar.GetComponent<BarScript> ().pushAway (forceApplied, p1Turn);
+			//GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
+			GameObject[] managers;
+			managers = GameObject.FindGameObjectsWithTag ("PowerUpManager");
+			foreach (GameObject man in managers) {
+				if (man.GetComponent<PowerUpManager> ().playerOne == p1Turn) {
+					man.GetComponent<PowerUpManager> ().addPowerUp (tempColor);
+					break;
+				}
 			}
-		}
-		p1Turn = !p1Turn;
-		if (++turnCount % 10 == 0) {
-			bar.GetComponent<BarScript> ().increaseSpeed ();
-			addRows ();
+			p1Turn = !p1Turn;
+			if (++turnCount % 8 == 0) {
+				bar.GetComponent<BarScript> ().increaseSpeed ();
+				addRows ();
+				recolor ();
+			}
 		}
 	}
 
@@ -354,21 +379,22 @@ public class BoutManager : MonoBehaviour {
 			//blocks [31, x] = null;
 			createBlock (x, 31, false);
 		}
-
-		//blocks = tempGrid;
-
-		/*for (int x = 0; x < blocks.GetLength (1); x++) {
-			/*Destroy (blocks [0, x]);
-			blocks [0, x] = null;
-			createBlock (x, 0, true);
-			Destroy (blocks [31, x]);
-			blocks [31, x] = null;
-			createBlock (x, 31, false);
-		}*/
 		printGrid ();
 	}
 
 	public void restart(){
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void recolor(){
+		for (int x = 0; x < blocks.GetLength (1); x++) {
+			for (int y = 0; y < blocks.GetLength (0); y++) {
+				if (blocks [y, x] != null) {
+					int randIndex = Random.Range (0, textures.Count);
+					blocks[y,x].GetComponent<Renderer> ().material = textures[randIndex];
+					blocks[y,x].GetComponent<BlockData> ().color = randIndex;
+				}
+			}
+		}
 	}
 }

@@ -60,7 +60,7 @@ MonoBehaviour:
   minForce: 4
   boostCount: 0
   boostBase: 1
-  maxPile: 4
+  maxPile: 7
   textures:
   - {fileID: 2100000, guid: 9fe69349063a88e4aadab7e507234b56, type: 2}
   - {fileID: 2100000, guid: 077f0b3b1c44f1d4c8f1c967c87122a2, type: 2}
