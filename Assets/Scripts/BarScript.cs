@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 public class BarScript : MonoBehaviour {
 
 	public Vector3 sVelocity;
+	public Vector3 fastVelocity;
+	public Vector3 finalVelocity;
 	//public Vector3 extraVelocity;
 	public Vector3 gForce;
 	public Vector3 maxHeight;
@@ -15,6 +17,7 @@ public class BarScript : MonoBehaviour {
 	public GameObject gameOver;
 
 	public bool locked;
+	public bool waiting;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +25,11 @@ public class BarScript : MonoBehaviour {
 		this.GetComponent<ConstantForce> ().force = gForce;
 		locked = false;
 		rb = this.GetComponent<Rigidbody> ();
-		this.GetComponent<Rigidbody> ().velocity = sVelocity;
+		finalVelocity = sVelocity;
+		this.GetComponent<Rigidbody> ().velocity = finalVelocity;
 		maxHeight = new Vector3(0,16.8f,0);
+		fastVelocity = sVelocity * 1.5f;
+		waiting = false;
 	}
 	
 	// Update is called once per frame
@@ -36,6 +42,10 @@ public class BarScript : MonoBehaviour {
 	}
 
 	IEnumerator waitForBoost(bool p1){
+		fastVelocity *= -1f;
+		sVelocity *= -1f;
+		finalVelocity = fastVelocity;
+		waiting = false;
 		if (p1) {
 			while (rb.velocity.y >= 0) {
 				yield return null;
@@ -47,13 +57,13 @@ public class BarScript : MonoBehaviour {
 		}
 		//rb.useGravity = false;
 		this.GetComponent<ConstantForce>().enabled= false;
-		sVelocity *= -1f;
 		Vector3 temp = sVelocity;
 		/*if (p1 && this.transform.position.y < 16.8f || !p1 && this.transform.position.y < 16.8f) {
 			temp.y *= 2f;
 		}*/
-		rb.velocity = temp;
+		rb.velocity = finalVelocity;
 		GameObject.Find ("Main Camera").GetComponent<CameraControls> ().setCamera (!p1);
+		waiting = false;
 	}
 		
 
@@ -77,13 +87,24 @@ public class BarScript : MonoBehaviour {
 			sVelocity.y = 0f;
 			//GameObject.Find ("GameOver").SetActive (true);
 			//gameOver.transform.GetChild(0).gameObject.SetActive(true);
-			gameOver.SetActive(true);
+			gameOver.SetActive (true);
 			locked = true;
+		} 
+	}
+
+	void OnTriggerEnter(Collider col){
+		if (col.gameObject.tag == "Middle") {
+			Debug.Log ("Hit Middle");
+			finalVelocity = sVelocity;
+			if (!waiting) {
+				rb.velocity = finalVelocity;
+			}
 		}
 	}
 
 	public void increaseSpeed(){
 		sVelocity.y += .05f;
-		rb.velocity = sVelocity;
+		fastVelocity = sVelocity * 1.5f;
+		//rb.velocity = sVelocity;
 	}
 }

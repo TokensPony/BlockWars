@@ -9,6 +9,7 @@ TagManager:
   - Floor
   - Power Up
   - PowerUpManager
+  - Middle
   layers:
   - Default
   - TransparentFX

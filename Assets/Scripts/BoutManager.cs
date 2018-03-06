@@ -89,10 +89,10 @@ public class BoutManager : MonoBehaviour {
 		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
 		if (p1) {
 			spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
-			Debug.Log ("P1 Block: " + spawnPoint.y);
+			//Debug.Log ("P1 Block: " + spawnPoint.y);
 		} else {
 			spawnPoint.y = (yPos - spawnHeight) - ((31 - yPos) * yOffset);
-			Debug.Log ("P2 Block: " + spawnPoint.y);
+			//Debug.Log ("P2 Block: " + spawnPoint.y);
 		}
 		//Debug.Log (spawnPoint.y);
 		if (spawnPoint.x > 0f) {
@@ -285,7 +285,7 @@ public class BoutManager : MonoBehaviour {
 			blocks [(int)pos.y - 1, (int)pos.x] != null &&
 			startMat == blocks [(int)pos.y - 1, (int)pos.x].GetComponent<Renderer>().sharedMaterial &&
 		    !blocks [(int)pos.y - 1, (int)pos.x].GetComponent<BlockData> ().marked) {
-			Debug.Log ("Matched");
+			//Debug.Log ("Matched");
 			matchMade (blocks [(int)pos.y - 1, (int)pos.x]);
 			found = true;
 			matchCount++;
@@ -306,7 +306,7 @@ public class BoutManager : MonoBehaviour {
 			blocks [(int)pos.y + 1, (int)pos.x] != null &&
 			startMat == blocks [(int)pos.y + 1, (int)pos.x].GetComponent<Renderer>().sharedMaterial &&
 			!blocks [(int)pos.y + 1, (int)pos.x].GetComponent<BlockData> ().marked) {
-			Debug.Log ("Matched");
+			//Debug.Log ("Matched");
 			matchMade (blocks [(int)pos.y + 1, (int)pos.x]);
 			found = true;
 			matchCount++;
