@@ -53,7 +53,11 @@ public class BlockData : MonoBehaviour{
 	the bar when it is close to it.*/
 	void OnMouseDrag()
 	{
-		dragBlock (Input.mousePosition, true);
+		if (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn) {
+			dragBlock (Input.mousePosition, true);
+		} else {
+			this.transform.position = handPos;
+		}
 		//dragBlock (new Vector2(0f, 10f));
 	}
 

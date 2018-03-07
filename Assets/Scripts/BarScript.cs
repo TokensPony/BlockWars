@@ -13,7 +13,9 @@ public class BarScript : MonoBehaviour {
 	public Vector3 maxHeight;
 	public Rigidbody rb;
 	public bool p1Turn;
+	public float incSpeed;
 
+	public bool onP1;
 	public GameObject gameOver;
 
 	public bool locked;
@@ -30,6 +32,7 @@ public class BarScript : MonoBehaviour {
 		maxHeight = new Vector3(0,16.8f,0);
 		fastVelocity = sVelocity * 1.5f;
 		waiting = false;
+		onP1 = true;
 	}
 	
 	// Update is called once per frame
@@ -45,7 +48,7 @@ public class BarScript : MonoBehaviour {
 		fastVelocity *= -1f;
 		sVelocity *= -1f;
 		finalVelocity = fastVelocity;
-		waiting = false;
+		waiting = true;
 		if (p1) {
 			while (rb.velocity.y >= 0) {
 				yield return null;
@@ -57,7 +60,13 @@ public class BarScript : MonoBehaviour {
 		}
 		//rb.useGravity = false;
 		this.GetComponent<ConstantForce>().enabled= false;
-		Vector3 temp = sVelocity;
+		//Vector3 temp = sVelocity;
+
+		if (p1Turn != onP1) {
+			Debug.Log ("Push made when not in view");
+			finalVelocity = sVelocity;
+		}
+		p1Turn = !p1Turn;
 		/*if (p1 && this.transform.position.y < 16.8f || !p1 && this.transform.position.y < 16.8f) {
 			temp.y *= 2f;
 		}*/
@@ -78,7 +87,6 @@ public class BarScript : MonoBehaviour {
 		rb.AddForce(new Vector3(0, yForce, 0), ForceMode.Impulse);
 		StartCoroutine (waitForBoost (p1));
 		Debug.Log ("Force Applied");
-		p1Turn = !p1Turn;
 	}
 
 	void OnCollisionEnter(Collision col){
@@ -97,14 +105,21 @@ public class BarScript : MonoBehaviour {
 			Debug.Log ("Hit Middle");
 			finalVelocity = sVelocity;
 			if (!waiting) {
+				Debug.Log ("Not waiting");
 				rb.velocity = finalVelocity;
+			}
+			if (rb.velocity.y < 0) {
+				onP1 = true;
+			} else if (rb.velocity.y > 0) {
+				onP1 = false;
 			}
 		}
 	}
 
 	public void increaseSpeed(){
-		sVelocity.y += .05f;
+		sVelocity.y += (sVelocity.y > 0f)? incSpeed: -incSpeed;
 		fastVelocity = sVelocity * 1.5f;
+		incSpeed *= .9f;
 		//rb.velocity = sVelocity;
 	}
 }

@@ -136,9 +136,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sVelocity: {x: 0, y: -0.25, z: 0}
+  fastVelocity: {x: 0, y: 0, z: 0}
+  finalVelocity: {x: 0, y: 0, z: 0}
   gForce: {x: 0, y: -6.5, z: 0}
   maxHeight: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   p1Turn: 0
+  incSpeed: 0.05
+  onP1: 0
   gameOver: {fileID: 0}
   locked: 0
+  waiting: 0
