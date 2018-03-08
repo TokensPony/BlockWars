@@ -49,6 +49,8 @@ public class BarScript : MonoBehaviour {
 		sVelocity *= -1f;
 		finalVelocity = fastVelocity;
 		waiting = true;
+		lockHands (true);
+
 		if (p1) {
 			while (rb.velocity.y >= 0) {
 				yield return null;
@@ -61,18 +63,19 @@ public class BarScript : MonoBehaviour {
 		//rb.useGravity = false;
 		this.GetComponent<ConstantForce>().enabled= false;
 		//Vector3 temp = sVelocity;
-
 		if (p1Turn != onP1) {
 			Debug.Log ("Push made when not in view");
 			finalVelocity = sVelocity;
 		}
 		p1Turn = !p1Turn;
+
 		/*if (p1 && this.transform.position.y < 16.8f || !p1 && this.transform.position.y < 16.8f) {
 			temp.y *= 2f;
 		}*/
 		rb.velocity = finalVelocity;
 		GameObject.Find ("Main Camera").GetComponent<CameraControls> ().setCamera (!p1);
 		waiting = false;
+		lockHands (false);
 	}
 		
 
@@ -121,5 +124,12 @@ public class BarScript : MonoBehaviour {
 		fastVelocity = sVelocity * 1.5f;
 		incSpeed *= .9f;
 		//rb.velocity = sVelocity;
+	}
+
+	public void lockHands(bool handSet){
+		GameObject[] hands = GameObject.FindGameObjectsWithTag ("HandManager");
+		foreach (GameObject hand in hands) {
+			hand.GetComponent<HandManager> ().handLocked = handSet;
+		}
 	}
 }

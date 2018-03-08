@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114511831691739992}
   m_Layer: 0
   m_Name: HandManager
-  m_TagString: Untagged
+  m_TagString: HandManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,3 +55,6 @@ MonoBehaviour:
   block: {fileID: 0}
   handSize: 5
   textures: []
+  colorNames: []
+  p1: 0
+  handLocked: 0

@@ -10,6 +10,7 @@ TagManager:
   - Power Up
   - PowerUpManager
   - Middle
+  - HandManager
   layers:
   - Default
   - TransparentFX

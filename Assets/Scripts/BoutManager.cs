@@ -58,8 +58,10 @@ public class BoutManager : MonoBehaviour {
 		if (p1Turn) {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				if (blocks [y, xPos] == null) {
-					if (y > 0 && p1Turn && dropBlock.transform.position.y < blocks [y - 1, xPos].transform.position.y + 1f) {
-						dropBlock.transform.position = blocks [y - 1, xPos].transform.position + new Vector3 (0, 1, 0);
+					if (y > 0 && p1Turn 
+						&& dropBlock.transform.position.y < blocks [y - 1, xPos].transform.position.y + 1f
+					){
+						dropBlock.transform.position = blocks [y - 1, xPos].transform.position + new Vector3 (0, 1.1f, 0);
 					}
 					dropBlock.GetComponent<BlockData> ().gridCoord.y = y;
 					blocks [y, xPos] = dropBlock;
@@ -69,8 +71,10 @@ public class BoutManager : MonoBehaviour {
 		} else {
 			for (int y = blocks.GetLength (0) - 1; y >= 0; y--) {
 				if (blocks [y, xPos] == null) {
-					if (y < 31 && !p1Turn && dropBlock.transform.position.y > blocks [y + 1, xPos].transform.position.y - 1f) {
-						dropBlock.transform.position = blocks [y + 1, xPos].transform.position - new Vector3 (0, 1, 0);
+					if (y < 31 && !p1Turn 
+						&& dropBlock.transform.position.y > blocks [y + 1, xPos].transform.position.y - 1f
+					) {
+						dropBlock.transform.position = blocks [y + 1, xPos].transform.position - new Vector3 (0, 1.1f, 0);
 					}
 					dropBlock.GetComponent<BlockData> ().gridCoord.y = y;
 					blocks [y, xPos] = dropBlock;

@@ -11,11 +11,13 @@ public class HandManager : MonoBehaviour {
 	public List<string> colorNames;
 
 	public bool p1;
+	public bool handLocked;
 
 	void Start () {
 		textures = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().textures;
 		block = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().block;
 		colorNames = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().colorNames;
+		handLocked = false;
 		populateHand ();
 	}
 	
@@ -40,6 +42,7 @@ public class HandManager : MonoBehaviour {
 		newBlock.transform.position = finalPos;
 		newBlock.GetComponent<ConstantForce> ().enabled = false;
 		newBlock.GetComponent<BlockData> ().playerOne = p1;
+		newBlock.GetComponent<BlockData> ().handM = this.gameObject;
 		return newBlock;
 	}
 

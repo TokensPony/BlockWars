@@ -138,6 +138,7 @@ MonoBehaviour:
   color: 0
   gridCoord: {x: 0, y: 0}
   handPos: {x: 0, y: 0, z: 0}
+  handM: {fileID: 0}
   manager: {fileID: 0}
   boardWidth: 0
   barOffset: 0

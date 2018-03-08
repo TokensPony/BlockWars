@@ -10,6 +10,7 @@ public class BlockData : MonoBehaviour{
 	//public Vector3 position;
 	public Vector2 gridCoord;
 	public Vector3 handPos;
+	public GameObject handM;
 
 	GameObject bar;
 
@@ -62,7 +63,7 @@ public class BlockData : MonoBehaviour{
 	}
 
 	public void dragBlock(Vector2 inputPos, bool human){
-		if (!GameObject.Find ("Bar").GetComponent<BarScript> ().locked) {
+		if (!GameObject.Find ("Bar").GetComponent<BarScript> ().locked && !handM.GetComponent<HandManager> ().handLocked) {
 			if (this.tag == "inHand") {
 				//Debug.Log (inputPos.x + ", " + inputPos.y);
 				float distance_to_screen = Camera.main.WorldToScreenPoint (gameObject.transform.position).z;
@@ -117,6 +118,7 @@ public class BlockData : MonoBehaviour{
 	/*Coroutine to delay the activation of the match checking until after
 	 * the block has fallen and hit the ground.*/
 	IEnumerator waitToCollide(){
+		handM.GetComponent<HandManager> ().handLocked = true;
 		if (playerOne) {
 			while (this.GetComponent<Rigidbody> ().velocity.y < 0f) {
 				yield return null;
@@ -126,6 +128,7 @@ public class BlockData : MonoBehaviour{
 				yield return null;
 			}
 		}
+		handM.GetComponent<HandManager> ().handLocked = false;
 		manager.isMarked();
 		//yield return null;
 	}

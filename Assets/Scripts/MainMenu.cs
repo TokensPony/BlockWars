@@ -16,6 +16,10 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void startGame(){
-		SceneManager.LoadScene("TestBoutScene");
+		SceneManager.LoadScene("Local2Player");
+	}
+
+	public void startAIGame(){
+		SceneManager.LoadScene("AIScene");
 	}
 }
