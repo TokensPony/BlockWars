@@ -50,7 +50,24 @@ public class AIOpponent : MonoBehaviour {
 			Material startMat = aihand.hand [h].GetComponent<Renderer> ().sharedMaterial;
 			for (int x = 0; x < board.GetLength (1); x++) {
 				for (int y = 0; y < board.GetLength (0) - 1; y++) {
-					if (board [y, x] != null && y != board.GetLength (1) - 1 && board [y + 1, x] == null &&
+					if (board [y, x] == null && y != board.GetLength (1) - 1) {
+						if (x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat ||
+						    y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat ||
+						    x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat) {
+							Debug.Log (y + "," + x + "," + startMat);
+							Vector3 temp = (y > 0) ? board [y - 1, x].transform.position : new Vector3 (x-4f, 0f, 0f);
+							temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
+							temp.y += 2f;
+							aihand.hand [h].GetComponent<BlockData> ().dragBlock (temp, false);
+							aihand.hand [h].GetComponent<BlockData> ().release ();
+							//Debug.Log ("Match Found: " + startMat + ", " + board [y, x].GetComponent<Renderer> ().sharedMaterial);
+							//break;
+							return true;
+						} else {
+							break;
+						}
+					}
+					/*if (board [y, x] != null && y != board.GetLength (1) - 1 && board [y + 1, x] == null &&
 					    board [y, x].GetComponent<Renderer> ().sharedMaterial == startMat) {
 						Vector3 temp = board [y, x].transform.position;
 						temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
@@ -60,7 +77,7 @@ public class AIOpponent : MonoBehaviour {
 						Debug.Log ("Match Found: " + startMat +", "+ board [y, x].GetComponent<Renderer> ().sharedMaterial);
 						//break;
 						return true;
-					}
+					}*/
 				}
 			}
 		}
