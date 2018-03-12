@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 
 public class BlockData : MonoBehaviour{
@@ -15,6 +16,7 @@ public class BlockData : MonoBehaviour{
 	GameObject bar;
 
 	public BoutManager manager;
+	public Scene scene;
 
 	public float boardWidth;
 	private float xOffset;
@@ -34,6 +36,7 @@ public class BlockData : MonoBehaviour{
 		if (!playerOne) {
 			this.GetComponent<ConstantForce> ().force *= -1f; 
 		}
+		scene = SceneManager.GetActiveScene ();
 	}
 
 	void Update(){
@@ -54,7 +57,7 @@ public class BlockData : MonoBehaviour{
 	the bar when it is close to it.*/
 	void OnMouseDrag()
 	{
-		if (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn) {
+		if ((playerOne && manager.p1Turn || !playerOne && !manager.p1Turn) && (string.Equals(scene.name, "AIScene") && !playerOne)) {
 			dragBlock (Input.mousePosition, true);
 		} else {
 			this.transform.position = handPos;

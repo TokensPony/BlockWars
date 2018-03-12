@@ -67,17 +67,6 @@ public class AIOpponent : MonoBehaviour {
 							break;
 						}
 					}
-					/*if (board [y, x] != null && y != board.GetLength (1) - 1 && board [y + 1, x] == null &&
-					    board [y, x].GetComponent<Renderer> ().sharedMaterial == startMat) {
-						Vector3 temp = board [y, x].transform.position;
-						temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
-						temp.y += 2f;
-						aihand.hand [h].GetComponent<BlockData> ().dragBlock (temp, false);
-						aihand.hand [h].GetComponent<BlockData> ().release ();
-						Debug.Log ("Match Found: " + startMat +", "+ board [y, x].GetComponent<Renderer> ().sharedMaterial);
-						//break;
-						return true;
-					}*/
 				}
 			}
 		}
