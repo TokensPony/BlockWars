@@ -57,11 +57,27 @@ public class BlockData : MonoBehaviour{
 	the bar when it is close to it.*/
 	void OnMouseDrag()
 	{
-		if ((playerOne && manager.p1Turn || !playerOne && !manager.p1Turn) && (string.Equals(scene.name, "AIScene") && !playerOne)) {
-			dragBlock (Input.mousePosition, true);
-		} else {
-			this.transform.position = handPos;
+		if(string.Equals(scene.name, "Local2Player")){
+			if (this.tag == "inHand" && (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)) {
+				dragBlock (Input.mousePosition, true);
+			}else if(this.tag == "inHand") {
+				this.transform.position = handPos;
+			}
+		}else if(string.Equals(scene.name, "AIScene")){
+			if (this.tag == "inHand" && !playerOne) {
+				dragBlock (Input.mousePosition, true);
+			}else if(this.tag == "inHand") {
+				this.transform.position = handPos;
+			}
 		}
+		/*if (this.tag == "inHand" && string.Equals(scene.name, "Local2Player") && 
+			(playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)) 
+			//&& (string.Equals(scene.name, "AIScene") && !playerOne))
+			{
+			dragBlock (Input.mousePosition, true);
+		} else if(this.tag == "inHand") {
+			this.transform.position = handPos;
+		}*/
 		//dragBlock (new Vector2(0f, 10f));
 	}
 
@@ -94,7 +110,7 @@ public class BlockData : MonoBehaviour{
 	public void release(){
 		transform.position = new Vector3 (transform.position.x, transform.position.y, 0f);
 		if (this.tag == "Block") {
-			this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, 1, 0);
+			//this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, 1, 0);
 		}
 		if(this.tag == "inHand"){
 			if ((this.transform.position.y >= .5f && playerOne) || this.transform.position.y <= 32f && !playerOne) {

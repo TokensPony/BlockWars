@@ -23,9 +23,11 @@ public class CameraControls : MonoBehaviour {
 		if (p1) {
 			this.transform.position = p1Position;
 			this.transform.rotation = Quaternion.Euler (p1Rotation);
+			//this.GetComponent<Camera> ().backgroundColor = Color.black;
 		} else {
 			this.transform.position = p2Position;
 			this.transform.rotation = Quaternion.Euler (p2Rotation);
+			//this.GetComponent<Camera> ().backgroundColor = Color.gray;
 		}
 	}
 }

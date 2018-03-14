@@ -255,6 +255,7 @@ MonoBehaviour:
   boardMan: {fileID: 533055810}
   moveDelay: 0
   waiting: 0
+  matchCount: 0
 --- !u!1001 &284221892
 Prefab:
   m_ObjectHideFlags: 0
@@ -966,7 +967,7 @@ RectTransform:
   m_GameObject: {fileID: 1470789345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.048780486, y: 0.048780486, z: 0.048780486}
+  m_LocalScale: {x: 0.03956044, y: 0.03956044, z: 0.03956044}
   m_Children:
   - {fileID: 1697555775}
   - {fileID: 1751860221}
