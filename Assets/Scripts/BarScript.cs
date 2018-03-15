@@ -27,27 +27,33 @@ public class BarScript : MonoBehaviour {
 		this.GetComponent<ConstantForce> ().force = gForce;
 		locked = false;
 		rb = this.GetComponent<Rigidbody> ();
-		finalVelocity = sVelocity;
+		finalVelocity = (p1Turn)? sVelocity: sVelocity * -1f;
 		this.GetComponent<Rigidbody> ().velocity = finalVelocity;
 		maxHeight = new Vector3(0,16.8f,0);
 		fastVelocity = sVelocity * 1.5f;
 		waiting = false;
 		onP1 = true;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		/*if (p1Turn && this.transform.position.y < 16.8f || !p1Turn && this.transform.position.y > 16.8f) {
-			Debug.Log ("Normal Speed");
-			rb.velocity = sVelocity;
-		}*/
+		if ((p1Turn && this.transform.position.y > 16f || !p1Turn && this.transform.position.y < 16f) && !waiting) {
+			//Debug.Log (" Speed");
+			finalVelocity = (p1Turn) ? fastVelocity : fastVelocity * -1f;
+			rb.velocity = finalVelocity;
+		} else if (!waiting) {
+			finalVelocity = (p1Turn) ? sVelocity : sVelocity * -1f;
+			rb.velocity = finalVelocity;
+		}
 		//Debug.Log (rb.velocity);
 	}
 
 	IEnumerator waitForBoost(bool p1){
-		fastVelocity *= -1f;
-		sVelocity *= -1f;
-		finalVelocity = fastVelocity;
+		//fastVelocity *= -1f;
+		//sVelocity *= -1f;
+
+		finalVelocity = (!p1Turn)? sVelocity : sVelocity*-1f;
 		waiting = true;
 		lockHands (true);
 
@@ -63,13 +69,15 @@ public class BarScript : MonoBehaviour {
 		//rb.useGravity = false;
 		this.GetComponent<ConstantForce>().enabled= false;
 		//Vector3 temp = sVelocity;
-		if (p1Turn != onP1) {
+		/*if (p1Turn != onP1) {
 			Debug.Log ("Push made when not in view");
 			finalVelocity = sVelocity;
-		}
+		}*/
 		p1Turn = !p1Turn;
 
-		/*if (p1 && this.transform.position.y < 16.8f || !p1 && this.transform.position.y < 16.8f) {
+
+
+		/*if (p1 && this.transform.position.y < 16f || !p1 && this.transform.position.y < 16f) {
 			temp.y *= 2f;
 		}*/
 		rb.velocity = finalVelocity;
@@ -103,7 +111,7 @@ public class BarScript : MonoBehaviour {
 		} 
 	}
 
-	void OnTriggerEnter(Collider col){
+	/*void OnTriggerEnter(Collider col){
 		if (col.gameObject.tag == "Middle") {
 			Debug.Log ("Hit Middle");
 			finalVelocity = sVelocity;
@@ -117,13 +125,14 @@ public class BarScript : MonoBehaviour {
 				onP1 = false;
 			}
 		}
-	}
+	}*/
 
 	public void increaseSpeed(){
-		sVelocity.y += (sVelocity.y > 0f)? incSpeed: -incSpeed;
+		//sVelocity.y += (sVelocity.y > 0f)? incSpeed: -incSpeed;
+		sVelocity.y -= incSpeed;
 		fastVelocity = sVelocity * 1.5f;
 		incSpeed *= .9f;
-		//rb.velocity = sVelocity;
+		rb.velocity = sVelocity;
 	}
 
 	public void lockHands(bool handSet){

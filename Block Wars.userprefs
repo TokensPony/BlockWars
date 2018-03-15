@@ -1,6 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI Scripts\AIOpponent.cs">
+    <Files>
+      <File FileName="Assets\Scripts\HandManager.cs" Line="3" Column="18" />
+      <File FileName="Assets\Scripts\BoutManager.cs" Line="280" Column="2" />
+      <File FileName="Assets\Scripts\BlockData.cs" Line="69" Column="36" />
+      <File FileName="Assets\Scripts\CameraControls.cs" Line="30" Column="6" />
+      <File FileName="Assets\Scripts\AI Scripts\AIOpponent.cs" Line="110" Column="56" NotebookId="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

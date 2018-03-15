@@ -30,15 +30,16 @@ public class AIOpponent : MonoBehaviour {
 			//placeBlock();
 			greedyHill();
 		}
-		/*if (boardMan.GetComponent<BoutManager> ().p1Turn && !waiting && !handObject.GetComponent<HandManager> ().handLocked) {
+		if (boardMan.GetComponent<BoutManager> ().p1Turn && !waiting && !handObject.GetComponent<HandManager> ().handLocked) {
 			StartCoroutine (AIDelay ());
-		}*/
+		}
 	}
 
 	private IEnumerator AIDelay(){
 		waiting = true;
 		yield return new WaitForSecondsRealtime (1.5f);
-		placeBlock ();
+		//placeBlock ();
+		greedyHill();
 		waiting = false;
 	}
 
@@ -95,6 +96,9 @@ public class AIOpponent : MonoBehaviour {
 	public bool greedyHill(){
 		Debug.Log ("Place Block");
 		GameObject[,] board = boardMan.GetComponent<BoutManager> ().blocks;
+		int tempHand = 0;
+		Vector2 tempPos = Vector2.zero;
+		int currentMax = 0;
 
 		for (int h = 0; h < aihand.hand.Count; h++) {
 			Material startMat = aihand.hand [h].GetComponent<Renderer> ().sharedMaterial;
@@ -102,28 +106,41 @@ public class AIOpponent : MonoBehaviour {
 				for (int y = 0; y < board.GetLength (0) - 1; y++) {
 					aihand.hand [h].GetComponent<BlockData> ().gridCoord = new Vector2 (x, y);
 					if (board [y, x] == null && y != board.GetLength (1) - 1) {
-						if (x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat ||
-							y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat ||
-							x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat) {
-							Debug.Log (y + "," + x + "," + startMat);
+						if (((x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat) ||
+							(y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
+							(x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))){
+							//Debug.Log (y + "," + x + "," + startMat);
+							Debug.Log ("Match Count: " + matchCount);
 							matchMade (aihand.hand [h]);
 							boardMan.GetComponent<BoutManager> ().unmark ();
-							//Debug.Log ("Match Count: " + matchCount);
-							//matchCount = 0;
-							Vector3 temp = (y > 0) ? board [y - 1, x].transform.position : new Vector3 (x-4f, 0f, 0f);
+							if (matchCount > currentMax) {
+								currentMax = matchCount;
+								tempHand = h;
+								tempPos = new Vector2 (x, y);
+							}
+							matchCount = 0;
+							break;
+							/*Vector3 temp = (y > 0) ? board [y - 1, x].transform.position : new Vector3 (x-4f, 0f, 0f);
 							temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
 							temp.y += 2f;
 							aihand.hand [h].GetComponent<BlockData> ().dragBlock (temp, false);
 							aihand.hand [h].GetComponent<BlockData> ().release ();
-							//Debug.Log ("Match Found: " + startMat + ", " + board [y, x].GetComponent<Renderer> ().sharedMaterial);
-							//break;
-							return true;
+							return true;*/
 						} else {
+							matchCount = 0;
 							break;
 						}
 					}
 				}
 			}
+		}
+		if (currentMax > 0) {
+			Vector3 temp = (tempPos.y > 0f) ? board [(int)tempPos.y - 1, (int)tempPos.x].transform.position : new Vector3 (tempPos.x - 4f, 0f, 0f);
+			temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
+			temp.y += 2f;
+			aihand.hand [tempHand].GetComponent<BlockData> ().dragBlock (temp, false);
+			aihand.hand [tempHand].GetComponent<BlockData> ().release ();
+			return true;
 		}
 		randomDrop (board);
 		return false;
