@@ -11,6 +11,7 @@ TagManager:
   - PowerUpManager
   - Middle
   - HandManager
+  - AI
   layers:
   - Default
   - TransparentFX

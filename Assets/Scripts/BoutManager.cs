@@ -29,12 +29,15 @@ public class BoutManager : MonoBehaviour {
 
 	public bool p1Turn;
 
+	public GameObject ai;
+
 	// Use this for initialization
 	void Start () {
 		Screen.fullScreen = false;
 		Screen.orientation = ScreenOrientation.Portrait;
 		p1Turn = true;
 		turnCount = 0;
+		ai = GameObject.FindGameObjectWithTag ("AI");
 		//bar = this.
 		populatePile ();
 		clearStart ();
@@ -188,6 +191,10 @@ public class BoutManager : MonoBehaviour {
 					boostCount = 0;
 					if (matchMade (blocks [y, x]) && matchCount >= minMatch) {
 						//if (matchMade (blocks [y, x])) {
+						if (ai != null) {
+							Debug.Log ("Have AI");
+							ai.GetComponent<AIOpponent> ().setHMC (matchCount-1);
+						}
 						boostCount = (matchCount > minMatch)?matchCount-minMatch:0;
 						removeMarked (true);
 					} else {
