@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 1166482198688414, guid: 895a07da0052d294a9a8d3a888bf2f7c, type: 2}
-  bar: {fileID: 0}
+  bar: {fileID: 1589313474062812, guid: 98b76295451627645a5c560fa2032bcd, type: 2}
   boardWidth: 8
   xOffset: 0.15
   yOffset: 0.15
@@ -74,3 +74,4 @@ MonoBehaviour:
   - Orange
   - Yellow
   p1Turn: 0
+  ai: {fileID: 0}

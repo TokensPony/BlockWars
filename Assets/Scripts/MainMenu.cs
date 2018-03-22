@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+	public GameObject levelSelect;
+
 	// Use this for initialization
 	void Start () {
 		Screen.fullScreen = false;
@@ -16,11 +18,22 @@ public class MainMenu : MonoBehaviour {
 		
 	}
 
-	public void startGame(){
-		SceneManager.LoadScene("Local2Player");
+	public void startGame(int input){
+		switch (input) {
+		case 0:
+			SceneManager.LoadScene ("Local2Player");
+			break;
+		default:
+			break;
+		}
 	}
 
-	public void startAIGame(){
+	public void startAIGame(int diff){
+		PlayerPrefs.SetInt ("diffLev", diff);
 		SceneManager.LoadScene("AIScene");
+	}
+
+	public void levelMenu(bool op){
+		levelSelect.gameObject.SetActive (op);
 	}
 }

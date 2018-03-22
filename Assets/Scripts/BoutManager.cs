@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
-public class BoutManager : MonoBehaviour {
+public class BoutManager : NetworkBehaviour {
 
 	public GameObject block;
 	public GameObject[,] blocks = new GameObject[32,9];
@@ -35,8 +36,19 @@ public class BoutManager : MonoBehaviour {
 	void Start () {
 		Screen.fullScreen = false;
 		Screen.orientation = ScreenOrientation.Portrait;
+		if (!string.Equals (SceneManager.GetActiveScene().name, "Network")) {
+			manualStart ();
+		}
+	}
+
+	public void manualStart(){
 		p1Turn = true;
 		turnCount = 0;
+		bar = Instantiate (bar);
+		if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
+			Debug.Log ("Server Spawn");
+			NetworkServer.Spawn (bar);
+		}
 		ai = GameObject.FindGameObjectWithTag ("AI");
 		//bar = this.
 		populatePile ();

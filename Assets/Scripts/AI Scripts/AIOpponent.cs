@@ -15,11 +15,14 @@ public class AIOpponent : MonoBehaviour {
 
 	public bool waiting;
 	public int matchCount;
+	public int diff;
 
 	public int humanMatchCount;
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log(PlayerPrefs.GetInt("diffLev"));
+		diff = PlayerPrefs.GetInt ("diffLev");
 		humanMatchCount = 0;
 		aihand = handObject.GetComponent<HandManager> ();
 		waiting = false;
@@ -40,9 +43,21 @@ public class AIOpponent : MonoBehaviour {
 	private IEnumerator AIDelay(){
 		waiting = true;
 		yield return new WaitForSecondsRealtime (1.5f);
-		//placeBlock ();
-		//greedyHill();
-		titForTat();
+		switch (diff) {
+		case 0:
+			placeBlock ();
+			break;
+		case 1:
+			titForTat ();
+			break;
+		case 2:
+			greedyHill ();
+			break;
+		default:
+			placeBlock ();
+			break;
+		}
+			
 		waiting = false;
 	}
 

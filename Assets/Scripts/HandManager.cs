@@ -31,6 +31,7 @@ public class HandManager : MonoBehaviour {
 	}
 
 	public GameObject drawBlock(float xPos){
+		//Debug.Log ("HM Parent: " + this.gameObject.transform.root);
 		GameObject newBlock = Instantiate (block);
 		int randIndex = Random.Range (0, textures.Count);
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
@@ -40,6 +41,7 @@ public class HandManager : MonoBehaviour {
 		Vector3 finalPos = (p1) ? new Vector3 (xPos, -1f, 0) : new Vector3 (-xPos, 32f, 0);
 		newBlock.GetComponent<BlockData> ().handPos = finalPos;
 		newBlock.transform.position = finalPos;
+		newBlock.transform.SetParent (this.gameObject.transform.root);
 		newBlock.GetComponent<ConstantForce> ().enabled = false;
 		newBlock.GetComponent<BlockData> ().playerOne = p1;
 		newBlock.GetComponent<BlockData> ().handM = this.gameObject;

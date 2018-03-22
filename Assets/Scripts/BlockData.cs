@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 
-public class BlockData : MonoBehaviour{
+public class BlockData : NetworkBehaviour{
 
 	public int color;
 	//public Vector3 position;
@@ -32,7 +33,7 @@ public class BlockData : MonoBehaviour{
 		marked = false;
 		boardWidth = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().boardWidth;
 		xOffset = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().xOffset;
-		bar = GameObject.Find ("Bar");
+		//bar = GameObject.FindGameObjectWithTag ("Finish");
 		if (!playerOne) {
 			this.GetComponent<ConstantForce> ().force *= -1f; 
 		}
@@ -42,6 +43,10 @@ public class BlockData : MonoBehaviour{
 	void Update(){
 		if (marked) {
 			//Destroy (this.gameObject);
+		}
+		if (bar == null && GameObject.FindGameObjectWithTag("Finish") != null) {
+			Debug.Log ("Set Bar");
+			bar = GameObject.FindGameObjectWithTag ("Finish");
 		}
 
 		//onMouseDown ();
@@ -57,16 +62,23 @@ public class BlockData : MonoBehaviour{
 	the bar when it is close to it.*/
 	void OnMouseDrag()
 	{
-		if(string.Equals(scene.name, "Local2Player")){
+		if (string.Equals (scene.name, "Local2Player")) {
 			if (this.tag == "inHand" && (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)) {
 				dragBlock (Input.mousePosition, true);
-			}else if(this.tag == "inHand") {
+			} else if (this.tag == "inHand") {
 				this.transform.position = handPos;
 			}
-		}else if(string.Equals(scene.name, "AIScene")){
+		} else if (string.Equals (scene.name, "AIScene")) {
 			if (this.tag == "inHand" && !playerOne) {
 				dragBlock (Input.mousePosition, true);
-			}else if(this.tag == "inHand") {
+			} else if (this.tag == "inHand") {
+				this.transform.position = handPos;
+			}
+		} else if (string.Equals (scene.name, "Network") && string.Equals(transform.root.gameObject.name, "Player(Clone)")) {
+			//Debug.Log (transform.root.gameObject.name);
+			if (this.tag == "inHand" && (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)) {
+				dragBlock (Input.mousePosition, true);
+			} else if (this.tag == "inHand") {
 				this.transform.position = handPos;
 			}
 		}
@@ -82,7 +94,7 @@ public class BlockData : MonoBehaviour{
 	}
 
 	public void dragBlock(Vector2 inputPos, bool human){
-		if (!GameObject.Find ("Bar").GetComponent<BarScript> ().locked && !handM.GetComponent<HandManager> ().handLocked) {
+		if (!GameObject.FindGameObjectWithTag ("Finish").GetComponent<BarScript> ().locked && !handM.GetComponent<HandManager> ().handLocked) {
 			if (this.tag == "inHand") {
 				//Debug.Log (inputPos.x + ", " + inputPos.y);
 				float distance_to_screen = Camera.main.WorldToScreenPoint (gameObject.transform.position).z;

@@ -14,12 +14,16 @@ public class PowerUp : MonoBehaviour {
 	protected virtual void Start () {
 		mouseDown = false;
 		board = GameObject.Find ("BoutManager").gameObject;
-		bar = GameObject.Find ("Bar").gameObject;
+		//bar = GameObject.Find ("Bar").gameObject;
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update () {
-		
+		//Debug.Log (bar);
+		if (bar == null && GameObject.FindGameObjectWithTag("Finish") != null) {
+			Debug.Log ("Set Bar");
+			bar = GameObject.FindGameObjectWithTag ("Finish");
+		}
 	}
 
 	public virtual void OnMouseDown(){
