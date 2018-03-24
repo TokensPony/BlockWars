@@ -47,7 +47,7 @@ public class HandManager : NetworkBehaviour {
 		newBlock.GetComponent<ConstantForce> ().enabled = false;
 		newBlock.GetComponent<BlockData> ().playerOne = p1;
 		newBlock.GetComponent<BlockData> ().handM = this.gameObject;
-		if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
+		if (string.Equals (SceneManager.GetActiveScene().name, "Network") && NetworkServer.active) {
 			//Debug.Log ("Server Spawn");
 			NetworkServer.Spawn (newBlock);
 		}

@@ -53,6 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1166482198688414, guid: 895a07da0052d294a9a8d3a888bf2f7c, type: 2}
   bar: {fileID: 1589313474062812, guid: 98b76295451627645a5c560fa2032bcd, type: 2}
+  handManager: {fileID: 1416147753811546, guid: 40ed62e612f0e864689be256d7f01956,
+    type: 2}
   boardWidth: 8
   xOffset: 0.15
   yOffset: 0.15

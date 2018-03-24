@@ -31,6 +31,7 @@ public class NetworkPlayer : MonoBehaviour {
 			GameObject.Find("HandManager").transform.parent = this.gameObject.transform;
 		} else {
 			player1 = false;
+			//GameObject.Find ("BoutManager").GetComponent<BoutManager> ().manualStart ();
 			GameObject[] blocks = GameObject.FindGameObjectsWithTag ("Block");
 			for (int x = 0; x < blocks.GetLength (0); x++) {
 				if (!blocks [x].GetComponent<BlockData> ().playerOne) {
