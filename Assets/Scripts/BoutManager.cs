@@ -123,6 +123,10 @@ public class BoutManager : NetworkBehaviour {
 		newBlock.GetComponent<BlockData> ().gridCoord = new Vector2 (xPos, yPos);
 		newBlock.GetComponent<BlockData> ().playerOne = p1;
 		blocks [yPos, xPos] = newBlock;
+		if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
+			//Debug.Log ("Server Spawn");
+			NetworkServer.Spawn (newBlock);
+		}
 	}
 
 	/*Populates the board by columns. It starts at the bottom of a column and randomly

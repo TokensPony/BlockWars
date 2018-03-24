@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
-public class HandManager : MonoBehaviour {
+public class HandManager : NetworkBehaviour {
 
 	public List<GameObject> hand;
 	public GameObject block;
@@ -45,6 +47,10 @@ public class HandManager : MonoBehaviour {
 		newBlock.GetComponent<ConstantForce> ().enabled = false;
 		newBlock.GetComponent<BlockData> ().playerOne = p1;
 		newBlock.GetComponent<BlockData> ().handM = this.gameObject;
+		if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
+			//Debug.Log ("Server Spawn");
+			NetworkServer.Spawn (newBlock);
+		}
 		return newBlock;
 	}
 

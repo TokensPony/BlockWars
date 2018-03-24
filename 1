@@ -1,0 +1,1264 @@
+Starting to integrate and test network components. Fixed Freeze glitch.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   Assembly-CSharp.csproj
+#	modified:   Assets/Prefabs/Bar.prefab
+#	modified:   Assets/Prefabs/Block.prefab
+#	modified:   Assets/Prefabs/BoutManager.prefab
+#	modified:   Assets/Prefabs/MainMenuController.prefab
+#	new file:   Assets/Prefabs/NetworkBoutManager.prefab
+#	new file:   Assets/Prefabs/NetworkBoutManager.prefab.meta
+#	new file:   Assets/Prefabs/NetworkManager.prefab
+#	new file:   Assets/Prefabs/NetworkManager.prefab.meta
+#	new file:   Assets/Prefabs/Player.prefab
+#	new file:   Assets/Prefabs/Player.prefab.meta
+#	modified:   Assets/Scenes/AIScene.unity
+#	modified:   Assets/Scenes/Local2Player.unity
+#	modified:   Assets/Scenes/Network.unity
+#	modified:   Assets/Scenes/Network.unity.meta
+#	modified:   Assets/Scenes/StartMenu.unity
+#	modified:   Assets/Scripts/AI Scripts/AIOpponent.cs
+#	modified:   Assets/Scripts/BlockData.cs
+#	modified:   Assets/Scripts/BoutManager.cs
+#	deleted:    Assets/Scripts/FreezePowerUp.cs
+#	modified:   Assets/Scripts/HandManager.cs
+#	modified:   Assets/Scripts/MainMenu.cs
+#	new file:   Assets/Scripts/NetworkControls.cs
+#	new file:   Assets/Scripts/NetworkControls.cs.meta
+#	new file:   Assets/Scripts/NetworkPlayer.cs
+#	new file:   Assets/Scripts/NetworkPlayer.cs.meta
+#	new file:   Assets/Scripts/Power Ups/FreezePowerUp.cs
+#	renamed:    Assets/Scripts/FreezePowerUp.cs.meta -> Assets/Scripts/Power Ups/FreezePowerUp.cs.meta
+#	modified:   Assets/Scripts/Power Ups/PowerUp.cs
+#	modified:   Block Wars.userprefs
+#	new file:   Builds/Block Wars.exe
+#	new file:   Builds/Block Wars_Data/Managed/Assembly-CSharp.dll
+#	new file:   Builds/Block Wars_Data/Managed/Assembly-CSharp.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/Mono.Security.dll
+#	new file:   Builds/Block Wars_Data/Managed/Mono.Security.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/System.Core.dll
+#	new file:   Builds/Block Wars_Data/Managed/System.Core.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/System.dll
+#	new file:   Builds/Block Wars_Data/Managed/System.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AIModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AIModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AIModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ARModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ARModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ARModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AccessibilityModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AccessibilityModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AccessibilityModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AnimationModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AnimationModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AnimationModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AudioModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AudioModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.AudioModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClothModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClothModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClothModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClusterInputModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClusterInputModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClusterInputModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClusterRendererModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClusterRendererModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ClusterRendererModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.CoreModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.CoreModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.CoreModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.CrashReportingModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.CrashReportingModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.CrashReportingModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.DirectorModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.DirectorModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.DirectorModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.GameCenterModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.GameCenterModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.GameCenterModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.GridModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.GridModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.GridModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.IMGUIModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.IMGUIModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.IMGUIModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ImageConversionModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ImageConversionModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ImageConversionModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.InputModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.InputModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.InputModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.JSONSerializeModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.JSONSerializeModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.JSONSerializeModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.Networking.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.Networking.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ParticleSystemModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ParticleSystemModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ParticleSystemModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ParticlesLegacyModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ParticlesLegacyModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ParticlesLegacyModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.PerformanceReportingModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.PerformanceReportingModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.PerformanceReportingModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.Physics2DModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.Physics2DModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.Physics2DModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.PhysicsModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.PhysicsModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.PhysicsModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ScreenCaptureModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ScreenCaptureModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.ScreenCaptureModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.SpatialTracking.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.SpatialTracking.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.SpriteMaskModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.SpriteMaskModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.SpriteMaskModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.StyleSheetsModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.StyleSheetsModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.StyleSheetsModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TerrainModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TerrainModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TerrainModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TerrainPhysicsModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TerrainPhysicsModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TerrainPhysicsModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TextRenderingModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TextRenderingModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TextRenderingModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TilemapModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TilemapModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.TilemapModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.Timeline.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.Timeline.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UI.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UI.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UIElementsModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UIElementsModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UIElementsModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UIModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UIModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UIModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UNETModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UNETModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UNETModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityAnalyticsModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityAnalyticsModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityAnalyticsModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityConnectModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityConnectModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityConnectModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestAudioModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestTextureModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.UnityWebRequestWWWModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VRModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VRModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VRModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VehiclesModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VehiclesModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VehiclesModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VideoModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VideoModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.VideoModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.WebModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.WebModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.WebModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.WindModule.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.WindModule.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.WindModule.xml
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.dll
+#	new file:   Builds/Block Wars_Data/Managed/UnityEngine.dll.mdb
+#	new file:   Builds/Block Wars_Data/Managed/mscorlib.dll
+#	new file:   Builds/Block Wars_Data/Managed/mscorlib.dll.mdb
+#	new file:   Builds/Block Wars_Data/Mono/EmbedRuntime/MonoPosixHelper.dll
+#	new file:   Builds/Block Wars_Data/Mono/EmbedRuntime/mono.dll
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/1.0/machine.config
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/2.0/Browsers/Compat.browser
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/2.0/machine.config
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/2.0/settings.map
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/2.0/web.config
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/browscap.ini
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/config
+#	new file:   Builds/Block Wars_Data/Mono/etc/mono/mconfig/config.xml
+#	new file:   Builds/Block Wars_Data/Resources/unity default resources
+#	new file:   Builds/Block Wars_Data/Resources/unity_builtin_extra
+#	new file:   Builds/Block Wars_Data/app.info
+#	new file:   Builds/Block Wars_Data/boot.config
+#	new file:   Builds/Block Wars_Data/globalgamemanagers
+#	new file:   Builds/Block Wars_Data/globalgamemanagers.assets
+#	new file:   Builds/Block Wars_Data/level0
+#	new file:   Builds/Block Wars_Data/level1
+#	new file:   Builds/Block Wars_Data/level1.resS
+#	new file:   Builds/Block Wars_Data/level2
+#	new file:   Builds/Block Wars_Data/level3
+#	new file:   Builds/Block Wars_Data/sharedassets0.assets
+#	new file:   Builds/Block Wars_Data/sharedassets0.assets.resS
+#	new file:   Builds/Block Wars_Data/sharedassets0.resource
+#	new file:   Builds/Block Wars_Data/sharedassets1.assets
+#	new file:   Builds/Block Wars_Data/sharedassets1.assets.resS
+#	new file:   Builds/Block Wars_Data/sharedassets1.resource
+#	new file:   Builds/Block Wars_Data/sharedassets2.assets
+#	new file:   Builds/Block Wars_Data/sharedassets3.assets
+#	new file:   Builds/UnityPlayer.dll
+#	new file:   Builds/WinPixEventRuntime.dll
+#	modified:   Library/AssetImportState
+#	modified:   Library/CurrentLayout.dwlt
+#	modified:   Library/EditorUserBuildSettings.asset
+#	modified:   Library/InspectorExpandedItems.asset
+#	modified:   Library/LastBuild.buildreport
+#	modified:   Library/PlayerDataCache/Data/Managed/Assembly-CSharp.dll
+#	modified:   Library/PlayerDataCache/Data/Managed/Assembly-CSharp.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.AIModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.AIModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ARModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ARModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.AccessibilityModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.AccessibilityModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.AnimationModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.AnimationModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.AudioModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.AudioModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ClothModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ClothModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.CoreModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.CoreModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.CrashReportingModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.CrashReportingModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.DirectorModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.DirectorModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.GameCenterModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.GameCenterModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.GridModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.GridModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.IMGUIModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.IMGUIModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ImageConversionModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ImageConversionModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.InputModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.InputModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.JSONSerializeModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.JSONSerializeModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ParticleSystemModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ParticleSystemModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ParticlesLegacyModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ParticlesLegacyModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.PerformanceReportingModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.PerformanceReportingModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.Physics2DModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.Physics2DModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.PhysicsModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.PhysicsModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ScreenCaptureModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.ScreenCaptureModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.SpriteMaskModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.SpriteMaskModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.StyleSheetsModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.StyleSheetsModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.TerrainModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.TerrainModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.TerrainPhysicsModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.TerrainPhysicsModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.TextRenderingModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.TextRenderingModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.TilemapModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.TilemapModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UIElementsModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UIElementsModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UIModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UIModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UNETModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UNETModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityAnalyticsModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityAnalyticsModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityConnectModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityConnectModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityWebRequestModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityWebRequestModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.VRModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.VRModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.VehiclesModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.VehiclesModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.VideoModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.VideoModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.WebModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.WebModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.WindModule.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.WindModule.dll.mdb
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.dll
+#	deleted:    Library/PlayerDataCache/Data/Managed/UnityEngine.dll.mdb
+#	modified:   Library/PlayerDataCache/Data/Resources/unity_builtin_extra
+#	modified:   Library/PlayerDataCache/Data/boot.config
+#	modified:   Library/PlayerDataCache/Data/globalgamemanagers
+#	modified:   Library/PlayerDataCache/Data/globalgamemanagers.assets
+#	modified:   Library/PlayerDataCache/Data/level0
+#	modified:   Library/PlayerDataCache/Data/level1
+#	new file:   Library/PlayerDataCache/Data/level1.resS
+#	modified:   Library/PlayerDataCache/Data/level2
+#	new file:   Library/PlayerDataCache/Data/level3
+#	modified:   Library/PlayerDataCache/Data/sharedassets0.assets
+#	new file:   Library/PlayerDataCache/Data/sharedassets0.assets.resS
+#	modified:   Library/PlayerDataCache/Data/sharedassets0.resource
+#	modified:   Library/PlayerDataCache/Data/sharedassets1.assets
+#	new file:   Library/PlayerDataCache/Data/sharedassets1.assets.resS
+#	modified:   Library/PlayerDataCache/Data/sharedassets1.resource
+#	modified:   Library/PlayerDataCache/Data/sharedassets2.assets
+#	new file:   Library/PlayerDataCache/Data/sharedassets3.assets
+#	modified:   Library/PlayerDataCache/ScriptLayoutHashes.txt
+#	modified:   Library/ScriptAssemblies/Assembly-CSharp.dll
+#	modified:   Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
+#	new file:   Library/ShaderCache/0/0017ad3eeebf005432b2e3d0f42ee46c.bin
+#	new file:   Library/ShaderCache/0/001b9ad15392a1eff57f53f856a1ca9b.bin
+#	new file:   Library/ShaderCache/0/0029d4d63dc65bb417c16f618134f84c.bin
+#	new file:   Library/ShaderCache/0/0037e1724b78c6f8786f7c980708c7cb.bin
+#	new file:   Library/ShaderCache/0/005b1803287780bbfcca1d28e5297076.bin
+#	new file:   Library/ShaderCache/0/009a96b9db54a6a1ac04c6c737cb9859.bin
+#	new file:   Library/ShaderCache/0/00b53674f38853dd654b1e60f5706972.bin
+#	new file:   Library/ShaderCache/0/015b2d9a2f169b50e2e4a96e21199028.bin
+#	new file:   Library/ShaderCache/0/015c48c7b9098695daeace9d08aa8831.bin
+#	new file:   Library/ShaderCache/0/01dc6c9135fb94913df8a409c784bf8e.bin
+#	new file:   Library/ShaderCache/0/0284f889018259f01e5a3d25de02d32a.bin
+#	new file:   Library/ShaderCache/0/02c91a5dd89484240cb3cfae96ed1d25.bin
+#	new file:   Library/ShaderCache/0/02ea6e98a52ddb47a9c6561dbe749978.bin
+#	new file:   Library/ShaderCache/0/03007ccdf0b93160dd1df78caf5c4e1c.bin
+#	new file:   Library/ShaderCache/0/0311a1713775373460e5e773f4122b6f.bin
+#	new file:   Library/ShaderCache/0/036b4c3b7e19adba35eb271c7504b774.bin
+#	new file:   Library/ShaderCache/0/039b268919a54aa2cd5e7eb1fd004e99.bin
+#	new file:   Library/ShaderCache/0/03abae4ae7c1a510ada118dd6ac61f63.bin
+#	new file:   Library/ShaderCache/0/03caf39e1a7fc29cb4e21904d5438c31.bin
+#	new file:   Library/ShaderCache/0/04bc3692c2f87786c44b7f504355aed9.bin
+#	new file:   Library/ShaderCache/0/052b1cffa798b386c959940ff933c968.bin
+#	new file:   Library/ShaderCache/0/053a5c8259e48cc8545b10e511a65541.bin
+#	new file:   Library/ShaderCache/0/056b2ae0587c62b5c2ce389ce9dcb044.bin
+#	new file:   Library/ShaderCache/0/05fb153a1c5e35abcd7a27c5131ddbe2.bin
+#	new file:   Library/ShaderCache/0/073fd0afe3f9a6c57ada06a761831180.bin
+#	new file:   Library/ShaderCache/0/07446b4b6c1fd34dc662e9e04d6e3038.bin
+#	new file:   Library/ShaderCache/0/075a5cc4bc7847dddee287e189b24ef8.bin
+#	new file:   Library/ShaderCache/0/0785e1cc1eff4320fff4e99b2284c756.bin
+#	new file:   Library/ShaderCache/0/07871fedae021b2cea59efa85b1fc933.bin
+#	new file:   Library/ShaderCache/0/07a7418ab298327f023e97a179209b6a.bin
+#	new file:   Library/ShaderCache/0/07ad68c1e0a12bc524230646bb19c57e.bin
+#	new file:   Library/ShaderCache/0/07ce47e01dedbb172839584372dd30df.bin
+#	new file:   Library/ShaderCache/0/0840bbc0fb4cab6c176de2efbd117b8d.bin
+#	new file:   Library/ShaderCache/0/084a22a4a8791a0b67c01287b8b51865.bin
+#	new file:   Library/ShaderCache/0/084d129693ef0aa8f9bae8c3a5fd9d5c.bin
+#	new file:   Library/ShaderCache/0/085ed7e2dc7e57baee76e06c9fea1380.bin
+#	new file:   Library/ShaderCache/0/088061de48e43e210cd0f4cd89fa2f80.bin
+#	new file:   Library/ShaderCache/0/08d26eea4a6e98bad903cc8436c14c5c.bin
+#	new file:   Library/ShaderCache/0/096523165fac2e9bd3c6a16bb0222433.bin
+#	new file:   Library/ShaderCache/0/0967a7bc4be2e0063a36a8fa03ee521c.bin
+#	new file:   Library/ShaderCache/0/0a6f67d7ddb5a27ddd622fd9a345f729.bin
+#	new file:   Library/ShaderCache/0/0a6f81b74d361383cf7dc0f6cb56b985.bin
+#	new file:   Library/ShaderCache/0/0ba8ee7357332058e60f9782ff8ee5e7.bin
+#	new file:   Library/ShaderCache/0/0bf9b1f9aa185c3f2bd01afbe54777a1.bin
+#	new file:   Library/ShaderCache/0/0c0a5f4cc02960e5e4d18b0b1bb86057.bin
+#	new file:   Library/ShaderCache/0/0caecaa67bf4a27cc9f41ba5522536ec.bin
+#	new file:   Library/ShaderCache/0/0d612dbfc3214e2cd91b3e95dc34318d.bin
+#	new file:   Library/ShaderCache/0/0dc7d6076127e54be934101a92f5eb3a.bin
+#	new file:   Library/ShaderCache/0/0dce1078abe6c99497a7116cff20781a.bin
+#	new file:   Library/ShaderCache/0/0dcefdfef62f49a80c25d7344b58ba36.bin
+#	new file:   Library/ShaderCache/0/0e1725cfe071e97fef3a4d14261a1640.bin
+#	new file:   Library/ShaderCache/0/0e342b42d4437d580799c368a14a589e.bin
+#	new file:   Library/ShaderCache/0/0e82aa0e2bbbc73ab8da9f4d81906177.bin
+#	new file:   Library/ShaderCache/0/0ef33bb01cf68f0c288e527f87ab72aa.bin
+#	new file:   Library/ShaderCache/0/0f4f366ff8ddd95381da2145513bc465.bin
+#	new file:   Library/ShaderCache/0/0fa77ca48357af9bf46bd2b5c4a98ff5.bin
+#	new file:   Library/ShaderCache/1/102ed09a6f730397f9dca256bbba12ed.bin
+#	new file:   Library/ShaderCache/1/107917f25f07eb234e3ec35e63919bc5.bin
+#	new file:   Library/ShaderCache/1/10ae1c88313cb2d6be1c46d2251b2116.bin
+#	new file:   Library/ShaderCache/1/10ced435187535b59c974719f2a34e58.bin
+#	new file:   Library/ShaderCache/1/1144a2155fa8aaa8d1f161997f4c74b4.bin
+#	new file:   Library/ShaderCache/1/114fac933d88372944a01b1dedc48992.bin
+#	new file:   Library/ShaderCache/1/11582d3b3379c4a37a7c311f74d2a4a1.bin
+#	new file:   Library/ShaderCache/1/1162d15d43588e598a25881a7e934848.bin
+#	new file:   Library/ShaderCache/1/11935f41b60a1c362c40add6b80c8864.bin
+#	new file:   Library/ShaderCache/1/11d6a9c20f12b73a2e9f0c4b5586f817.bin
+#	new file:   Library/ShaderCache/1/11f818e2db2b17adeba21ca29f6c8185.bin
+#	new file:   Library/ShaderCache/1/12047eed7c8a700b46fdd7d7d9f656d7.bin
+#	new file:   Library/ShaderCache/1/121950b7a38aff5822b93a26865c861a.bin
+#	new file:   Library/ShaderCache/1/122ac88a958804de62f2477b607a65bc.bin
+#	new file:   Library/ShaderCache/1/1285724deba43c087ba0db9cdc21e349.bin
+#	new file:   Library/ShaderCache/1/129650c25d08c91170fd51bedca1580e.bin
+#	new file:   Library/ShaderCache/1/12ac24206eeed6aaa042897411926fa9.bin
+#	new file:   Library/ShaderCache/1/12dc28652f85fd7cf9922e29b8647de1.bin
+#	new file:   Library/ShaderCache/1/12ff491896914ebe956fc336dad324de.bin
+#	new file:   Library/ShaderCache/1/131dd5cfe8faf5198dc203f0fa2288b9.bin
+#	new file:   Library/ShaderCache/1/135a18d50e95c17730e5494f880dbb54.bin
+#	new file:   Library/ShaderCache/1/136c8e8b25825d11f7709b8ea26752f6.bin
+#	new file:   Library/ShaderCache/1/139975c312b85ac8fafef853ba28a1a8.bin
+#	new file:   Library/ShaderCache/1/144d719a45d115cf3cf80259af8af6e6.bin
+#	new file:   Library/ShaderCache/1/146989280b3f342b4dfe2b6c05fd33ca.bin
+#	new file:   Library/ShaderCache/1/15a608e9681335fd18dfbd7579961aa5.bin
+#	new file:   Library/ShaderCache/1/15e4d4e444b14c99a77b73c928e47aa7.bin
+#	new file:   Library/ShaderCache/1/1632288f89682233828853e1efa38ec6.bin
+#	new file:   Library/ShaderCache/1/16d143690cee2eceb8afdda0e501e3c1.bin
+#	new file:   Library/ShaderCache/1/1700206b3c7f81a641b93c8e3b6f3a72.bin
+#	new file:   Library/ShaderCache/1/18074509df9d7f697bf41e7c2e7009ee.bin
+#	new file:   Library/ShaderCache/1/185bb8bf85e5d324fd89afae48336d0e.bin
+#	new file:   Library/ShaderCache/1/1916d9a0a2dffaeb9882cbc4dfc31de6.bin
+#	new file:   Library/ShaderCache/1/192c6b46a3c078a21e27cc472d4df8e3.bin
+#	new file:   Library/ShaderCache/1/1950935788e21ba91c2dc548bc352104.bin
+#	new file:   Library/ShaderCache/1/19a31680fa7da7f745c640ca5dde7274.bin
+#	new file:   Library/ShaderCache/1/1a19732048966cc9b1ac49dbbc49cca0.bin
+#	new file:   Library/ShaderCache/1/1a25210e032e01ca9e77d390ce6e1fb7.bin
+#	new file:   Library/ShaderCache/1/1a5c66b9d71bed4a6e23ae2baf4006f6.bin
+#	new file:   Library/ShaderCache/1/1a6b60299238e48adf6a252ef4caf3cd.bin
+#	new file:   Library/ShaderCache/1/1a7ab950d0e1442b7000b146ab8d975b.bin
+#	new file:   Library/ShaderCache/1/1ac30f5cd96b6c84149c708fa2f4e5c4.bin
+#	new file:   Library/ShaderCache/1/1ae47c149d68f55023bb2a11f5eb5cc4.bin
+#	new file:   Library/ShaderCache/1/1aef5dfe016eeb2d3d11a68e2f178e3f.bin
+#	new file:   Library/ShaderCache/1/1b825830eff88e4c7f898cded52e0923.bin
+#	new file:   Library/ShaderCache/1/1bd7bf5d4e63e6b45e4c732b8b5326f8.bin
+#	new file:   Library/ShaderCache/1/1d5724d8f4a171e9ad3371bfa0096dd2.bin
+#	new file:   Library/ShaderCache/1/1d61ce6d1a0a1ad8cc018d724fbac28b.bin
+#	new file:   Library/ShaderCache/1/1d6d8ff7af69360d489464297d0a646f.bin
+#	new file:   Library/ShaderCache/1/1e1aee875ef9f986fd1072829b1a35f3.bin
+#	new file:   Library/ShaderCache/1/1e5a8b03ce138b211338a855277bd05f.bin
+#	new file:   Library/ShaderCache/1/1e8650208483341a1fd7b69995893b70.bin
+#	new file:   Library/ShaderCache/1/1f06e9588962ad5b1aa6afd85ec9ccca.bin
+#	new file:   Library/ShaderCache/1/1f1be7096e6cbde4ab4252f2cb8cc276.bin
+#	new file:   Library/ShaderCache/1/1f70c9dee47c3efc596395b1c5b3e863.bin
+#	new file:   Library/ShaderCache/1/1fe105d649042ef69abd50b30ab4bc82.bin
+#	new file:   Library/ShaderCache/2/2020f8a25792a6341b538bc5aae221ab.bin
+#	new file:   Library/ShaderCache/2/20adbd5c076d32b88a39d0a2f914fbc1.bin
+#	new file:   Library/ShaderCache/2/20d29184da4dc720cf966fc3f5b92420.bin
+#	new file:   Library/ShaderCache/2/21ccfcf016bf120306f926843def19ed.bin
+#	new file:   Library/ShaderCache/2/220e8644693f08a88f9a74ea663513cd.bin
+#	new file:   Library/ShaderCache/2/221ae5f0339d1f2a86dc08c93e4f8c73.bin
+#	new file:   Library/ShaderCache/2/223508f45ab3a0e8bf5fef8613df4089.bin
+#	new file:   Library/ShaderCache/2/22469ef6d0c06a60c42d27f8e7531bc5.bin
+#	new file:   Library/ShaderCache/2/224f4fd26c3371a7e6e8503d2c443ba0.bin
+#	new file:   Library/ShaderCache/2/2361b64b407fb7a4ab0d47270b0d9aea.bin
+#	new file:   Library/ShaderCache/2/23878351f8555ad338890112b08de8c2.bin
+#	new file:   Library/ShaderCache/2/23c320022715710cc5f9b642d892fb73.bin
+#	new file:   Library/ShaderCache/2/23cd62eff20a273120ba91e02e80917b.bin
+#	new file:   Library/ShaderCache/2/2459f750d7870a04eb20c740d5478ee4.bin
+#	new file:   Library/ShaderCache/2/24a9b15ca1babb3cf321e82e0d8fed1f.bin
+#	new file:   Library/ShaderCache/2/24de61c444a970e3c3fbc506e3472e44.bin
+#	new file:   Library/ShaderCache/2/2513ece5563bd205463968c5eec8dcae.bin
+#	new file:   Library/ShaderCache/2/2553efed336f3646f98244269f52d7e3.bin
+#	new file:   Library/ShaderCache/2/25ed8881c8eddc08b4269fe38f720981.bin
+#	new file:   Library/ShaderCache/2/25f1305648805398cf7595a23ca50c16.bin
+#	new file:   Library/ShaderCache/2/2609c7bfe155f2afa5a36deb3f52cd59.bin
+#	new file:   Library/ShaderCache/2/2618f60551360a49a9bdb992e54f6626.bin
+#	new file:   Library/ShaderCache/2/272f46af85ecc274602976cd927cecad.bin
+#	new file:   Library/ShaderCache/2/276c6e2f472466586f3e95bcc34e0d36.bin
+#	new file:   Library/ShaderCache/2/276cb2a55a19fd7cc3b638e318e1baf9.bin
+#	new file:   Library/ShaderCache/2/2773d5686ac913351a52ff263107fb53.bin
+#	new file:   Library/ShaderCache/2/277cf2688a584e70fd827bad953a5d27.bin
+#	new file:   Library/ShaderCache/2/27839bad480556f4b4bd87785b94dfb3.bin
+#	new file:   Library/ShaderCache/2/278abce2bfa04f947c3a5bad8971b9e9.bin
+#	new file:   Library/ShaderCache/2/2790ac61b7aaf079a10751371e3af435.bin
+#	new file:   Library/ShaderCache/2/280801b83acd614827cf1f927b935461.bin
+#	new file:   Library/ShaderCache/2/289d15dba0d8187e04ad33dcfc6d17d4.bin
+#	new file:   Library/ShaderCache/2/28d9cc41783b04e7f96238e8be7b8e9c.bin
+#	new file:   Library/ShaderCache/2/29031e9cbe50f73d8d49de373ad0b4e2.bin
+#	new file:   Library/ShaderCache/2/291d4b9272622d063975b42520fa3326.bin
+#	new file:   Library/ShaderCache/2/297d13b03d08aaaabec8e934c8417aba.bin
+#	new file:   Library/ShaderCache/2/2aa5ab46a36f4f248ab27b2238a88033.bin
+#	new file:   Library/ShaderCache/2/2ac1828e3d129b5bd24f03ed98cca2cf.bin
+#	new file:   Library/ShaderCache/2/2b744a759a70113e9e1555f4c25f906d.bin
+#	new file:   Library/ShaderCache/2/2b7a2f106edc8566a81affb2d050e02e.bin
+#	new file:   Library/ShaderCache/2/2bab76b979bc494586dfa81f85226ea5.bin
+#	new file:   Library/ShaderCache/2/2c16977dcad45e3c0d9f46006449dec8.bin
+#	new file:   Library/ShaderCache/2/2c1dbcf56af23bf6e830ee0e7ab95ae1.bin
+#	new file:   Library/ShaderCache/2/2cddfc71fc4d80ccfa2be4dd3dd4be83.bin
+#	new file:   Library/ShaderCache/2/2cdf07d35517671610723d4f4a4c6d20.bin
+#	new file:   Library/ShaderCache/2/2d0176d3a5a449d3a996eb518e95db2f.bin
+#	new file:   Library/ShaderCache/2/2dbfa96b22f224c958763564c76110eb.bin
+#	new file:   Library/ShaderCache/2/2de1aeb02245776164da123e9b9b492c.bin
+#	new file:   Library/ShaderCache/2/2e126ed6983dd7439f8abf8f660ae487.bin
+#	new file:   Library/ShaderCache/2/2ef38795b17d28a0489d7dbc0274a482.bin
+#	new file:   Library/ShaderCache/2/2f663e9c81094fc4d0218bf78d42b83f.bin
+#	new file:   Library/ShaderCache/2/2f7ce3aaad7242cdf9eafbec46f54ceb.bin
+#	new file:   Library/ShaderCache/3/3091f2a122b169e6eeeece3d03218d0e.bin
+#	new file:   Library/ShaderCache/3/30aec0bc6f283be7c20361fa1b04244f.bin
+#	new file:   Library/ShaderCache/3/30f2594f7042b349ad6334bd537abfb6.bin
+#	new file:   Library/ShaderCache/3/314e4f7fbf91a8823d8d5c6b00a3ddc1.bin
+#	new file:   Library/ShaderCache/3/3203b9a5cbfda04bf03c1bc230af861e.bin
+#	new file:   Library/ShaderCache/3/3213b76b9a6ef2111cf23bc50e7b0266.bin
+#	new file:   Library/ShaderCache/3/32189ccc5d5a7526a1c1c13d24203ce2.bin
+#	new file:   Library/ShaderCache/3/3237b92488b49d4e7a80e34e2a181890.bin
+#	new file:   Library/ShaderCache/3/3280edf713438d65a8899b4b3c50e22d.bin
+#	new file:   Library/ShaderCache/3/32e990eda4aa7548a0b34a23ea68b949.bin
+#	new file:   Library/ShaderCache/3/334d3d7124bc6ecc067ec00ffa962ed7.bin
+#	new file:   Library/ShaderCache/3/3364fd54dce3267045a809d5df9aff1b.bin
+#	new file:   Library/ShaderCache/3/344557ede351afbf8e7882ce9973adcf.bin
+#	new file:   Library/ShaderCache/3/34e36a26abc8421efa70a9c82e9057f1.bin
+#	new file:   Library/ShaderCache/3/355793d9b84bba04ef5c4321b5ab8cac.bin
+#	new file:   Library/ShaderCache/3/35e8f6bb0af079b7008c31adc788fc52.bin
+#	new file:   Library/ShaderCache/3/361360d91e12a0167e1f9844856b3223.bin
+#	new file:   Library/ShaderCache/3/363fbdc373e57dbbca6b6a3338a49cfe.bin
+#	new file:   Library/ShaderCache/3/371ddde22b8de03cce6b9d1183fb5a19.bin
+#	new file:   Library/ShaderCache/3/3727ab5614e206d285e6d78ade153901.bin
+#	new file:   Library/ShaderCache/3/376590b5791729a2a1fba0e56dca14d6.bin
+#	new file:   Library/ShaderCache/3/377afc27f9150fd183c3edf33f8613d2.bin
+#	new file:   Library/ShaderCache/3/377faf6d924ab177ea0b5f0fbe4f36c5.bin
+#	new file:   Library/ShaderCache/3/378b1ee1b0e557251934d2db9fbcc2fc.bin
+#	new file:   Library/ShaderCache/3/379fc1d7815d1aaae107e6c922927c79.bin
+#	new file:   Library/ShaderCache/3/37a1639ed8d996a98d4c054a700104f8.bin
+#	new file:   Library/ShaderCache/3/38203f9dd73c8a78adf2c13fa84e6b66.bin
+#	new file:   Library/ShaderCache/3/382f116ef7db2d2df06bc842342ed747.bin
+#	new file:   Library/ShaderCache/3/38538b2c36b11007a2bac45eb43dc97b.bin
+#	new file:   Library/ShaderCache/3/387aaaf59560f9be721fcc8543a485ec.bin
+#	new file:   Library/ShaderCache/3/38978ed52e82cae15328253c6654c597.bin
+#	new file:   Library/ShaderCache/3/394495591e4e7caea0ab74ba53adf84f.bin
+#	new file:   Library/ShaderCache/3/39a3c79da5c5d23fd5f08503edcf186b.bin
+#	new file:   Library/ShaderCache/3/39d1d1354578d7b4682344e05252867e.bin
+#	new file:   Library/ShaderCache/3/39e0abbb660008d35d5d437b26eef460.bin
+#	new file:   Library/ShaderCache/3/3a1135be3ed8814810e30666a5fb33e7.bin
+#	new file:   Library/ShaderCache/3/3a2ace9eefea42c5c44d5adef66a18e2.bin
+#	new file:   Library/ShaderCache/3/3b0c01cbd42651031236aaf2d7fc99ba.bin
+#	new file:   Library/ShaderCache/3/3bbb91ad891350ae9f54cfa7fb5c1c90.bin
+#	new file:   Library/ShaderCache/3/3c06e9bccc2402307cd0469bb6a1d68d.bin
+#	new file:   Library/ShaderCache/3/3c23b969d34ac12fc301ab32c0cdbb9e.bin
+#	new file:   Library/ShaderCache/3/3c29b9170eb32c1473e427964cb4e669.bin
+#	new file:   Library/ShaderCache/3/3c4c71c784cd4be0085ae873441eac58.bin
+#	new file:   Library/ShaderCache/3/3c748e20a5e212cbf39ef00f3f75c497.bin
+#	new file:   Library/ShaderCache/3/3cb9cc26bc6e5c3857d1468bf5abd4c5.bin
+#	new file:   Library/ShaderCache/3/3d324d71e79869ffac0c1e9d6dd36949.bin
+#	new file:   Library/ShaderCache/3/3d6ebad5f5c238f2512aa2e3155cee69.bin
+#	new file:   Library/ShaderCache/3/3d8a54103419adae15fa89fcb1d90af8.bin
+#	new file:   Library/ShaderCache/3/3e0edf6593cdd8fa3a0adf787880a823.bin
+#	new file:   Library/ShaderCache/3/3f08c3dbbc015849dadb2474c4b7c630.bin
+#	new file:   Library/ShaderCache/3/3f445f13597fe5e831518a744ecd5dfa.bin
+#	new file:   Library/ShaderCache/4/40671e557615ee6e8e7097ec68f74e1e.bin
+#	new file:   Library/ShaderCache/4/40edd8dcd53d166ee820b012721144bb.bin
+#	new file:   Library/ShaderCache/4/412ba14e90efd325bd1e66d65d1f8035.bin
+#	new file:   Library/ShaderCache/4/41334bfb12103f3dfd77fd8a1699f2ee.bin
+#	new file:   Library/ShaderCache/4/41a838d9f50a3db56d804f5bf105b337.bin
+#	new file:   Library/ShaderCache/4/41f812edb1074369cd1dac8323ec2a8d.bin
+#	new file:   Library/ShaderCache/4/421d8ab0050dc8715036548d69794f7d.bin
+#	new file:   Library/ShaderCache/4/4222673b5109f2fc0d7cf6b9ed888a8e.bin
+#	new file:   Library/ShaderCache/4/42486e884f65e679ab4f0d2f548f2062.bin
+#	new file:   Library/ShaderCache/4/4281a21899f4062f08f0fe3dc34b0b4f.bin
+#	new file:   Library/ShaderCache/4/428d866ce2b1042dfa423421465ca9f9.bin
+#	new file:   Library/ShaderCache/4/43cd703d60f14d5ed6d1111ba73e2b2a.bin
+#	new file:   Library/ShaderCache/4/43f82a7af5e9fd9fd094b4df350ea9ca.bin
+#	new file:   Library/ShaderCache/4/440f52052029f89d514e19730a624608.bin
+#	new file:   Library/ShaderCache/4/444c59ae091ab1d3dfde47648aaaf442.bin
+#	new file:   Library/ShaderCache/4/446da25019798b738ab28d55c4e2dcf8.bin
+#	new file:   Library/ShaderCache/4/44a40b5b402d4d881e290af545939167.bin
+#	new file:   Library/ShaderCache/4/44df52af0aefd646839be437ce3baf7a.bin
+#	new file:   Library/ShaderCache/4/451f815661c97474cf87de16743849e9.bin
+#	new file:   Library/ShaderCache/4/45fdf895f569860bde263aa0c7795271.bin
+#	new file:   Library/ShaderCache/4/4600b1e82b351e3b7bcb0f1fa702dc4b.bin
+#	new file:   Library/ShaderCache/4/46b552f7aa3c36b218cbc323ef2e0da4.bin
+#	new file:   Library/ShaderCache/4/47265460608585b4a1e91ee1a6948d67.bin
+#	new file:   Library/ShaderCache/4/474735b560237e3ed2585e1ce73e19bd.bin
+#	new file:   Library/ShaderCache/4/47f776f7c9e486da33ccc0b9a0a6b0d2.bin
+#	new file:   Library/ShaderCache/4/481d7d24923bdbe9a7b35f56f6142b0a.bin
+#	new file:   Library/ShaderCache/4/483715785f028ed4b9dd5e83da791b83.bin
+#	new file:   Library/ShaderCache/4/483bc0ba3f604dd75eb5660014afbee8.bin
+#	new file:   Library/ShaderCache/4/484aadd6bb4772b800b1b8aa06da8a9f.bin
+#	new file:   Library/ShaderCache/4/485ff04bb6af1556461e44d7c92a74f7.bin
+#	new file:   Library/ShaderCache/4/4863fbd26cad961647aeb67633065024.bin
+#	new file:   Library/ShaderCache/4/486a80ad734781602b4e5e359b4bb4cd.bin
+#	new file:   Library/ShaderCache/4/486effaa0c47c960bd6feeb9d293811c.bin
+#	new file:   Library/ShaderCache/4/48d8c9e3b9d657116a94bd0067429e5f.bin
+#	new file:   Library/ShaderCache/4/49bf749ae0f5a1f09768972bf07c43d0.bin
+#	new file:   Library/ShaderCache/4/49c478f5ba94b83a106cadccd349c7c1.bin
+#	new file:   Library/ShaderCache/4/4a2c526c9408a2f2e235e9d3f000fe11.bin
+#	new file:   Library/ShaderCache/4/4a66e478b7270ead57d341135d6568db.bin
+#	new file:   Library/ShaderCache/4/4a9d25d45af5e14c2e3aab59bcce678d.bin
+#	new file:   Library/ShaderCache/4/4aa70c4b1e08278ca5c4376e3738e425.bin
+#	new file:   Library/ShaderCache/4/4aedf33eb90c39e18caaa0a2c3ad0f20.bin
+#	new file:   Library/ShaderCache/4/4b3a4d0adfcd38b3d6420877ae735a4c.bin
+#	new file:   Library/ShaderCache/4/4b6db4f624d4e2841175b0bccb3a342c.bin
+#	new file:   Library/ShaderCache/4/4bcf4b7c3cdf51fe000905e474d2e181.bin
+#	new file:   Library/ShaderCache/4/4bdea6fd78384f00d140ef76cda6b13a.bin
+#	new file:   Library/ShaderCache/4/4befaca0e2b7390c0b3923f644bd6442.bin
+#	new file:   Library/ShaderCache/4/4c63bb78deacd356f28f093a6bcfc882.bin
+#	new file:   Library/ShaderCache/4/4c801a173f67670432ed0a35b85a41d6.bin
+#	new file:   Library/ShaderCache/4/4cde7083b9881fb4e33c81dda8e054cb.bin
+#	new file:   Library/ShaderCache/4/4d396247926dbd17fb0be8b6bfc574ba.bin
+#	new file:   Library/ShaderCache/4/4d42325badd5b053497b47997ff62158.bin
+#	new file:   Library/ShaderCache/4/4d5121c0704cdf7748be41f64237ad8f.bin
+#	new file:   Library/ShaderCache/4/4d6591a8f304b72373719d6775468846.bin
+#	new file:   Library/ShaderCache/4/4dde5eb6b4e66653d383ab5045905f94.bin
+#	new file:   Library/ShaderCache/4/4e15e4f2831dc96f2b0da4fbb634afa4.bin
+#	new file:   Library/ShaderCache/4/4e22c9380d8688eec894e225f614f1b9.bin
+#	new file:   Library/ShaderCache/4/4e2c1b2f0903fc7e0baeb631a912d30a.bin
+#	new file:   Library/ShaderCache/4/4e3ed403a108962af373cdafd433246b.bin
+#	new file:   Library/ShaderCache/4/4ea12548fd6a27d4a8a9264b80c10468.bin
+#	new file:   Library/ShaderCache/4/4eb11140ffd66d2887d82d9abf198682.bin
+#	new file:   Library/ShaderCache/4/4eb6349d900f2d6a7db5a169e279e433.bin
+#	new file:   Library/ShaderCache/4/4f0e69fe8d91967c9c5182a149983fb5.bin
+#	new file:   Library/ShaderCache/4/4f417bb010fb948df123210885eee0d2.bin
+#	new file:   Library/ShaderCache/4/4fd3bf23d9650a6b5b9f05e3c8fc26c1.bin
+#	new file:   Library/ShaderCache/5/50026ed3757829a5a724c144cf062db0.bin
+#	new file:   Library/ShaderCache/5/50295483cdd2982191a56e7e79082f75.bin
+#	new file:   Library/ShaderCache/5/502b4f6b9763db960c0f4b405386fed3.bin
+#	new file:   Library/ShaderCache/5/503bcdcca2b55069dd1d0dc1f9880fdb.bin
+#	new file:   Library/ShaderCache/5/5047300b5460b1c7e34b637eb75af9d6.bin
+#	new file:   Library/ShaderCache/5/50c40f131d0f9a9173a219d772228922.bin
+#	new file:   Library/ShaderCache/5/51041e6f24adcca4e9e2f4a7415d5eb3.bin
+#	new file:   Library/ShaderCache/5/51955d25d1511addf0479a8874179a0f.bin
+#	new file:   Library/ShaderCache/5/51a5ae6f361df525444c2a7d5b657126.bin
+#	new file:   Library/ShaderCache/5/51be64544e11f3dfaa9bb780438b5f8a.bin
+#	new file:   Library/ShaderCache/5/51f3a2644c699cc7104c23e7cb858e81.bin
+#	new file:   Library/ShaderCache/5/529ad2a9591d5a46dfe5becdf49c75d6.bin
+#	new file:   Library/ShaderCache/5/52ae4c229309f4e718201778f2ec79b0.bin
+#	new file:   Library/ShaderCache/5/52b65bc4ebe21c06ce5294e42498ad02.bin
+#	new file:   Library/ShaderCache/5/52fba1e91039e7e50bf47ec8d483b9ff.bin
+#	new file:   Library/ShaderCache/5/5351b99dea4e37f5201b0f7f47013ba8.bin
+#	new file:   Library/ShaderCache/5/536ad223f1099461e326d01b6b96d51c.bin
+#	new file:   Library/ShaderCache/5/538cf6457bad041ef63f3afaf12e225e.bin
+#	new file:   Library/ShaderCache/5/53afd0fa8f1b4a715706011f6bcee635.bin
+#	new file:   Library/ShaderCache/5/53b6abeec22efc9e8ed4696a0a1c4d86.bin
+#	new file:   Library/ShaderCache/5/549bce8cc751cbba9807a4507f47c6d7.bin
+#	new file:   Library/ShaderCache/5/54b3a83d8b7e52ddcb0dc6f70cdebe10.bin
+#	new file:   Library/ShaderCache/5/55596cbaf0e6b14c6bbd64e8ce64dc8b.bin
+#	new file:   Library/ShaderCache/5/55800bd8833e5f85a08e111bae7d010f.bin
+#	new file:   Library/ShaderCache/5/5601e8d7012683354d03f38d2e7b9240.bin
+#	new file:   Library/ShaderCache/5/567f275b3510245a33102dd0dd6cd788.bin
+#	new file:   Library/ShaderCache/5/574bbf7ff16156cb9728a1d571e7d476.bin
+#	new file:   Library/ShaderCache/5/5766c8091c5bce6885556761f922f2a5.bin
+#	new file:   Library/ShaderCache/5/58383e9faaceaa1c11e36a61ebc527e3.bin
+#	new file:   Library/ShaderCache/5/583edf40e9c1b49c0ff0f247bc9171f8.bin
+#	new file:   Library/ShaderCache/5/58788c158b8a6817fa19b57ee77499f1.bin
+#	new file:   Library/ShaderCache/5/58819223bf7cacd6374770cf4a8f40b8.bin
+#	new file:   Library/ShaderCache/5/58d8e1fcf3d5af6041f14ca78cc39a3d.bin
+#	new file:   Library/ShaderCache/5/58fe41d9c7f7dbf4ff038eee7a425a59.bin
+#	new file:   Library/ShaderCache/5/591d949381ef6214d1b2bbe7ea0ac7c9.bin
+#	new file:   Library/ShaderCache/5/594d1bc18fe9eb0bc6d2aa4b2688d30b.bin
+#	new file:   Library/ShaderCache/5/5952b2a3e538f92240a830f485e6e9c1.bin
+#	new file:   Library/ShaderCache/5/5971f7731ba287afe2ac42c06810b8ac.bin
+#	new file:   Library/ShaderCache/5/59bb6e82c012df3da7dd5b7193dd1abd.bin
+#	new file:   Library/ShaderCache/5/5a4d9905e1fa0cd278a70dc4b29fc4c8.bin
+#	new file:   Library/ShaderCache/5/5b57bb04238f143bd3f81ac136d9912c.bin
+#	new file:   Library/ShaderCache/5/5b9b220da7852d70285bac318023cbee.bin
+#	new file:   Library/ShaderCache/5/5bc1618c43db75624e042538ea07e2cf.bin
+#	new file:   Library/ShaderCache/5/5bc1dd4eb5f154a25e95f676875295b3.bin
+#	new file:   Library/ShaderCache/5/5bf6719e9501fc329f4453430ece808b.bin
+#	new file:   Library/ShaderCache/5/5c3610f3f88dfe645f917c47c86cc2d0.bin
+#	new file:   Library/ShaderCache/5/5c566157d8dc1f1948c9c3d58623519a.bin
+#	new file:   Library/ShaderCache/5/5cee743c20b1f88ce5752fa789bf980f.bin
+#	new file:   Library/ShaderCache/5/5dc0eeb05b57287405907509e23aff46.bin
+#	new file:   Library/ShaderCache/5/5e796e51ba4d501afdbd7902ff7400cd.bin
+#	new file:   Library/ShaderCache/5/5eacd321f0e4714280e3c56272741943.bin
+#	new file:   Library/ShaderCache/5/5eb4c75380f5c827d6cf4d4c55bb4edc.bin
+#	new file:   Library/ShaderCache/5/5eb8320a1be2ce03ca3de326eee8f6bd.bin
+#	new file:   Library/ShaderCache/5/5f149d5d2d70bcf656f20d9fd2c00420.bin
+#	new file:   Library/ShaderCache/5/5f2c1dc1ecec82af70925beae5ee7f52.bin
+#	new file:   Library/ShaderCache/5/5f8e5f5ffe439d0cb0ac68d5f2343d10.bin
+#	new file:   Library/ShaderCache/5/5ffff89fae24a1decfc0a09cdc9ec786.bin
+#	new file:   Library/ShaderCache/6/6014201d408398e4137a0204bb9b3a68.bin
+#	new file:   Library/ShaderCache/6/6022f6cf1a5c15af9dae15be10181ba6.bin
+#	new file:   Library/ShaderCache/6/6025d6dbb44c296b73c4e521c8623309.bin
+#	new file:   Library/ShaderCache/6/608ecdc3cdd2aea9e967f4064f33a35e.bin
+#	new file:   Library/ShaderCache/6/60afdd52b3fe601c4e356d9af8a9fc7c.bin
+#	new file:   Library/ShaderCache/6/60fb20ea3c2156bbae1fe01b23744cbc.bin
+#	new file:   Library/ShaderCache/6/611f9f59fb96afdb07d6743143514816.bin
+#	new file:   Library/ShaderCache/6/61907e3c878dbb137007ebc1b920f2c1.bin
+#	new file:   Library/ShaderCache/6/61c256c544925004725dbdbe8cd8528d.bin
+#	new file:   Library/ShaderCache/6/61d251e0fab4d08f382fc55bfc38f051.bin
+#	new file:   Library/ShaderCache/6/61ed485f42e7130731fd246f3c62f61d.bin
+#	new file:   Library/ShaderCache/6/61f8d0c8726c7d9788a953941a6f2b48.bin
+#	new file:   Library/ShaderCache/6/624320ad2f16793f54b050a4a7e9927f.bin
+#	new file:   Library/ShaderCache/6/624a75dcb48843953e57e6bdcc526e97.bin
+#	new file:   Library/ShaderCache/6/6295862fe3c1d08f4f6482bece68f182.bin
+#	new file:   Library/ShaderCache/6/62baf7cbfc057406c4df25077a37997f.bin
+#	new file:   Library/ShaderCache/6/62f63b8cdcacfc1b211601239b287b32.bin
+#	new file:   Library/ShaderCache/6/63e6a7a5cf9dd845b5b7d885ed6391de.bin
+#	new file:   Library/ShaderCache/6/63e82ff3b366f6399008a6b6aff56139.bin
+#	new file:   Library/ShaderCache/6/6429affc22752b22c79d6b528400757b.bin
+#	new file:   Library/ShaderCache/6/644406924c928db036c29db039ff8980.bin
+#	new file:   Library/ShaderCache/6/645b44ca93117f6749c1c0678fae3ad1.bin
+#	new file:   Library/ShaderCache/6/646afa9875ff6050bac84ab2f9ac7ad5.bin
+#	new file:   Library/ShaderCache/6/64d5a6c80240c1fe151598fa171d2f10.bin
+#	new file:   Library/ShaderCache/6/64d82e356a3428d46d9ad8ee7f71d9d5.bin
+#	new file:   Library/ShaderCache/6/656aab7adb2acd81eb2617e317bdc08e.bin
+#	new file:   Library/ShaderCache/6/659566cb2727570bcc6698eefee68f7a.bin
+#	new file:   Library/ShaderCache/6/662fbecf9a0139de2ffe13dd2a6f9f0f.bin
+#	new file:   Library/ShaderCache/6/67415dd1e5a5e24f5843328dc08ce2af.bin
+#	new file:   Library/ShaderCache/6/68113a66ca3bd9ae1dff2bb859d6772d.bin
+#	new file:   Library/ShaderCache/6/682cad91e2e79b67ae3c4ca6c220888a.bin
+#	new file:   Library/ShaderCache/6/684f3b4b50746acf3be680a5a5092112.bin
+#	new file:   Library/ShaderCache/6/68b167c390b2bb1e5722ee28b4a9b7a3.bin
+#	new file:   Library/ShaderCache/6/68b7f002abc901cf68d1b2eb6da6fc2b.bin
+#	new file:   Library/ShaderCache/6/68dcb2d6ab2fc4d014a9704ddd1b6558.bin
+#	new file:   Library/ShaderCache/6/692d7e7b315b07c586d678a3ca3a60d5.bin
+#	new file:   Library/ShaderCache/6/69371972cc1121a1cdb764ccadddae74.bin
+#	new file:   Library/ShaderCache/6/693e45f9d7ad7eaf7fb904f11bcf25ef.bin
+#	new file:   Library/ShaderCache/6/6984e1f7e18c3ba59a65702165a7b055.bin
+#	new file:   Library/ShaderCache/6/699db5b60d0e3b0cea6e445c1a115bbc.bin
+#	new file:   Library/ShaderCache/6/69ac8eb2c30e03619ee00e1922fa59df.bin
+#	new file:   Library/ShaderCache/6/69fac1819120fa01a428435c6312dd0c.bin
+#	new file:   Library/ShaderCache/6/6a27422e820e9b7343d0a2ae7ab23e44.bin
+#	new file:   Library/ShaderCache/6/6a3e872322c0dbbff2176fef5bcbd5fe.bin
+#	new file:   Library/ShaderCache/6/6ab5e42714cbe84bbacac7043f31f472.bin
+#	new file:   Library/ShaderCache/6/6abe42bf870c6e33b06badcef0b6bfe1.bin
+#	new file:   Library/ShaderCache/6/6b09cd0caf82d45b2ba6d23b99eb9b30.bin
+#	new file:   Library/ShaderCache/6/6b12f5e5d31cac2e5a6c323dc63726d4.bin
+#	new file:   Library/ShaderCache/6/6b2fe1410d12a9ac86604e53a8e69fe6.bin
+#	new file:   Library/ShaderCache/6/6b3d6c78ca2d56dda2997112d7d30ed0.bin
+#	new file:   Library/ShaderCache/6/6b44d55a32ca2bdaeb1364a69a056402.bin
+#	new file:   Library/ShaderCache/6/6c13c14177fb6cfa8d2ec3556b7c6657.bin
+#	new file:   Library/ShaderCache/6/6e3e465d640b2071d40c564a6c712595.bin
+#	new file:   Library/ShaderCache/6/6ebb6568f4dbcea5257b7b940e5e5838.bin
+#	new file:   Library/ShaderCache/6/6ecbd7493d10627aa11cd061642c7f6d.bin
+#	new file:   Library/ShaderCache/6/6ee44a8f2d7fb475d2bd13cbad5429ff.bin
+#	new file:   Library/ShaderCache/6/6f6888f688c00f1c37be9bbc5d457b9d.bin
+#	new file:   Library/ShaderCache/6/6f7ac4c2de8bd269a116f9b911f59aad.bin
+#	new file:   Library/ShaderCache/7/70378d40384a32ba45a7c220fe380b01.bin
+#	new file:   Library/ShaderCache/7/70a9dc9b34f2ae694ff60ad0aae4ed1a.bin
+#	new file:   Library/ShaderCache/7/70ac8102bbca39c0f294326c63e0e211.bin
+#	new file:   Library/ShaderCache/7/70c472663d754491ded049ca920cf56d.bin
+#	new file:   Library/ShaderCache/7/711bfaf35654e906e966b916a78e9d4a.bin
+#	new file:   Library/ShaderCache/7/71470a3b63f7b23b0de060344ffc1a18.bin
+#	new file:   Library/ShaderCache/7/714f1f1fd56f1a5d9cbfaf1c27113068.bin
+#	new file:   Library/ShaderCache/7/716921d29c00ed6263a682fde25ee95d.bin
+#	new file:   Library/ShaderCache/7/722e4d0f081f48f6696c4afb0c072cd1.bin
+#	new file:   Library/ShaderCache/7/727ba403412b44db79264abfd5e81f64.bin
+#	new file:   Library/ShaderCache/7/7291df358cf93bae46978493e42cc39c.bin
+#	new file:   Library/ShaderCache/7/72e11983a932c7c2ef74e62f5aec5870.bin
+#	new file:   Library/ShaderCache/7/72ec38f81814ec5d3d05afb8171fc47c.bin
+#	new file:   Library/ShaderCache/7/73a8498c3c8faaed0fc2b8abf00181df.bin
+#	new file:   Library/ShaderCache/7/7457125c82674843f9c42b71c4937f91.bin
+#	new file:   Library/ShaderCache/7/74cd9d17e36ae9143b42617bdad3b0c0.bin
+#	new file:   Library/ShaderCache/7/7505f16f74a05eae30aec473cb1626e3.bin
+#	new file:   Library/ShaderCache/7/754428b2a08343ce7c7f9f7dd8cf66a7.bin
+#	new file:   Library/ShaderCache/7/7549688f307e6e4c42f61ac37555ca73.bin
+#	new file:   Library/ShaderCache/7/75646fd0cec5485c2de3988dc6439f87.bin
+#	new file:   Library/ShaderCache/7/7564fba236e52932658f8d816e0fee7c.bin
+#	new file:   Library/ShaderCache/7/757988a0d3bd849eec3ee14450730702.bin
+#	new file:   Library/ShaderCache/7/75d8a857b429728a6b33b07c3d2d548b.bin
+#	new file:   Library/ShaderCache/7/75e0c8139bd8ba0c907e1b2a87e7c3c0.bin
+#	new file:   Library/ShaderCache/7/7608f161d8c9047ff4c21125fe07e6f0.bin
+#	new file:   Library/ShaderCache/7/7610db76163a9ea1633903ccdaf510ed.bin
+#	new file:   Library/ShaderCache/7/763df90526a09697b82506912cd81ee0.bin
+#	new file:   Library/ShaderCache/7/77393d2154a315d3f0c12d465533c9aa.bin
+#	new file:   Library/ShaderCache/7/7748586f2f516d29d157ffa13c826062.bin
+#	new file:   Library/ShaderCache/7/78ff1dc385e8c20be5126f142d48ba7d.bin
+#	new file:   Library/ShaderCache/7/7902fd9d73950ca3dbc83572a6dbb8f8.bin
+#	new file:   Library/ShaderCache/7/7933128d1d2203b0fdc4aa8ea0620e23.bin
+#	new file:   Library/ShaderCache/7/793e15c758b2eb9a507fc93b13bca4ce.bin
+#	new file:   Library/ShaderCache/7/79c2b2ed85a7bcef9f50d537a108ece1.bin
+#	new file:   Library/ShaderCache/7/79df4c84a05323394c0bca962fa3e653.bin
+#	new file:   Library/ShaderCache/7/7a3ef8605471145e5568617d25261855.bin
+#	new file:   Library/ShaderCache/7/7aadeb20c329b9daa10889911da3cbf7.bin
+#	new file:   Library/ShaderCache/7/7afedcafe1000a2cbbfd78c923a9dd20.bin
+#	new file:   Library/ShaderCache/7/7b27935e7577354a15b1b01ab6c42a77.bin
+#	new file:   Library/ShaderCache/7/7b393a9ddd204c21a87cfa0ad393011a.bin
+#	new file:   Library/ShaderCache/7/7b884bdaffd98deda0a12381161b4efb.bin
+#	new file:   Library/ShaderCache/7/7b8e2764d9b250a7d05644cf8d1362f3.bin
+#	new file:   Library/ShaderCache/7/7ba5cee3bd563b3f7d76144873eca5ef.bin
+#	new file:   Library/ShaderCache/7/7bb1b2be2d981a3af3628dd109b7a3f8.bin
+#	new file:   Library/ShaderCache/7/7c2ca0ce109f61edbf045b8fb9403924.bin
+#	new file:   Library/ShaderCache/7/7c9fb1ad61d1f60166ca23ef36cdbd1a.bin
+#	new file:   Library/ShaderCache/7/7cd3d635854d7055254d1f9d9832c461.bin
+#	new file:   Library/ShaderCache/7/7d596a3e5b26f9719b9f43819759131a.bin
+#	new file:   Library/ShaderCache/7/7d9f04327e7b03f512709d8594beee79.bin
+#	new file:   Library/ShaderCache/7/7db17ab559e7d6c58c9dcac7960a7e31.bin
+#	new file:   Library/ShaderCache/7/7e3cc1581e4528a7e14b3c741dacfe79.bin
+#	new file:   Library/ShaderCache/7/7f0bdd4b34d5102a29fbc2d8a77ae115.bin
+#	new file:   Library/ShaderCache/7/7f0c67727c18631b4b05f7f343905147.bin
+#	new file:   Library/ShaderCache/7/7f68dc310a32d5e7006c41d8a44becf8.bin
+#	new file:   Library/ShaderCache/7/7f872a89bf3e5e0dc28e515c8a0d44e6.bin
+#	new file:   Library/ShaderCache/7/7fcfad02d7643e2e25e0cb78ee380d87.bin
+#	new file:   Library/ShaderCache/7/7ff924285c990c9c9361446e52bf5686.bin
+#	new file:   Library/ShaderCache/8/80c713d80deef1a4a46b70a4ba8c4673.bin
+#	new file:   Library/ShaderCache/8/80ce840f466f12ae4ea06735427ec858.bin
+#	new file:   Library/ShaderCache/8/8175466205d377adab50d9258cab695d.bin
+#	new file:   Library/ShaderCache/8/817b5914d2f0a998b6d440aba4431665.bin
+#	new file:   Library/ShaderCache/8/828137aeb61b9eccb712c9c73d193946.bin
+#	new file:   Library/ShaderCache/8/829ce4bf0e490db9796e6f113c89a136.bin
+#	new file:   Library/ShaderCache/8/82d3771104f24586977451525f465bd7.bin
+#	new file:   Library/ShaderCache/8/82d9dd1e3fdc63962dbae2d610b34d93.bin
+#	new file:   Library/ShaderCache/8/82db40d1fc8e0716ae651e40c08731f8.bin
+#	new file:   Library/ShaderCache/8/830cc20d13bc01362269b64e392438a5.bin
+#	new file:   Library/ShaderCache/8/8332c83c455de0a5f37d847d52cf0d8c.bin
+#	new file:   Library/ShaderCache/8/833b5c606192940efd40bcd9dce1085a.bin
+#	new file:   Library/ShaderCache/8/83baa1091379e5706dcaa8fee3edc5c1.bin
+#	new file:   Library/ShaderCache/8/83eb23667cc08b9359006d54b98b3c4d.bin
+#	new file:   Library/ShaderCache/8/844786d9a1d0317f0b7c496f46f3b231.bin
+#	new file:   Library/ShaderCache/8/84992056d572cd78cdf423e08d685397.bin
+#	new file:   Library/ShaderCache/8/84cb514fbd60ba5d008e74a3450a0d26.bin
+#	new file:   Library/ShaderCache/8/85ff7ff54b2cadc29d5b387babe9b3b6.bin
+#	new file:   Library/ShaderCache/8/8658dcf0ba093f57070bf95d547217e0.bin
+#	new file:   Library/ShaderCache/8/8696b2db677f7ed0c6416f4c24381d05.bin
+#	new file:   Library/ShaderCache/8/86a3794730560ee8c014b3a1073f6c7b.bin
+#	new file:   Library/ShaderCache/8/86cf9a71b0ee011cb3ea2e9ebb90e43c.bin
+#	new file:   Library/ShaderCache/8/86da6f9fbc482b5eb7666aa5db73fff0.bin
+#	new file:   Library/ShaderCache/8/8705b40dcd472a7318eeac23950bd600.bin
+#	new file:   Library/ShaderCache/8/873bb6e2f91b7b2965dfa8cd3cc23c45.bin
+#	new file:   Library/ShaderCache/8/8770dacb2b0b47607a1e109617032f9e.bin
+#	new file:   Library/ShaderCache/8/8797bb8d8e7d077b4d6b8ddcea151b9e.bin
+#	new file:   Library/ShaderCache/8/87ca0623eceed22b3039cb279e318de5.bin
+#	new file:   Library/ShaderCache/8/87dd714f7579b73f032a88b050c88f40.bin
+#	new file:   Library/ShaderCache/8/88d4ae03c5ca5362c1bfcf6806b2fdfe.bin
+#	new file:   Library/ShaderCache/8/89158fb1f891b80deea82d9dca7799b5.bin
+#	new file:   Library/ShaderCache/8/891de0bd79b9fd6fb3c37b45b96c5c42.bin
+#	new file:   Library/ShaderCache/8/894da19d992e73e724900b64d44d931d.bin
+#	new file:   Library/ShaderCache/8/89869b6169a365419048ce33b0e313e1.bin
+#	new file:   Library/ShaderCache/8/89b3d70f705cd9b4ab6efb93b815ff1d.bin
+#	new file:   Library/ShaderCache/8/8a0fd8401820098d703d498ffdd36157.bin
+#	new file:   Library/ShaderCache/8/8a1fc291a556fca9ee9e6bcc362aa7ca.bin
+#	new file:   Library/ShaderCache/8/8aa523ecf5acf360e18c637cbbe20144.bin
+#	new file:   Library/ShaderCache/8/8ac579e96567e709fc595e62be5f8a0c.bin
+#	new file:   Library/ShaderCache/8/8ad8b1c6a33baccf3f07f42131b0ede9.bin
+#	new file:   Library/ShaderCache/8/8b2c9005848343dab097cb4999081f6a.bin
+#	new file:   Library/ShaderCache/8/8b73626187a15fe49d5550223ad4df10.bin
+#	new file:   Library/ShaderCache/8/8bb412b85835a7f0e4f960206f0e5b8b.bin
+#	new file:   Library/ShaderCache/8/8bd73e4c64de8a78cb29a3af5ef34b40.bin
+#	new file:   Library/ShaderCache/8/8c2fc8b4c5ff85e79be7b87785dcfe47.bin
+#	new file:   Library/ShaderCache/8/8d198a49309f8012436f98ae778f9cd2.bin
+#	new file:   Library/ShaderCache/8/8e3df4b1adca9a7f201ba6c26a349a40.bin
+#	new file:   Library/ShaderCache/8/8e567122bf1b5c459f5d365215ec1574.bin
+#	new file:   Library/ShaderCache/8/8e80171ed06a89d1634082a8ce651874.bin
+#	new file:   Library/ShaderCache/8/8f384c74e37b296e520c482fe874aec4.bin
+#	new file:   Library/ShaderCache/8/8ffe8c4025c071f0262ce5ccffeeb102.bin
+#	new file:   Library/ShaderCache/9/904df8d48ceb5d3567e44b8a9b930a69.bin
+#	new file:   Library/ShaderCache/9/90c686ff64c9243ce6c758777d2e68fb.bin
+#	new file:   Library/ShaderCache/9/90da939def5d3f6c7c49ab5881c6611b.bin
+#	new file:   Library/ShaderCache/9/90eba5694836ffdcf9639070bb0014f1.bin
+#	new file:   Library/ShaderCache/9/90f604f363816e558534eec41300a5fc.bin
+#	new file:   Library/ShaderCache/9/921b4a967f87893215b5a1a9977b8206.bin
+#	new file:   Library/ShaderCache/9/9264aaee79b487f43abd5b9895168480.bin
+#	new file:   Library/ShaderCache/9/92f11bbd8fd9a35c519384c3656fde8f.bin
+#	new file:   Library/ShaderCache/9/932758bbd3d895e3d90242623710015a.bin
+#	new file:   Library/ShaderCache/9/939e61f579bcc91f083c377c122a50b4.bin
+#	new file:   Library/ShaderCache/9/93c83677bf1ec89d72a6e2c27599a44d.bin
+#	new file:   Library/ShaderCache/9/93e49a031c1a0a7a40eb78936d0ceb27.bin
+#	new file:   Library/ShaderCache/9/950e532a4b663bb40dee5e53f10ee40c.bin
+#	new file:   Library/ShaderCache/9/952d4a49f5abe70f4260e2a25805ce75.bin
+#	new file:   Library/ShaderCache/9/954ec2f5533c6a03a8cf960215cdd0e0.bin
+#	new file:   Library/ShaderCache/9/961b9e21bcc6c6b22077a68bb6b39d13.bin
+#	new file:   Library/ShaderCache/9/966a30116866a8b734e45009faa904ee.bin
+#	new file:   Library/ShaderCache/9/9679f5fd302b205da1ccf308d2966f6e.bin
+#	new file:   Library/ShaderCache/9/968dd5deef50322acbd282cfe9acfba3.bin
+#	new file:   Library/ShaderCache/9/96969f1dceb8bdc98cce97756d2e602c.bin
+#	new file:   Library/ShaderCache/9/96c18c3d28e730a244db4d986aee1542.bin
+#	new file:   Library/ShaderCache/9/971a648c07e26f0d2f4711cc96cc6ec6.bin
+#	new file:   Library/ShaderCache/9/97455f16f019040a7015cfcb1da8ed9b.bin
+#	new file:   Library/ShaderCache/9/974b1c4fdb68c0fbd28ccd0f4e725bce.bin
+#	new file:   Library/ShaderCache/9/97910f08111077811e511129f4c67dbe.bin
+#	new file:   Library/ShaderCache/9/98287632f5c904a72215333061bd9093.bin
+#	new file:   Library/ShaderCache/9/98cb860d87f1b6bb84c02750f443e058.bin
+#	new file:   Library/ShaderCache/9/98d52cc813288f4fb8446d197a06af1e.bin
+#	new file:   Library/ShaderCache/9/9929f1afc8c8013926e1be53886d01d8.bin
+#	new file:   Library/ShaderCache/9/9a6a9b92d6b8f6a45648b2546ac2d648.bin
+#	new file:   Library/ShaderCache/9/9b1b4c890df28d6da213972efa42c520.bin
+#	new file:   Library/ShaderCache/9/9bee1f4a33325cce8559250061d29100.bin
+#	new file:   Library/ShaderCache/9/9c5be7d64721e72d82b25a75347a90be.bin
+#	new file:   Library/ShaderCache/9/9d278f6b54ff62d50b96e76db604e51f.bin
+#	new file:   Library/ShaderCache/9/9d57abdbbb811136409b50f4f96be3be.bin
+#	new file:   Library/ShaderCache/9/9db1eb495719b7ceac9fa760acd71515.bin
+#	new file:   Library/ShaderCache/9/9de0e044551f9abdadb3894a28e454b6.bin
+#	new file:   Library/ShaderCache/9/9e04d91b708eb0e51a0db773b5c0d5d1.bin
+#	new file:   Library/ShaderCache/9/9e3110466a3a315251d59fce65a74c2d.bin
+#	new file:   Library/ShaderCache/9/9e4c8d66cd3228b318d1e94e76cb0872.bin
+#	new file:   Library/ShaderCache/9/9e838b4acaa2b74dc80ac7e5bc53b75a.bin
+#	new file:   Library/ShaderCache/9/9e94a98c8dcdbfd6fd3eff02b0fe7194.bin
+#	new file:   Library/ShaderCache/9/9ec8425e7ddf0e2098f005911f7cd56f.bin
+#	new file:   Library/ShaderCache/9/9f54c67c7ae83a7a76b0e951623cf49c.bin
+#	new file:   Library/ShaderCache/9/9f75f5d8000088a160ec2430e2d18673.bin
+#	new file:   Library/ShaderCache/9/9f8bdcee22f7ddac565d19e1af090410.bin
+#	new file:   Library/ShaderCache/9/9fe0b59eda419cc3e7b5767fcae5e908.bin
+#	new file:   Library/ShaderCache/a/a02816069bcbcd168ab1ebbdc589463d.bin
+#	new file:   Library/ShaderCache/a/a030151c69fbfb84d1c7db071a73a7ee.bin
+#	new file:   Library/ShaderCache/a/a046f63bbadc73a029300952996dc185.bin
+#	new file:   Library/ShaderCache/a/a04ce10589387a4e22ac028142b4b38e.bin
+#	new file:   Library/ShaderCache/a/a088b4c58d148f759fd98dd6297cbeec.bin
+#	new file:   Library/ShaderCache/a/a0d36bc1ae2901d6a6988e1875674ef7.bin
+#	new file:   Library/ShaderCache/a/a1216e77165de102ad163b9879502197.bin
+#	new file:   Library/ShaderCache/a/a17dd4d9099aa4fe105b06527e2fe6e5.bin
+#	new file:   Library/ShaderCache/a/a1c5ab85adfe1da8e5ebaef0d135c93c.bin
+#	new file:   Library/ShaderCache/a/a1cdf0eaa3c6eed51a82a1b2d20b3b4b.bin
+#	new file:   Library/ShaderCache/a/a1e24079ee6273bb848cff17611c87d4.bin
+#	new file:   Library/ShaderCache/a/a22d03cde20287951c92bf425ef177ce.bin
+#	new file:   Library/ShaderCache/a/a247efe0c1d1099e2d347c60e6ff5157.bin
+#	new file:   Library/ShaderCache/a/a2b6316788c901bc2fe7647ba1231e79.bin
+#	new file:   Library/ShaderCache/a/a2bd5295739799c54faedb23d866ea67.bin
+#	new file:   Library/ShaderCache/a/a2ff5d32074ffc7f17dd222a6c554fab.bin
+#	new file:   Library/ShaderCache/a/a32281c8f7a77919435a616d969aefca.bin
+#	new file:   Library/ShaderCache/a/a3ad6c5c0f9559159a89e59b9b8e53a1.bin
+#	new file:   Library/ShaderCache/a/a3e6723dc51790016ec9e21ab74a5e66.bin
+#	new file:   Library/ShaderCache/a/a40258317aaf5883baa3314f9f5e4db5.bin
+#	new file:   Library/ShaderCache/a/a44078c2f09b9d9789b4d9f0aeb752b6.bin
+#	new file:   Library/ShaderCache/a/a459b91f22dc6aa62bf924baa2ce5366.bin
+#	new file:   Library/ShaderCache/a/a547f400e16bc1c8d139f6a43cfa7997.bin
+#	new file:   Library/ShaderCache/a/a54d5f2052e89f86655e5499f8ad00b8.bin
+#	new file:   Library/ShaderCache/a/a5774ce4098cc4e626b8b3da401cc140.bin
+#	new file:   Library/ShaderCache/a/a5c963cb54728497ca5867864900ceb3.bin
+#	new file:   Library/ShaderCache/a/a60a91d9ec937570d76f2fc9a6cf86af.bin
+#	new file:   Library/ShaderCache/a/a62ec141052bef07d8bdeef5a5f7bddd.bin
+#	new file:   Library/ShaderCache/a/a631b4d6d27da01361ad98d0b24c84fc.bin
+#	new file:   Library/ShaderCache/a/a6418d05bb894ff366a5cf69f4f1080b.bin
+#	new file:   Library/ShaderCache/a/a69110d87722950f3da71605341d643d.bin
+#	new file:   Library/ShaderCache/a/a6e49dd48bd37f6870e949ce2b420a17.bin
+#	new file:   Library/ShaderCache/a/a6e52424b15b1ea1d8b789822d058891.bin
+#	new file:   Library/ShaderCache/a/a72a32c5771a98f7844cb77466ec1162.bin
+#	new file:   Library/ShaderCache/a/a77692102d3c006fd1534252c0fed7d5.bin
+#	new file:   Library/ShaderCache/a/a799d756eae5bafb5405f7c3a834f068.bin
+#	new file:   Library/ShaderCache/a/a81646318fe2eda91e9b929dba3e5d4f.bin
+#	new file:   Library/ShaderCache/a/a96ac67e7029a5fecf4aee071d7c6b6f.bin
+#	new file:   Library/ShaderCache/a/a9d10a5f6ac67a204b647b58283615eb.bin
+#	new file:   Library/ShaderCache/a/aa2008ee947747cd1a232f65478a1f43.bin
+#	new file:   Library/ShaderCache/a/aa74d0006dd5c62344ac55c5d7137eb1.bin
+#	new file:   Library/ShaderCache/a/aae29399d65af1f7278ae68fe402abab.bin
+#	new file:   Library/ShaderCache/a/ab0106488a4e4a3caeec3b2ebbd26da2.bin
+#	new file:   Library/ShaderCache/a/ac203f5694d439e0f375e770b3b693f8.bin
+#	new file:   Library/ShaderCache/a/ac3dd4cadf3dd94ba6d77eb9ea5fe3d4.bin
+#	new file:   Library/ShaderCache/a/ac502e9d02aaa0068d52df190a2a6b87.bin
+#	new file:   Library/ShaderCache/a/acfac261764a1080afbf534535f1544a.bin
+#	new file:   Library/ShaderCache/a/ad1ba79c89e3d74a0ad80b1874327804.bin
+#	new file:   Library/ShaderCache/a/ad3376e142f3f2eb64309647d2055731.bin
+#	new file:   Library/ShaderCache/a/ad9864c4a0de91455e32e07ad67192d9.bin
+#	new file:   Library/ShaderCache/a/ae0c0fd316378b8bc6bbf4310304f64c.bin
+#	new file:   Library/ShaderCache/a/ae1506702266e2de7c39441c636bd3d6.bin
+#	new file:   Library/ShaderCache/a/ae172852bc44b8ed18056ddb1346f071.bin
+#	new file:   Library/ShaderCache/a/ae6a4b675e5ce07a8bb3fa93a3596127.bin
+#	new file:   Library/ShaderCache/a/ae73b6197c5200205a152c23639e0d9b.bin
+#	new file:   Library/ShaderCache/a/aeda9c137dfda98ed77a4d8a37eda5fd.bin
+#	new file:   Library/ShaderCache/a/af04ccfc6deb405257c0454e4fc0000e.bin
+#	new file:   Library/ShaderCache/a/af4a0b78f5f5d80884971127c9b536fa.bin
+#	new file:   Library/ShaderCache/a/afc33b790289e1e3bd52f92025b0ab27.bin
+#	new file:   Library/ShaderCache/b/b04955d3f5bbb2ca44cb778b4d64c789.bin
+#	new file:   Library/ShaderCache/b/b1233cbc1c6831fe7db2a12fe38de856.bin
+#	new file:   Library/ShaderCache/b/b15372c582f3175a5d5c54a36c7d2624.bin
+#	new file:   Library/ShaderCache/b/b163a780c2b0d4736641210d2b8345d5.bin
+#	new file:   Library/ShaderCache/b/b16dfa94ecb973046464904a48db7800.bin
+#	new file:   Library/ShaderCache/b/b1b636e6b13b176b9bdad3b177ee746b.bin
+#	new file:   Library/ShaderCache/b/b1f9394ce2ffa404d95197f209673e8c.bin
+#	new file:   Library/ShaderCache/b/b2018b6b77f6e5270abafdc620675af9.bin
+#	new file:   Library/ShaderCache/b/b20cb4b0ff7a5502c72dd0865c1d8b71.bin
+#	new file:   Library/ShaderCache/b/b222cd9b4c1da341e636eb900228e11a.bin
+#	new file:   Library/ShaderCache/b/b23249eed58de2786de9b2f95b44ce6e.bin
+#	new file:   Library/ShaderCache/b/b23ef59f982356d65e0561652962a30a.bin
+#	new file:   Library/ShaderCache/b/b36f23149f8cb51f37695ff382124b8b.bin
+#	new file:   Library/ShaderCache/b/b39021440919aba322d6671f2d06a966.bin
+#	new file:   Library/ShaderCache/b/b42e35c611fae4dcebd96aa67c25e06b.bin
+#	new file:   Library/ShaderCache/b/b4966c6da50619d7ead970ccc544f8e6.bin
+#	new file:   Library/ShaderCache/b/b4da48a27e032aaadd0b07a0bf2e3973.bin
+#	new file:   Library/ShaderCache/b/b4eb545aa5ee6257531cba071901303c.bin
+#	new file:   Library/ShaderCache/b/b54901c8ccca28b58851856814d13750.bin
+#	new file:   Library/ShaderCache/b/b5668509e35a616a347785b084f6a177.bin
+#	new file:   Library/ShaderCache/b/b58359a8704d634d37854d39156fcc0d.bin
+#	new file:   Library/ShaderCache/b/b5c34bfbc214537bfcd58c8a7bc8a51f.bin
+#	new file:   Library/ShaderCache/b/b5f7bf6285e3e262ede2e6ac574ddf46.bin
+#	new file:   Library/ShaderCache/b/b651888eb10e5d831b237266d298a81c.bin
+#	new file:   Library/ShaderCache/b/b69f95a5c6f7cdb1cad15bb5d83a399b.bin
+#	new file:   Library/ShaderCache/b/b6a1449ecea0a9eff7bfd8c07e49aa87.bin
+#	new file:   Library/ShaderCache/b/b704ff1598376f493adb32225bbcd3e6.bin
+#	new file:   Library/ShaderCache/b/b71717a2c2e9897ab76d30828554d7cc.bin
+#	new file:   Library/ShaderCache/b/b762f7b8d877886aa446a6f47161b023.bin
+#	new file:   Library/ShaderCache/b/b7c398de0f0c0909e8832b5cdaab806c.bin
+#	new file:   Library/ShaderCache/b/b8015748abfa2c885f0015add180685b.bin
+#	new file:   Library/ShaderCache/b/b8106dbe1f9a299b1cff63c5dbc27e9b.bin
+#	new file:   Library/ShaderCache/b/b82159568c9648e36bf64bb44c0c50ba.bin
+#	new file:   Library/ShaderCache/b/b84172244e2989a04c6ab3348a82be3e.bin
+#	new file:   Library/ShaderCache/b/b88927bafd16ada4d338eb8420e4b149.bin
+#	new file:   Library/ShaderCache/b/b89120b8ec692133a2a857df0b970965.bin
+#	new file:   Library/ShaderCache/b/b8bbe0882b39a36c8a12fb41268f062b.bin
+#	new file:   Library/ShaderCache/b/b8d8f2278af0ba3d58d5359cc197b5d5.bin
+#	new file:   Library/ShaderCache/b/b8eb9bc7cf3e816bef722b3ea9b270c3.bin
+#	new file:   Library/ShaderCache/b/b9a8ebdf85058fc6dd192971ef827fc3.bin
+#	new file:   Library/ShaderCache/b/b9cae3e52605b6e1a8a404078b5e88d0.bin
+#	new file:   Library/ShaderCache/b/b9e9671f4d689f3d094d18e5ee0ab8dd.bin
+#	new file:   Library/ShaderCache/b/b9f24b5689ce0cb1a1bc0187fdf7a880.bin
+#	new file:   Library/ShaderCache/b/ba6811cfc71bedbe22ec8939a23d083d.bin
+#	new file:   Library/ShaderCache/b/ba6ee9a852616ed2ddf5bb097a0f8b97.bin
+#	new file:   Library/ShaderCache/b/baac46dfe02d346e61c3e2662fd01dd4.bin
+#	new file:   Library/ShaderCache/b/bac38358872e34584023ad3adaec95bb.bin
+#	new file:   Library/ShaderCache/b/badd005586414662c3c5e75bf2f21ff3.bin
+#	new file:   Library/ShaderCache/b/bae01028c911c0ad0dc6719049635ff8.bin
+#	new file:   Library/ShaderCache/b/baedf8dda26928e063e64d6fbff86ae4.bin
+#	new file:   Library/ShaderCache/b/bb18595f409387f67b7c4f63293bb94c.bin
+#	new file:   Library/ShaderCache/b/bb8fbf24cac9c7514b56dea425e41f9d.bin
+#	new file:   Library/ShaderCache/b/bb9c0d75ec7f487d6fc5ec5fc17decbd.bin
+#	new file:   Library/ShaderCache/b/bc1118499b04d004d4ed517da5a8dca0.bin
+#	new file:   Library/ShaderCache/b/bc82e1310645393dbc6fd9d42a01a365.bin
+#	new file:   Library/ShaderCache/b/bcf0f33c256b4a4c2c5924c890998696.bin
+#	new file:   Library/ShaderCache/b/bd91ac6de703938f5a9b1a3f2aabc430.bin
+#	new file:   Library/ShaderCache/b/bd93791c8a2fd5aa3b0d662864129479.bin
+#	new file:   Library/ShaderCache/b/be5a16a1a63616e3ad27144930824729.bin
+#	new file:   Library/ShaderCache/b/be8c2f998a123d44cfa5719ae5093047.bin
+#	new file:   Library/ShaderCache/b/beab89af81562ff57cb7ec3cdcd9a3a0.bin
+#	new file:   Library/ShaderCache/b/bf7e3d37f892fbad86e013395a5c5c21.bin
+#	new file:   Library/ShaderCache/b/bf98ed1e418fde95bd6a5a1594cff376.bin
+#	new file:   Library/ShaderCache/b/bff1e958b4021f202df0dea73f957e6f.bin
+#	new file:   Library/ShaderCache/c/c02817fa1be5d143e7352a2c235e563f.bin
+#	new file:   Library/ShaderCache/c/c0708abf7db528ebea9f526130170563.bin
+#	new file:   Library/ShaderCache/c/c0ed5c234188b2054b5bcc763fde3e9d.bin
+#	new file:   Library/ShaderCache/c/c0fed5fb05e536dd4ef3e421e54012c0.bin
+#	new file:   Library/ShaderCache/c/c12cfe44c682c8433ab5482e2fb27ddc.bin
+#	new file:   Library/ShaderCache/c/c12d20ef7770332344ee3fcd82ddd4d4.bin
+#	new file:   Library/ShaderCache/c/c1ba3d94bc92582cc332f5ecfc04cfba.bin
+#	new file:   Library/ShaderCache/c/c1fd6a877fa0747f4a11f68ffb3df232.bin
+#	new file:   Library/ShaderCache/c/c2a901d7c066b5d985c04d49678c3bb0.bin
+#	new file:   Library/ShaderCache/c/c2b47a6cc50ffc588bf1d93bed4025b5.bin
+#	new file:   Library/ShaderCache/c/c2f7841d18c656396d04c0e71af654a0.bin
+#	new file:   Library/ShaderCache/c/c38195dd70ea30c8ec676bff5f67f685.bin
+#	new file:   Library/ShaderCache/c/c38efb24f091c5b299581848d4c62223.bin
+#	new file:   Library/ShaderCache/c/c3b4a34fb6d0ac4d21bca40d4b4b74b8.bin
+#	new file:   Library/ShaderCache/c/c3d0ce6e4299879cadabe16bdae88dd2.bin
+#	new file:   Library/ShaderCache/c/c3ff1ae44c5f210df6562abf83a57974.bin
+#	new file:   Library/ShaderCache/c/c4908d12108064cf7a5e77c1ff370e0f.bin
+#	new file:   Library/ShaderCache/c/c51f6a9e0f5778e1dfe3c02dae4a2070.bin
+#	new file:   Library/ShaderCache/c/c52cd8813a90f79a5a9c3653f5171f95.bin
+#	new file:   Library/ShaderCache/c/c52e09af6dd3486f0c9db20c5986da5e.bin
+#	new file:   Library/ShaderCache/c/c54493aba70ceff837cafb5ae90775b2.bin
+#	new file:   Library/ShaderCache/c/c560bd5456cb29b3fd9b7a29337e797c.bin
+#	new file:   Library/ShaderCache/c/c5b15856ae451348989af24982e2c90d.bin
+#	new file:   Library/ShaderCache/c/c5bc73a1964f52a5aa32f175c0c6fd14.bin
+#	new file:   Library/ShaderCache/c/c5bd3587ad8746a628150d9c7429ab07.bin
+#	new file:   Library/ShaderCache/c/c5ee4589ab3e2d8ad0d9beaa19de85cb.bin
+#	new file:   Library/ShaderCache/c/c6846f210953c2cf8dd42ec83365cef7.bin
+#	new file:   Library/ShaderCache/c/c74b13b25efec3eb5741197224224700.bin
+#	new file:   Library/ShaderCache/c/c77967ccd0319d22b6a8d42626815fae.bin
+#	new file:   Library/ShaderCache/c/c7e643fc9083a1246a2efe1b0592d11c.bin
+#	new file:   Library/ShaderCache/c/c893a0db95170b860832d1bf483cc3bd.bin
+#	new file:   Library/ShaderCache/c/c90c260870f12480013e025ec9f736cf.bin
+#	new file:   Library/ShaderCache/c/c955e51b1c7b7b3df1d92679149066bb.bin
+#	new file:   Library/ShaderCache/c/c97f93a1687860c91c622dcb4b37ebde.bin
+#	new file:   Library/ShaderCache/c/ca353ca2bc98e22059d2b18b9fb3e81c.bin
+#	new file:   Library/ShaderCache/c/ca913ae918b3fee502ca6eaa60acef5c.bin
+#	new file:   Library/ShaderCache/c/ca963d540dd08c00d650c408cebc7496.bin
+#	new file:   Library/ShaderCache/c/cacaf5784a65cf86dc0042b0beee1e8a.bin
+#	new file:   Library/ShaderCache/c/cae0cefd35b7eedd9c1bd87d229201dd.bin
+#	new file:   Library/ShaderCache/c/cb98f32eeba5c76e96f9dba06e402abe.bin
+#	new file:   Library/ShaderCache/c/cb99bc7dd1d6197a668797ebb4566279.bin
+#	new file:   Library/ShaderCache/c/cbac4d4b1e8e2fb123f06b51b8d90549.bin
+#	new file:   Library/ShaderCache/c/cbada693cbac92058073da944fc6fb30.bin
+#	new file:   Library/ShaderCache/c/cbbe74433e4541c120e6a21a5be53e7b.bin
+#	new file:   Library/ShaderCache/c/cc06784ef25c3b817b57f68589bc6a03.bin
+#	new file:   Library/ShaderCache/c/cc4f4cf45d99a8aa14d8986371d80753.bin
+#	new file:   Library/ShaderCache/c/cc856dbecc95cd1abf175996fea9fe9b.bin
+#	new file:   Library/ShaderCache/c/ccecf7fde61b63f2d3cfc042dac4eadc.bin
+#	new file:   Library/ShaderCache/c/cd3871647990417ed157a07ea723bed4.bin
+#	new file:   Library/ShaderCache/c/cdb4bb7f025e93793f6018bc4b5f49bb.bin
+#	new file:   Library/ShaderCache/c/ce2f3635fa0b170fb09b187ec2a32549.bin
+#	new file:   Library/ShaderCache/c/ce3ff00849e6ef5fa0f7b86b8d9bf664.bin
+#	new file:   Library/ShaderCache/c/ce5bb4d05fa5ea5273804def1f48b579.bin
+#	new file:   Library/ShaderCache/c/cec43e35c64358b1fca81718fc1862ab.bin
+#	new file:   Library/ShaderCache/c/cf520ebe45da3a670752b5060229162c.bin
+#	new file:   Library/ShaderCache/c/cfed6f170d0875b460fc02754572ef09.bin
+#	new file:   Library/ShaderCache/d/d02dc4b5463d4af3959ee87cc9e8b480.bin
+#	new file:   Library/ShaderCache/d/d02e393a4bb4db7b81b8340fc072b4eb.bin
+#	new file:   Library/ShaderCache/d/d03536668bc321fb20f423ee67a1d41f.bin
+#	new file:   Library/ShaderCache/d/d0b26497168316a281b1acafb0e4d2b9.bin
+#	new file:   Library/ShaderCache/d/d0c796ce1b06461f5d8de501d2d643c4.bin
+#	new file:   Library/ShaderCache/d/d112fe980b15658e87f1d99a2a5cae39.bin
+#	new file:   Library/ShaderCache/d/d11cbb0dea087c97d376a93eb8861b75.bin
+#	new file:   Library/ShaderCache/d/d15ce2f17f2675bd36c0fa7dc064de78.bin
+#	new file:   Library/ShaderCache/d/d215bb0c1ef853553fc00110bfaf5a83.bin
+#	new file:   Library/ShaderCache/d/d2347fc99e29114223837b3abdc34366.bin
+#	new file:   Library/ShaderCache/d/d2530d30ad0407ef3cded7fd1a365d0f.bin
+#	new file:   Library/ShaderCache/d/d2c6c7e6de60e4bfe4255b0b5d2af81c.bin
+#	new file:   Library/ShaderCache/d/d31997c1ea5093352b46037d392eb7b2.bin
+#	new file:   Library/ShaderCache/d/d32859e04266622c77147bb601d4439d.bin
+#	new file:   Library/ShaderCache/d/d398efa7392b3238d50229507d7981dc.bin
+#	new file:   Library/ShaderCache/d/d3a556f03120a1977732b6bad0a9af85.bin
+#	new file:   Library/ShaderCache/d/d3fa052630d36aa4edc44610a0f8fda6.bin
+#	new file:   Library/ShaderCache/d/d4039540baa4e5d1d96857e895442cb4.bin
+#	new file:   Library/ShaderCache/d/d410894975b8ff05b790686eba10433e.bin
+#	new file:   Library/ShaderCache/d/d454671d284c402a74ef108e1bbff9de.bin
+#	new file:   Library/ShaderCache/d/d49a59837b9c3f1e53eecaf0f15bd348.bin
+#	new file:   Library/ShaderCache/d/d4b19e225bb715d52db927568246c3f3.bin
+#	new file:   Library/ShaderCache/d/d5add7a7f56af448f7286ed9b788da37.bin
+#	new file:   Library/ShaderCache/d/d5c93205d0563d02d21bf8e45b730f2b.bin
+#	new file:   Library/ShaderCache/d/d5d02252206aa8080acde86212dd1f78.bin
+#	new file:   Library/ShaderCache/d/d6cd1975851595985609fbb6ebf4a9e2.bin
+#	new file:   Library/ShaderCache/d/d7121b4c0bc9cdd7d1a46c79250556b6.bin
+#	new file:   Library/ShaderCache/d/d71d133e6cfde66d275829bbb31e8bd2.bin
+#	new file:   Library/ShaderCache/d/d7ce0d715dec9f34b5d135e493dc9e9b.bin
+#	new file:   Library/ShaderCache/d/d7f7178e1f21cbf8709f904dcf71aedc.bin
+#	new file:   Library/ShaderCache/d/d805c9bdfb2a577202b7504c994dbc7b.bin
+#	new file:   Library/ShaderCache/d/d8304f2cc13048169f7976d8b53d2d92.bin
+#	new file:   Library/ShaderCache/d/d8779fa334f293dd0bb5cb1fde2d9cba.bin
+#	new file:   Library/ShaderCache/d/d87b74cfb34afc98d0f9eb3efaf2f4ae.bin
+#	new file:   Library/ShaderCache/d/d8f4dfde6a5ef3b70b1da2b76dfbc6af.bin
+#	new file:   Library/ShaderCache/d/d93a88ff12a718dca27f1ed43b21a2d9.bin
+#	new file:   Library/ShaderCache/d/d961d4b589f25c61f3f8298ecb8da3d3.bin
+#	new file:   Library/ShaderCache/d/d97acf3b22897258e065d1d2f3709b5b.bin
+#	new file:   Library/ShaderCache/d/d9a667cf8203edbafda57c972e92fbe0.bin
+#	new file:   Library/ShaderCache/d/da0701ab0ee1079357856925bdeded15.bin
+#	new file:   Library/ShaderCache/d/dac694fc516b3b2e0c7d7bf5a6285747.bin
+#	new file:   Library/ShaderCache/d/daf27ff662f4a7d6ad891fa9dfff87cb.bin
+#	new file:   Library/ShaderCache/d/db3d767f300a05f5022770f33882320d.bin
+#	new file:   Library/ShaderCache/d/db41ddce5e3a1736bfb3b2cf2d2f4998.bin
+#	new file:   Library/ShaderCache/d/db5159920811bfc077a2d81b91fbd59f.bin
+#	new file:   Library/ShaderCache/d/dc18605e4aad9bdde47501f294ab74d7.bin
+#	new file:   Library/ShaderCache/d/dc68057dccaa276b1e16ee41469a4774.bin
+#	new file:   Library/ShaderCache/d/dc7f320863cfcd840c7aec0dcba937dc.bin
+#	new file:   Library/ShaderCache/d/dc917188fcaf32d670eae45f118db2f6.bin
+#	new file:   Library/ShaderCache/d/dc94ce4141810d7f3f5c45e3906f5b41.bin
+#	new file:   Library/ShaderCache/d/dd11582efabee0c340dc5d7f829fdd38.bin
+#	new file:   Library/ShaderCache/d/ddb90293957ba95edaa56af87a7fbed2.bin
+#	new file:   Library/ShaderCache/d/de39407681e97007d0f13c0821feede5.bin
+#	new file:   Library/ShaderCache/d/df0a1511ce8f358b459b971a3cc80b45.bin
+#	new file:   Library/ShaderCache/d/df5d399aa2528e2e5211fcb3ca737c0e.bin
+#	new file:   Library/ShaderCache/d/dfadba627b17823bd6984bdd4354ef8a.bin
+#	new file:   Library/ShaderCache/e/e05381c2e58a7b7854377b7d50be2855.bin
+#	new file:   Library/ShaderCache/e/e0582604a13102b8b489d748df7f534a.bin
+#	new file:   Library/ShaderCache/e/e0622fe9e99167811e86985d8a913a6c.bin
+#	new file:   Library/ShaderCache/e/e07d884bef302ecffddad81110388684.bin
+#	new file:   Library/ShaderCache/e/e145f394112cda8b656b97b841d39224.bin
+#	new file:   Library/ShaderCache/e/e2176b1cf197cac727a6fe465893a17d.bin
+#	new file:   Library/ShaderCache/e/e263cf0a104b69857f257e8914332ab0.bin
+#	new file:   Library/ShaderCache/e/e3080f9a59704b7dae9f80e5bbf28c2a.bin
+#	new file:   Library/ShaderCache/e/e3317b21fd66a606b04da960f50c7594.bin
+#	new file:   Library/ShaderCache/e/e39aba1c479d132d83a2b2b3c881763c.bin
+#	new file:   Library/ShaderCache/e/e3cb5d8d27389a1d110a44f28f49e976.bin
+#	new file:   Library/ShaderCache/e/e3d3328c876cbb70448d826804fe1bc4.bin
+#	new file:   Library/ShaderCache/e/e3f7811427eef724d6756189b418e474.bin
+#	new file:   Library/ShaderCache/e/e40b378736baa31bf619ffd0afb07044.bin
+#	new file:   Library/ShaderCache/e/e44b84b0c411dfe71fa37d87531712e1.bin
+#	new file:   Library/ShaderCache/e/e491e81db8cca406ba7361dc657fd217.bin
+#	new file:   Library/ShaderCache/e/e4e65a538466b61fdbfb046c4b2957cc.bin
+#	new file:   Library/ShaderCache/e/e56f8532bf21ace75f31bf359f83248b.bin
+#	new file:   Library/ShaderCache/e/e5d4780f499ea575d7919f59aa77db7f.bin
+#	new file:   Library/ShaderCache/e/e5f8e78893dd3a05fb49ab1d8890f8e1.bin
+#	new file:   Library/ShaderCache/e/e5fced0529cb41221e080c600319b69d.bin
+#	new file:   Library/ShaderCache/e/e6171abc6f0c2139fb08abda6a84a8ef.bin
+#	new file:   Library/ShaderCache/e/e6300c72974d86f1e804f7e25fb6b845.bin
+#	new file:   Library/ShaderCache/e/e66db8983719f2a1d8f6933173023fac.bin
+#	new file:   Library/ShaderCache/e/e70cc78fe084fc9b9e8f50ea46bdfe4a.bin
+#	new file:   Library/ShaderCache/e/e72cb4264f2c43299e171fc584b13e91.bin
+#	new file:   Library/ShaderCache/e/e73989d09652a500de3b22307fcc60a9.bin
+#	new file:   Library/ShaderCache/e/e743933553611cf9823912513bd1c5c5.bin
+#	new file:   Library/ShaderCache/e/e819c526b64281506da2f030281a40a9.bin
+#	new file:   Library/ShaderCache/e/e85b199d70ed1765abf39d74824a8fbc.bin
+#	new file:   Library/ShaderCache/e/e88624b223f4aea9f803b94c243daecb.bin
+#	new file:   Library/ShaderCache/e/e8c8d7caa5163da4b5c6d5740b1a39bf.bin
+#	new file:   Library/ShaderCache/e/e94eb02d275f9dbb66a67731267798d3.bin
+#	new file:   Library/ShaderCache/e/e97ac1a5e4bb49961f917da065cae6a3.bin
+#	new file:   Library/ShaderCache/e/e995233c7eb02a01f019fdee243e8d78.bin
+#	new file:   Library/ShaderCache/e/e9ed7c6dcc5d1231b523b0e066553dc9.bin
+#	new file:   Library/ShaderCache/e/ea1002a6eec5cbaed4d3898fc9dbc7a9.bin
+#	new file:   Library/ShaderCache/e/ea2356ec19088fcbea1b2754471ccd22.bin
+#	new file:   Library/ShaderCache/e/eaf51a81fd4aba2e238c94b1981e4b26.bin
+#	new file:   Library/ShaderCache/e/eb239086acad4bc7f8bb83597eb24b84.bin
+#	new file:   Library/ShaderCache/e/eb508e294f5d9c9bfb12ce6049bf5139.bin
+#	new file:   Library/ShaderCache/e/ebc4c301f875bfc252376cdbd666b07d.bin
+#	new file:   Library/ShaderCache/e/ebedfe93649dec7944df939f966568d1.bin
+#	new file:   Library/ShaderCache/e/ebf2bb8118ce85db91b9d9359c80dc7e.bin
+#	new file:   Library/ShaderCache/e/ec076b1ceeeb9eac8d2d7aeed696ffb0.bin
+#	new file:   Library/ShaderCache/e/ec1682243857a0d2405ee9b8f0beea23.bin
+#	new file:   Library/ShaderCache/e/ecead7ddad5948707bde24276a5c17d4.bin
+#	new file:   Library/ShaderCache/e/ed005d6608434c236aadcc242c02e210.bin
+#	new file:   Library/ShaderCache/e/ed23c02bb335080c6aaf9633db837900.bin
+#	new file:   Library/ShaderCache/e/ed5ff092397fa4800a6ed4f7e77d0a76.bin
+#	new file:   Library/ShaderCache/e/eda83c5dd1e0ddd7942b00868bb12db4.bin
+#	new file:   Library/ShaderCache/e/ee17aba3f9e06bffadcd79f40206d034.bin
+#	new file:   Library/ShaderCache/e/ee55ab61e21b9ab36cb5856bb9e94aee.bin
+#	new file:   Library/ShaderCache/e/eea4a10071d2f27f77e386826c0a83ac.bin
+#	new file:   Library/ShaderCache/e/ef23a43468bef29cb7088766d1c8d6b9.bin
+#	new file:   Library/ShaderCache/e/ef6db6dfccf02679a44086d4c5ea9554.bin
+#	new file:   Library/ShaderCache/e/ef7fff99925afd8e12c56ea16977176e.bin
+#	new file:   Library/ShaderCache/e/efe71308af5c7d20e735589d0b2256ab.bin
+#	new file:   Library/ShaderCache/f/f0324ddd28203f6800bb529a4a004d9d.bin
+#	new file:   Library/ShaderCache/f/f08594dddd335d864186435620085fb3.bin
+#	new file:   Library/ShaderCache/f/f13051fec8aeb7db3c99b8b6afc3e98d.bin
+#	new file:   Library/ShaderCache/f/f1ae5521c4a24a3a93e16092824dcba6.bin
+#	new file:   Library/ShaderCache/f/f1d46d55f41e295f7d6c9eb424e169dc.bin
+#	new file:   Library/ShaderCache/f/f1ec0e8df7064585148313911542e821.bin
+#	new file:   Library/ShaderCache/f/f24ef369e6e0c52ff495aedadca08384.bin
+#	new file:   Library/ShaderCache/f/f25b7e9f8e8ea9157e4a5083941b23c7.bin
+#	new file:   Library/ShaderCache/f/f26b11046a4d8d9762941aeb362fb121.bin
+#	new file:   Library/ShaderCache/f/f2dbbe62fe376ab67d05ab63d2e5ad77.bin
+#	new file:   Library/ShaderCache/f/f36471243ec20606075386757d8f44a3.bin
+#	new file:   Library/ShaderCache/f/f3a8e538fa05a253a06fa5e37f740663.bin
+#	new file:   Library/ShaderCache/f/f414da82b635703188594b590c8200ba.bin
+#	new file:   Library/ShaderCache/f/f4290b9af3248f9a5aa2513a178cff85.bin
+#	new file:   Library/ShaderCache/f/f449c68ccb85204ead2ce8d50230b597.bin
+#	new file:   Library/ShaderCache/f/f464fc6b4bf38560c8cefe59d471a7b6.bin
+#	new file:   Library/ShaderCache/f/f480269b59493b594002a9c98fabdd70.bin
+#	new file:   Library/ShaderCache/f/f481cbd8f1fb3196a2a2e4757d7a89cc.bin
+#	new file:   Library/ShaderCache/f/f4d47178d10fe089647acfd6c3aa58b9.bin
+#	new file:   Library/ShaderCache/f/f53271f41d9c2207e77bf1736ae87b63.bin
+#	new file:   Library/ShaderCache/f/f57bd66211f397c4d3d3c933356aea18.bin
+#	new file:   Library/ShaderCache/f/f58a22ee2d8f5eb4cab372a7e520f848.bin
+#	new file:   Library/ShaderCache/f/f5b009de566ae1f4934c0918124cf12b.bin
+#	new file:   Library/ShaderCache/f/f60d7ddc4e4ea9fd7623ece1b4e82161.bin
+#	new file:   Library/ShaderCache/f/f6205f461923fd2bee06af2831be7ba7.bin
+#	new file:   Library/ShaderCache/f/f62128bb95003e76186989c89933e7bc.bin
+#	new file:   Library/ShaderCache/f/f621b6794d309e41e036b852e7684f4a.bin
+#	new file:   Library/ShaderCache/f/f6d770552972e2abedbb8d863a0d3c90.bin
+#	new file:   Library/ShaderCache/f/f749e4ead3f9fe411185e5c2ce805062.bin
+#	new file:   Library/ShaderCache/f/f752b6db817a8f8e3e079700d3880f01.bin
+#	new file:   Library/ShaderCache/f/f78e3a2fc891ab2c1ed5f6ad8abb1163.bin
+#	new file:   Library/ShaderCache/f/f7c322e4d1f8cf62d62665afca7c3942.bin
+#	new file:   Library/ShaderCache/f/f7ed2356b91e0459ee31552bf5d0ce0c.bin
+#	new file:   Library/ShaderCache/f/f85db49947faa665f02831517a8fadf1.bin
+#	new file:   Library/ShaderCache/f/f88b6a9f6677b1a86a2c51d5b174612f.bin
+#	new file:   Library/ShaderCache/f/f9007f8b253efb47c7740b4f597472f9.bin
+#	new file:   Library/ShaderCache/f/f92a383f77d1c8cc2c3a8bf616d6153d.bin
+#	new file:   Library/ShaderCache/f/fa73df0ec9aba8c4868e4c259eacdce1.bin
+#	new file:   Library/ShaderCache/f/fa882e97767dc4cf3d5a3b91d81e6d7b.bin
+#	new file:   Library/ShaderCache/f/fac2ccb34a767efcfbe310e006c25e1a.bin
+#	new file:   Library/ShaderCache/f/facb36ff5d5cb5b344cdd870a159764d.bin
+#	new file:   Library/ShaderCache/f/fad39fd2cddc8c352764e7a6b055600f.bin
+#	new file:   Library/ShaderCache/f/faee5468e51e8e23010ba26daaafbe78.bin
+#	new file:   Library/ShaderCache/f/fb25dea5b2de293473d44c825440d76b.bin
+#	new file:   Library/ShaderCache/f/fb5630a781d60d2d8ee887633bc409a4.bin
+#	new file:   Library/ShaderCache/f/fb7890c621b3502b849215eaae02e424.bin
+#	new file:   Library/ShaderCache/f/fb7d8c4463244be19846c2dcaa8fd5d8.bin
+#	new file:   Library/ShaderCache/f/fb99c6eabf190a36a0f1843f9e507f8c.bin
+#	new file:   Library/ShaderCache/f/fbd83dd5f60c4c5fd1cf619b1e7edfc9.bin
+#	new file:   Library/ShaderCache/f/fd8bcd27d41540a70454ede9e873bd66.bin
+#	new file:   Library/ShaderCache/f/fdee9ae0cf1ba42a90468074a0722167.bin
+#	new file:   Library/ShaderCache/f/fe2452491f403b628faba888bf85e223.bin
+#	new file:   Library/ShaderCache/f/fe891feec51827f41b1631bc7fdcd953.bin
+#	new file:   Library/ShaderCache/f/fea94c71f63ff3f1a9ebf78fe29b0d5d.bin
+#	new file:   Library/ShaderCache/f/ffb0f647ae46377d515c8c724de00a1d.bin
+#	new file:   Library/ShaderCache/f/ffcf94d893548f77d0ffa0afb7801ab0.bin
+#	modified:   Library/assetDatabase3
+#	modified:   Library/metadata/00/00000000000000004000000000000000
+#	modified:   Library/metadata/00/00000000000000005100000000000000
+#	modified:   Library/metadata/00/00000000000000006100000000000000
+#	modified:   Library/metadata/00/00000000000000008000000000000000
+#	modified:   Library/metadata/00/0000000000000000b000000000000000
+#	new file:   Library/metadata/11/11da8baf665cf4c479a2876607859aeb
+#	new file:   Library/metadata/11/11da8baf665cf4c479a2876607859aeb.info
+#	modified:   Library/metadata/23/23d5127d340c85e46a70ac4f2b6ebe61
+#	modified:   Library/metadata/2f/2f91cafafc5a1504fa2b62381fafda33
+#	modified:   Library/metadata/36/36bd0665bb4ae3945b1777b1c5e2f487
+#	modified:   Library/metadata/47/4700ee29f92408242ae12de474dc1c30
+#	new file:   Library/metadata/58/5849dcb322eadbc4cad8abf217b851d5
+#	new file:   Library/metadata/58/5849dcb322eadbc4cad8abf217b851d5.info
+#	new file:   Library/metadata/6a/6ad1ac45e9c27cb4898d35d7736fa40a
+#	new file:   Library/metadata/6a/6ad1ac45e9c27cb4898d35d7736fa40a.info
+#	new file:   Library/metadata/77/77e9b4ac0c0d46942b153f5805600f60
+#	new file:   Library/metadata/77/77e9b4ac0c0d46942b153f5805600f60.info
+#	modified:   Library/metadata/89/895a07da0052d294a9a8d3a888bf2f7c.info
+#	new file:   Library/metadata/96/96b675b1af36a7846bfe74e8b4eed303
+#	new file:   Library/metadata/96/96b675b1af36a7846bfe74e8b4eed303.info
+#	modified:   Library/metadata/98/98b76295451627645a5c560fa2032bcd.info
+#	modified:   Library/metadata/bf/bf09f544ed628ad499c4f460cafc6c21
+#	modified:   Library/metadata/bf/bf09f544ed628ad499c4f460cafc6c21.info
+#	modified:   Library/metadata/ce/ce571c99e525fe541a327c93243a58ec
+#	modified:   Library/metadata/dc/dc8353c96c801df4cb2046358c3c6d0a
+#	modified:   Library/metadata/f3/f36ae29bdf49d9d469b1c6df272a7560
+#	modified:   Library/shadercompiler-UnityShaderCompiler.exe0.log
+#	modified:   Library/shadercompiler-UnityShaderCompiler.exe1.log
+#	modified:   Library/shadercompiler-UnityShaderCompiler.exe2.log
+#	modified:   Library/shadercompiler-UnityShaderCompiler.exe3.log
+#	modified:   ProjectSettings/EditorBuildSettings.asset
+#	modified:   ProjectSettings/GraphicsSettings.asset
+#
