@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4909993411840774}
   - component: {fileID: 114511831691739992}
+  - component: {fileID: 114852198500032024}
+  - component: {fileID: 114607322026798252}
   m_Layer: 0
   m_Name: HandManager
   m_TagString: HandManager
@@ -54,7 +56,65 @@ MonoBehaviour:
   hand: []
   block: {fileID: 1166482198688414, guid: 895a07da0052d294a9a8d3a888bf2f7c, type: 2}
   handSize: 5
-  textures: []
+  textures:
+  - {fileID: 2100000, guid: 9fe69349063a88e4aadab7e507234b56, type: 2}
+  - {fileID: 2100000, guid: 077f0b3b1c44f1d4c8f1c967c87122a2, type: 2}
+  - {fileID: 2100000, guid: a03696af2da50dc418ae5f7ed5e88601, type: 2}
+  - {fileID: 2100000, guid: d0f96c48934567f458d63caa5c1ceb04, type: 2}
+  - {fileID: 2100000, guid: fc5c5d09b664e144a9a93406d2b53f23, type: 2}
   colorNames: []
   p1: 0
   handLocked: 0
+--- !u!114 &114607322026798252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416147753811546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114852198500032024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416147753811546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 64
+    i1: 237
+    i2: 98
+    i3: 230
+    i4: 18
+    i5: 240
+    i6: 232
+    i7: 100
+    i8: 104
+    i9: 155
+    i10: 226
+    i11: 86
+    i12: 215
+    i13: 240
+    i14: 25
+    i15: 86
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0

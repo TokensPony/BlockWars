@@ -146,7 +146,7 @@ MonoBehaviour:
   p1Turn: 0
   incSpeed: 0.05
   onP1: 0
-  gameOver: {fileID: 0}
+  gameOver: {fileID: 1770118407759866, guid: 200d6a7e227355e42b5a5e275ca39d24, type: 2}
   locked: 0
   waiting: 0
 --- !u!114 &114271911993981406

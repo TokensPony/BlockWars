@@ -24,8 +24,11 @@ public class AIOpponent : MonoBehaviour {
 		Debug.Log(PlayerPrefs.GetInt("diffLev"));
 		diff = PlayerPrefs.GetInt ("diffLev");
 		humanMatchCount = 0;
+		handObject = GameObject.FindGameObjectWithTag ("HandManager");
 		aihand = handObject.GetComponent<HandManager> ();
+		boardMan = GameObject.FindGameObjectWithTag ("GameController");
 		waiting = false;
+
 		//board = boardMan.GetComponent<BoutManager> ().blocks;
 	}
 	

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114711078590488614}
   m_Layer: 0
   m_Name: BoutManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,8 @@ MonoBehaviour:
   bar: {fileID: 1589313474062812, guid: 98b76295451627645a5c560fa2032bcd, type: 2}
   handManager: {fileID: 1416147753811546, guid: 40ed62e612f0e864689be256d7f01956,
     type: 2}
+  boutUI: {fileID: 1886947760460666, guid: 200d6a7e227355e42b5a5e275ca39d24, type: 2}
+  aiOpp: {fileID: 1806381180336614, guid: f659bd2e9d034a54dbca19f747c7811e, type: 2}
   boardWidth: 8
   xOffset: 0.15
   yOffset: 0.15

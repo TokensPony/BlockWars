@@ -12,6 +12,7 @@ TagManager:
   - Middle
   - HandManager
   - AI
+  - BoutUI
   layers:
   - Default
   - TransparentFX

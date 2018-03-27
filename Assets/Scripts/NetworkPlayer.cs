@@ -28,7 +28,9 @@ public class NetworkPlayer : MonoBehaviour {
 					blocks [x].transform.parent = this.gameObject.transform;
 				}
 			}
-			GameObject.Find("HandManager").transform.parent = this.gameObject.transform;
+			GameObject[] hms = GameObject.FindGameObjectsWithTag ("HandManager");
+
+			GameObject.Find("HandManager(Clone)").transform.parent = this.gameObject.transform;
 		} else {
 			player1 = false;
 			//GameObject.Find ("BoutManager").GetComponent<BoutManager> ().manualStart ();
@@ -44,7 +46,7 @@ public class NetworkPlayer : MonoBehaviour {
 					blocks [x].transform.parent = this.gameObject.transform;
 				}
 			}
-			GameObject.Find("HandManager (1)").transform.parent = this.gameObject.transform;
+			//GameObject.Find("HandManager (1)").transform.parent = this.gameObject.transform;
 		}
 	}
 	

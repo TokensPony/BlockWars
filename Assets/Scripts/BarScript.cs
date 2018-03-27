@@ -23,6 +23,7 @@ public class BarScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameOver = GameObject.FindGameObjectWithTag ("GameController").GetComponent<BoutManager>().boutUI;
 		p1Turn = true;
 		this.GetComponent<ConstantForce> ().force = gForce;
 		locked = false;
@@ -104,7 +105,7 @@ public class BarScript : MonoBehaviour {
 		if (col.gameObject.tag == "Block") {
 			Debug.Log ("Touched Block");
 			sVelocity.y = 0f;
-			//GameObject.Find ("GameOver").SetActive (true);
+			//GameObject.FindGameObjectWithTag("BoutUI").SetActive (true);
 			//gameOver.transform.GetChild(0).gameObject.SetActive(true);
 			gameOver.SetActive (true);
 			locked = true;

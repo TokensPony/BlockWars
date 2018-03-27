@@ -16,18 +16,20 @@ public class HandManager : NetworkBehaviour {
 	public bool handLocked;
 
 	void Start () {
-		textures = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().textures;
+		//textures = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().textures;
 		block = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().block;
 		colorNames = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().colorNames;
 		handLocked = false;
-		populateHand ();
+		//populateHand ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		for (int x = 0; x < handSize; x++) {
-			if (hand [x].tag == "Block") {
-				hand [x] = drawBlock (x + (Mathf.Abs (x * .15f)));
+		if (hand.Count != 0) {
+			for (int x = 0; x < handSize; x++) {
+				if (hand [x].tag == "Block") {
+					hand [x] = drawBlock (x + (Mathf.Abs (x * .15f)));
+				}
 			}
 		}
 	}

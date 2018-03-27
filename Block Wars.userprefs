@@ -2,16 +2,16 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\NetworkPlayer.cs">
     <Files>
-      <File FileName="Assets\Scripts\BoutManager.cs" Line="129" Column="4" />
+      <File FileName="Assets\Scripts\BoutManager.cs" Line="59" Column="52" />
       <File FileName="Assets\Scripts\BlockData.cs" Line="77" Column="78" />
-      <File FileName="Assets\Scripts\NetworkPlayer.cs" Line="39" Column="5" />
+      <File FileName="Assets\Scripts\NetworkPlayer.cs" Line="33" Column="39" />
       <File FileName="Assets\Scripts\BarScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Power Ups\PowerUp.cs" Line="26" Column="4" />
-      <File FileName="Assets\Scripts\NetworkControls.cs" Line="8" Column="34" />
-      <File FileName="Assets\Scripts\AI Scripts\AIOpponent.cs" Line="22" Column="7" NotebookId="1" />
-      <File FileName="Assets\Scripts\MainMenu.cs" Line="37" Column="39" NotebookId="1" />
-      <File FileName="Assets\Scripts\Power Ups\FreezePowerUp.cs" Line="15" Column="18" NotebookId="1" />
-      <File FileName="Assets\Scripts\HandManager.cs" Line="16" Column="25" NotebookId="1" />
+      <File FileName="Assets\Scripts\Power Ups\PowerUp.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\NetworkControls.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI Scripts\AIOpponent.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\MainMenu.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\Power Ups\FreezePowerUp.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\HandManager.cs" Line="46" Column="20" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

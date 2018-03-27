@@ -11,6 +11,8 @@ public class BoutManager : MonoBehaviour {
 	//public GameObject[]
 	public GameObject bar;
 	public GameObject handManager;
+	public GameObject boutUI;
+	public GameObject aiOpp;
 
 	public float boardWidth;
 	public float xOffset = .15f;
@@ -45,16 +47,26 @@ public class BoutManager : MonoBehaviour {
 	public void manualStart(){
 		p1Turn = true;
 		turnCount = 0;
+		boutUI = Instantiate (boutUI);
 		bar = Instantiate (bar);
 		if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
 			Debug.Log ("Server Spawn");
 			NetworkServer.Spawn (bar);
 		}
 		ai = GameObject.FindGameObjectWithTag ("AI");
+		GameObject hm = Instantiate (handManager);
+		hm.GetComponent<HandManager> ().p1 = true;
+		hm.GetComponent<HandManager> ().populateHand ();
+		GameObject hm2 = Instantiate (handManager);
+		hm2.GetComponent<HandManager> ().p1 = false;
+		hm2.GetComponent<HandManager> ().populateHand ();
 		//bar = this.
 		populatePile ();
 		clearStart ();
 		printGrid ();
+		if (string.Equals (SceneManager.GetActiveScene ().name, "AIScene")) {
+			aiOpp = Instantiate (aiOpp);
+		}
 	}
 	
 	// Update is called once per frame
