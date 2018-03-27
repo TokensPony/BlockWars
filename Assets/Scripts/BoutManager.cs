@@ -114,16 +114,15 @@ public class BoutManager : MonoBehaviour {
 
 	public void createBlock(int xPos, int yPos, bool p1){
 		GameObject newBlock = Instantiate (block);
-		if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
-			//Debug.Log ("Server Spawn");
-			NetworkServer.Spawn (newBlock);
-		}
+
+		newBlock.GetComponent<BlockData> ().blockSetup (xPos, yPos, p1, textures, spawnHeight, xOffset, yOffset, boardWidth);
 		//CmdSetBlock(newBlock, xPos, yPos, p1);
-		int randIndex = Random.Range (0, textures.Count);
+		/*int randIndex = Random.Range (0, textures.Count);
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
 		newBlock.GetComponent<BlockData> ().color = randIndex;
 		//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
 		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
+		Debug.Log (spawnPoint.x);
 		if (p1) {
 			spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
 			//Debug.Log ("P1 Block: " + spawnPoint.y);
@@ -138,9 +137,14 @@ public class BoutManager : MonoBehaviour {
 			spawnPoint.x -= (xOffset*Mathf.Abs(spawnPoint.x));
 		}
 		newBlock.transform.position = spawnPoint;
+		Debug.Log (spawnPoint);
 		newBlock.GetComponent<BlockData> ().gridCoord = new Vector2 (xPos, yPos);
-		newBlock.GetComponent<BlockData> ().playerOne = p1;
+		newBlock.GetComponent<BlockData> ().playerOne = p1;*/
 		blocks [yPos, xPos] = newBlock;
+		if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
+			//Debug.Log ("Server Spawn");
+			NetworkServer.Spawn (newBlock);
+		}
 	}
 
 	/*[Command]

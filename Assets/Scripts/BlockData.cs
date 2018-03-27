@@ -10,7 +10,9 @@ public class BlockData : NetworkBehaviour{
 
 	public int color;
 	//public Vector3 position;
+	[SyncVar]
 	public Vector2 gridCoord;
+	[SyncVar]
 	public Vector3 handPos;
 	public GameObject handM;
 
@@ -34,9 +36,9 @@ public class BlockData : NetworkBehaviour{
 		boardWidth = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().boardWidth;
 		xOffset = GameObject.Find ("BoutManager").GetComponent<BoutManager> ().xOffset;
 		//bar = GameObject.FindGameObjectWithTag ("Finish");
-		if (!playerOne) {
+		/*if (!playerOne) {
 			this.GetComponent<ConstantForce> ().force *= -1f; 
-		}
+		}*/
 		scene = SceneManager.GetActiveScene ();
 	}
 
@@ -45,11 +47,77 @@ public class BlockData : NetworkBehaviour{
 			//Destroy (this.gameObject);
 		}
 		if (bar == null && GameObject.FindGameObjectWithTag("Finish") != null) {
-			Debug.Log ("Set Bar");
+			//Debug.Log ("Set Bar");
 			bar = GameObject.FindGameObjectWithTag ("Finish");
 		}
 
 		//onMouseDown ();
+	}
+
+	public void blockSetup(int xPos, int yPos, bool p1, List<Material> textures, float spawnHeight, float xOffset, float yOffset, float bw){
+		if (string.Equals (scene.name, "Network")) {
+			CmdBlockSetup (xPos, yPos, p1, spawnHeight, xOffset, yOffset, bw);
+		} else {
+			boardWidth = bw;
+			int randIndex = Random.Range (0, textures.Count);
+			this.GetComponent<Renderer> ().material = textures [randIndex];
+			color = randIndex;
+			//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
+			Vector3 spawnPoint = new Vector3 (xPos - (boardWidth / 2f), 0f, 0f);
+			Debug.Log (xPos);
+			if (p1) {
+				spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
+				//Debug.Log ("P1 Block: " + spawnPoint.y);
+			} else {
+				spawnPoint.y = (yPos - spawnHeight) - ((31 - yPos) * yOffset);
+				//Debug.Log ("P2 Block: " + spawnPoint.y);
+			}
+			//Debug.Log (spawnPoint.y);
+			if (spawnPoint.x > 0f) {
+				spawnPoint.x += (xOffset * spawnPoint.x);
+			} else if (spawnPoint.x < 0f) {
+				spawnPoint.x -= (xOffset * Mathf.Abs (spawnPoint.x));
+			}
+			this.transform.position = spawnPoint;
+			//Debug.Log (spawnPoint);
+			gridCoord = new Vector2 (xPos, yPos);
+			playerOne = p1;
+			if (!playerOne) {
+				this.GetComponent<ConstantForce> ().force *= -1f; 
+			}
+		}
+	}
+
+	[Command]
+	public void CmdBlockSetup(int xPos, int yPos, bool p1, float spawnHeight, float xOffset, float yOffset, float bw){
+		boardWidth = bw;
+		//int randIndex = Random.Range (0, textures.Count);
+		//this.GetComponent<Renderer> ().material = textures[randIndex];
+		//color = randIndex;
+		//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
+		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
+		Debug.Log (xPos);
+		if (p1) {
+			spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
+			//Debug.Log ("P1 Block: " + spawnPoint.y);
+		} else {
+			spawnPoint.y = (yPos - spawnHeight) - ((31 - yPos) * yOffset);
+			//Debug.Log ("P2 Block: " + spawnPoint.y);
+		}
+		//Debug.Log (spawnPoint.y);
+		if (spawnPoint.x > 0f) {
+			spawnPoint.x += (xOffset*spawnPoint.x);
+		} else if (spawnPoint.x < 0f) {
+			spawnPoint.x -= (xOffset*Mathf.Abs(spawnPoint.x));
+		}
+		this.transform.position = spawnPoint;
+		//Debug.Log (spawnPoint);
+		gridCoord = new Vector2 (xPos, yPos);
+		playerOne = p1;
+		if (!playerOne) {
+			this.GetComponent<ConstantForce> ().force *= -1f; 
+		}
+		Debug.Log (this.GetComponent<ConstantForce> ().force.y);
 	}
 
 	/*Controls what happens when dragging a block. If the item being dragged is "inHand", it
@@ -60,6 +128,7 @@ public class BlockData : NetworkBehaviour{
 	SnapPosition and sets it as the x value for the grid coord. which dictates where in the grid the
 	block will be placed, if the block is dropped. It also creates a ySnap that snaps the block to
 	the bar when it is close to it.*/
+
 	void OnMouseDrag()
 	{
 		if (string.Equals (scene.name, "Local2Player")) {
@@ -82,15 +151,6 @@ public class BlockData : NetworkBehaviour{
 				this.transform.position = handPos;
 			}
 		}
-		/*if (this.tag == "inHand" && string.Equals(scene.name, "Local2Player") && 
-			(playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)) 
-			//&& (string.Equals(scene.name, "AIScene") && !playerOne))
-			{
-			dragBlock (Input.mousePosition, true);
-		} else if(this.tag == "inHand") {
-			this.transform.position = handPos;
-		}*/
-		//dragBlock (new Vector2(0f, 10f));
 	}
 
 	public void dragBlock(Vector2 inputPos, bool human){
