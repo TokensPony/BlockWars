@@ -167,6 +167,8 @@ MonoBehaviour:
   barOffset: 0
   marked: 0
   playerOne: 1
+  cForce: {x: 0, y: -9, z: 0}
+  cForceActive: 1
 --- !u!114 &114989503248682336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,4 +200,4 @@ MonoBehaviour:
     i14: 47
     i15: 124
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0

@@ -58,8 +58,11 @@
      <Compile Include="Assets\Scripts\CameraControls.cs" />
      <Compile Include="Assets\Scripts\HandManager.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
-     <Compile Include="Assets\Scripts\NetworkControls.cs" />
-     <Compile Include="Assets\Scripts\NetworkPlayer.cs" />
+     <Compile Include="Assets\Scripts\Network Scripts\BarSpawner.cs" />
+     <Compile Include="Assets\Scripts\Network Scripts\NetBarScript.cs" />
+     <Compile Include="Assets\Scripts\Network Scripts\NetBlockData.cs" />
+     <Compile Include="Assets\Scripts\Network Scripts\NetworkControls.cs" />
+     <Compile Include="Assets\Scripts\Network Scripts\NetworkPlayer.cs" />
      <Compile Include="Assets\Scripts\Power Ups\BombPowerUp.cs" />
      <Compile Include="Assets\Scripts\Power Ups\FreezePowerUp.cs" />
      <Compile Include="Assets\Scripts\Power Ups\PowerUp.cs" />

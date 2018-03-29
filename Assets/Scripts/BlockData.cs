@@ -28,7 +28,13 @@ public class BlockData : NetworkBehaviour{
 	public float barOffset;
 
 	public bool marked;
+	[SyncVar]
 	public bool playerOne;
+
+	[SyncVar]
+	public Vector3 cForce;
+	[SyncVar]
+	public bool cForceActive;
 
 	public void Start(){
 		manager = GameObject.Find("BoutManager").GetComponent<BoutManager>();
@@ -39,7 +45,9 @@ public class BlockData : NetworkBehaviour{
 		/*if (!playerOne) {
 			this.GetComponent<ConstantForce> ().force *= -1f; 
 		}*/
+
 		scene = SceneManager.GetActiveScene ();
+		//Debug.Log (scene);
 	}
 
 	void Update(){
@@ -51,20 +59,27 @@ public class BlockData : NetworkBehaviour{
 			bar = GameObject.FindGameObjectWithTag ("Finish");
 		}
 
+		//this.GetComponent<ConstantForce> ().enabled = cForceActive;
+		//this.GetComponent<ConstantForce> ().force = cForce;
 		//onMouseDown ();
+
 	}
 
 	public void blockSetup(int xPos, int yPos, bool p1, List<Material> textures, float spawnHeight, float xOffset, float yOffset, float bw){
-		if (string.Equals (scene.name, "Network")) {
+		//Debug.Log (scene.name);
+		/*if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
+			Debug.Log ("In Network Scene");
+			//this.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
 			CmdBlockSetup (xPos, yPos, p1, spawnHeight, xOffset, yOffset, bw);
-		} else {
+		} else {*/
+			//Debug.Log ("Not in Network Scene");
 			boardWidth = bw;
 			int randIndex = Random.Range (0, textures.Count);
 			this.GetComponent<Renderer> ().material = textures [randIndex];
 			color = randIndex;
 			//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
 			Vector3 spawnPoint = new Vector3 (xPos - (boardWidth / 2f), 0f, 0f);
-			Debug.Log (xPos);
+			//Debug.Log (xPos);
 			if (p1) {
 				spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
 				//Debug.Log ("P1 Block: " + spawnPoint.y);
@@ -83,9 +98,10 @@ public class BlockData : NetworkBehaviour{
 			gridCoord = new Vector2 (xPos, yPos);
 			playerOne = p1;
 			if (!playerOne) {
-				this.GetComponent<ConstantForce> ().force *= -1f; 
+				this.GetComponent<ConstantForce> ().force *= -1f;
+				//cForce *= -1f;
 			}
-		}
+		//}
 	}
 
 	[Command]
@@ -120,6 +136,11 @@ public class BlockData : NetworkBehaviour{
 		Debug.Log (this.GetComponent<ConstantForce> ().force.y);
 	}
 
+	[Command]
+	public void CmdSetAuthority(){
+		//NetworkServer.AddPlayerForConnection(this.GetComponent<NetworkIdentity>().connectionToClient, this.gameObject, 0);
+	}
+
 	/*Controls what happens when dragging a block. If the item being dragged is "inHand", it
 	calculates the move position based on worldToScreenPoint Coords from the camera. It then
 	creates a "SnapPosition for the x axis, which causes the block to "Snap" into an x position
@@ -131,6 +152,7 @@ public class BlockData : NetworkBehaviour{
 
 	void OnMouseDrag()
 	{
+		//Debug.Log ("Trying to Drag");
 		if (string.Equals (scene.name, "Local2Player")) {
 			if (this.tag == "inHand" && (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)) {
 				dragBlock (Input.mousePosition, true);
@@ -143,8 +165,8 @@ public class BlockData : NetworkBehaviour{
 			} else if (this.tag == "inHand") {
 				this.transform.position = handPos;
 			}
-		} else if (string.Equals (scene.name, "Network") && string.Equals(transform.root.gameObject.name, "Player(Clone)")) {
-			//Debug.Log (transform.root.gameObject.name);
+		} else if (string.Equals (scene.name, "Network") /*&& string.Equals(transform.root.gameObject.name, "Player(Clone)")*/) {
+			Debug.Log ("Network Scene");
 			if (this.tag == "inHand" && (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)) {
 				dragBlock (Input.mousePosition, true);
 			} else if (this.tag == "inHand") {
@@ -188,6 +210,7 @@ public class BlockData : NetworkBehaviour{
 			if ((this.transform.position.y >= .5f && playerOne) || this.transform.position.y <= 31.5f && !playerOne) {
 				this.tag = "Block";
 				this.GetComponent<ConstantForce> ().enabled = true;
+				//cForceActive = true;
 				manager.addBlock (this.gameObject);
 				manager.collapseBoard ();
 				//this.GetComponent<Rigidbody> ().useGravity = true;

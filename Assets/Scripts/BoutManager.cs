@@ -143,35 +143,11 @@ public class BoutManager : MonoBehaviour {
 		blocks [yPos, xPos] = newBlock;
 		if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
 			//Debug.Log ("Server Spawn");
-			NetworkServer.Spawn (newBlock);
+			NetworkServer.Spawn(newBlock);
+			//NetworkServer.SpawnWithClientAuthority (newBlock, Network.connections[0]);
+			//newBlock.GetComponent<BlockData>().CmdNetworkSpawn();
 		}
 	}
-
-	/*[Command]
-	public void CmdSetBlock(GameObject newBlock, int xPos, int yPos, bool p1){
-		int randIndex = Random.Range (0, textures.Count);
-		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
-		newBlock.GetComponent<BlockData> ().color = randIndex;
-		//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
-		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
-		if (p1) {
-			spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
-			//Debug.Log ("P1 Block: " + spawnPoint.y);
-		} else {
-			spawnPoint.y = (yPos - spawnHeight) - ((31 - yPos) * yOffset);
-			//Debug.Log ("P2 Block: " + spawnPoint.y);
-		}
-		//Debug.Log (spawnPoint.y);
-		if (spawnPoint.x > 0f) {
-			spawnPoint.x += (xOffset*spawnPoint.x);
-		} else if (spawnPoint.x < 0f) {
-			spawnPoint.x -= (xOffset*Mathf.Abs(spawnPoint.x));
-		}
-		newBlock.transform.position = spawnPoint;
-		newBlock.GetComponent<BlockData> ().gridCoord = new Vector2 (xPos, yPos);
-		newBlock.GetComponent<BlockData> ().playerOne = p1;
-		blocks [yPos, xPos] = newBlock;
-	}*/
 
 	/*Populates the board by columns. It starts at the bottom of a column and randomly
 	generateds a number. if it's greater than .1f, then a block is spawned, then it moves
