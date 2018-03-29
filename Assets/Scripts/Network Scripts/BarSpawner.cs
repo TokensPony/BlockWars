@@ -18,8 +18,22 @@ public class BarSpawner : NetworkBehaviour {
 	}
 
 	public override void OnStartServer(){
+		StartCoroutine (waitForSecondPlayer());
+	}
+
+	IEnumerator waitForSecondPlayer(){
+		while(NetworkManager.singleton.numPlayers < 2){
+			
+			//Debug.Log (NetworkManager.singleton.numPlayers);
+			yield return null;
+		}
+		SpawnBar ();
+	}
+
+	void SpawnBar(){
 		var newBar = (GameObject)Instantiate (bar);
 		NetworkServer.Spawn (newBar);
+		//newBar.GetComponent<NetworkIdentity> ().AssignClientAuthority (Network.connections [0]);
 	}
 
 }

@@ -6,20 +6,29 @@ using UnityEngine.Networking;
 
 public class NetBarScript : NetworkBehaviour {
 
+	[SyncVar]
 	public Vector3 sVelocity;
+	[SyncVar]
 	public Vector3 fastVelocity;
+	[SyncVar]
 	public Vector3 finalVelocity;
 	//public Vector3 extraVelocity;
+	[SyncVar]
 	public Vector3 gForce;
 	public Vector3 maxHeight;
 	public Rigidbody rb;
+
+	[SyncVar]
 	public bool p1Turn;
+	[SyncVar]
 	public float incSpeed;
 
+	[SyncVar]
 	public bool onP1;
 	public GameObject gameOver;
-
+	[SyncVar]
 	public bool locked;
+	[SyncVar]
 	public bool waiting;
 
 	// Use this for initialization
@@ -49,6 +58,7 @@ public class NetBarScript : NetworkBehaviour {
 			rb.velocity = finalVelocity;
 		}
 		//Debug.Log (rb.velocity);
+		//rb.velocity = finalVelocity;
 	}
 
 	IEnumerator waitForBoost(bool p1){
@@ -83,12 +93,10 @@ public class NetBarScript : NetworkBehaviour {
 			temp.y *= 2f;
 		}*/
 		rb.velocity = finalVelocity;
-		GameObject.Find ("Main Camera").GetComponent<CameraControls> ().setCamera (!p1);
 		waiting = false;
 		lockHands (false);
 	}
-
-
+		
 	public void pushAway(float yForce, bool p1){
 		//rb = this.GetComponent<Rigidbody> ();
 		//rb.useGravity = true;
@@ -108,7 +116,7 @@ public class NetBarScript : NetworkBehaviour {
 			sVelocity.y = 0f;
 			//GameObject.FindGameObjectWithTag("BoutUI").SetActive (true);
 			//gameOver.transform.GetChild(0).gameObject.SetActive(true);
-			gameOver.SetActive (true);
+			//gameOver.SetActive (true);
 			locked = true;
 		} 
 	}

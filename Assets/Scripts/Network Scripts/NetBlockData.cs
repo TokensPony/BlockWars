@@ -48,7 +48,7 @@ public class NetBlockData : NetworkBehaviour{
 	}
 
 	void OnMouseDrag(){
-		if (this.tag == "inHand" || true /*&& (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)*/) {
+		if (this.tag == "inHand" /*&& (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)*/) {
 			dragBlock (Input.mousePosition, true);
 		} 
 	}
@@ -56,13 +56,13 @@ public class NetBlockData : NetworkBehaviour{
 	public void dragBlock(Vector2 inputPos, bool human){
 		if (true || !GameObject.FindGameObjectWithTag ("Finish").GetComponent<BarScript> ().locked && !handM.GetComponent<HandManager> ().handLocked) {
 			//THIS TRUE SHIT IS TEMPORARY
-			if (this.tag == "inHand" || true) {
+			if (this.tag == "inHand") {
 				//Debug.Log (inputPos.x + ", " + inputPos.y);
 				float distance_to_screen = Camera.main.WorldToScreenPoint (gameObject.transform.position).z;
 				Vector3 pos_move = (human)?Camera.main.ScreenToWorldPoint (new Vector3 (inputPos.x, inputPos.y, distance_to_screen)):new Vector3 (inputPos.x, inputPos.y, distance_to_screen);
 				float snapPosition = ((pos_move.x - Mathf.Floor (pos_move.x)) > .5f) ? Mathf.Ceil (pos_move.x) : Mathf.Floor (pos_move.x);
 				snapPosition = (Mathf.Abs (snapPosition) > boardWidth / 2) ? transform.position.x : snapPosition;
-				Debug.Log (snapPosition);
+				//Debug.Log (snapPosition);
 				this.gridCoord = new Vector2 (Mathf.Floor (Mathf.Abs (snapPosition + (boardWidth / 2))), 10);
 				//this.gridCoord = new Vector2 (snapPosition + (boardWidth/2), 10);
 				//Debug.Log (this.gridCoord.x);
@@ -82,18 +82,18 @@ public class NetBlockData : NetworkBehaviour{
 
 	public void release(){
 		transform.position = new Vector3 (transform.position.x, transform.position.y, 0f);
-		if(this.tag == "inHand" || true){
+		if(this.tag == "inHand"){
 			if ((this.transform.position.y >= .5f && playerOne) || this.transform.position.y <= 31.5f && !playerOne) {
 				this.tag = "Block";
 				this.GetComponent<ConstantForce> ().enabled = true;
 				//cForceActive = true;
-				////manager.addBlock (this.gameObject);
-				////manager.collapseBoard ();
+				this.transform.root.gameObject.GetComponent<NetworkPlayer>().addBlock (this.gameObject);
+				this.transform.root.gameObject.GetComponent<NetworkPlayer>().collapseBoard ();
 				//this.GetComponent<Rigidbody> ().useGravity = true;
 
 				this.GetComponent<Rigidbody> ().velocity = (playerOne)? new Vector3 (0, -1, 0) : new Vector3 (0, 1, 0);
 				marked = true;
-				//StartCoroutine (waitToCollide ());
+				StartCoroutine (waitToCollide ());
 			} else {
 				this.transform.position = handPos;
 			}
@@ -104,6 +104,24 @@ public class NetBlockData : NetworkBehaviour{
 		release ();
 	}
 
+	/*Coroutine to delay the activation of the match checking until after
+	 * the block has fallen and hit the ground.*/
+	IEnumerator waitToCollide(){
+		//handM.GetComponent<HandManager> ().handLocked = true;
+		if (playerOne) {
+			while (this.GetComponent<Rigidbody> ().velocity.y < 0f) {
+				yield return null;
+			}
+		} else {
+			while (this.GetComponent<Rigidbody> ().velocity.y > 0f) {
+				yield return null;
+			}
+		}
+		//handM.GetComponent<HandManager> ().handLocked = false;
+		this.transform.root.gameObject.GetComponent<NetworkPlayer>().isMarked();
+		//yield return null;
+	}
+
 	void OnMouseDown(){
 		RaycastHit hitInfo = new RaycastHit();
 		bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
@@ -112,7 +130,8 @@ public class NetBlockData : NetworkBehaviour{
 			GameObject target = hitInfo.transform.gameObject;
 			Debug.Log("Hit " + target.name);
 			if (hitInfo.transform.gameObject.tag == "Block"){
-				
+				marked = true;
+				this.transform.parent.gameObject.GetComponent<NetworkPlayer> ().isMarked ();
 			} else {
 				//Debug.Log ("nopz");
 			}

@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Network Scripts\BarSpawner.cs" />
      <Compile Include="Assets\Scripts\Network Scripts\NetBarScript.cs" />
      <Compile Include="Assets\Scripts\Network Scripts\NetBlockData.cs" />
+     <Compile Include="Assets\Scripts\Network Scripts\NetHandManager.cs" />
      <Compile Include="Assets\Scripts\Network Scripts\NetworkControls.cs" />
      <Compile Include="Assets\Scripts\Network Scripts\NetworkPlayer.cs" />
      <Compile Include="Assets\Scripts\Power Ups\BombPowerUp.cs" />
