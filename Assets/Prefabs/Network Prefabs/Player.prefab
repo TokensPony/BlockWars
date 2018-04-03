@@ -86,9 +86,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1858893383329118, guid: 5cb4264e8ffe86e48b9b24a2d713ed8a, type: 2}
   player1: 0
+  hand: []
+  handLocked: 0
   bar: {fileID: 0}
-  handManager: {fileID: 1646348691867720, guid: 9eb71446e711fe447b7a6ca544e97be6,
-    type: 2}
   boutUI: {fileID: 0}
   boardWidth: 8
   xOffset: 0.15

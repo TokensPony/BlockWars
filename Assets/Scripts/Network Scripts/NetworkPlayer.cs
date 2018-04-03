@@ -11,8 +11,12 @@ public class NetworkPlayer : NetworkBehaviour {
 	[SyncVar]
 	public bool player1;
 
+	//Hand variables
+	public List<GameObject> hand;// = new List<GameObject>(5);
+	public bool handLocked;
+
 	public GameObject bar;
-	public GameObject handManager;
+	//public GameObject handManager;
 
 	public GameObject boutUI;
 
@@ -37,47 +41,86 @@ public class NetworkPlayer : NetworkBehaviour {
 		if (!isLocalPlayer) {
 			return;
 		}
+		//hand = new List<GameObject>(5);
 		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
 		player1 = (players.GetLength (0) == 1) ? true : false;
 		GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraControls> ().setCamera (player1);
 
 		turnCount = 0;
+		StartCoroutine (waitForSecondPlayer ());
+	}
+
+	IEnumerator waitForSecondPlayer(){
+		while(NetworkManager.singleton.numPlayers < 2 && NetworkManager.singleton.numPlayers != 0){
+
+			//Debug.Log (NetworkManager.singleton.numPlayers);
+			yield return null;
+		}
+		/*if (player1) {
+			bar = Instantiate (bar);
+			NetworkServer.Spawn (bar);
+		} else {
+			//Debug.Log
+			bar = GameObject.FindGameObjectWithTag ("Finish");
+		}*/
+		//bar = GameObject.FindGameObjectWithTag ("Finish");
+		//Debug.Log ("Found Second Player");
 		populatePile ();
-		//CmdCreateHand ();
+		CmdCreateHand ();
 		//clearStart ();
 		printGrid ();
+	}
 
+	// Update is called once per frame
+	void Update () {
+		if (!isLocalPlayer) {
+			return;
+		}
+
+		if (hand.Count != 0) {
+			for (int x = 0; x < 5; x++) {
+				if (hand[x] != null && hand [x].tag == "Block") {
+					hand [x] = null;
+					drawBlock (x);
+				}
+			}
+		}
+	}
+
+	public void drawBlock(int x){
+		CmdCreateBlock (0,0, player1, true, x);
 	}
 
 	[Command]
 	public void CmdCreateHand(){
-		handManager.GetComponent<NetHandManager> ().p1 = player1;
-		handManager = Instantiate (handManager);
-		handManager.transform.parent = this.gameObject.transform;
-		//handManager.GetComponent<NetHandManager> ().populateHand ();
-		NetworkServer.Spawn (handManager);
+		for (int x = 0; x < 5; x++){
+			CmdCreateBlock (0, 0, player1, true, x);
+		}
 	}
 
 	[Command]
-	public void CmdCreateBlock(int xPos, int yPos, bool p1){
+	public void CmdCreateBlock(int xPos, int yPos, bool p1, bool drawnBlock, int hPosX){
 		int randIndex = Random.Range (0, textures.Count);
-		//newBlock.GetComponent<Renderer> ().material = textures[randIndex];
-		//newBlock.GetComponent<BlockData> ().color = randIndex;
-		//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
-		Vector3 spawnPoint = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
+		Vector3 spawnPoint;// = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
 		//Debug.Log (spawnPoint.x);
-		if (p1) {
-			spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
-			//Debug.Log ("P1 Block: " + spawnPoint.y);
+		if (!drawnBlock) {
+			spawnPoint = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
+			if (p1) {
+				spawnPoint.y = yPos + spawnHeight + (yPos * yOffset);
+				//Debug.Log ("P1 Block: " + spawnPoint.y);
+			} else {
+				spawnPoint.y = (yPos - spawnHeight) - ((31 - yPos) * yOffset);
+				//Debug.Log ("P2 Block: " + spawnPoint.y);
+			}
+			//Debug.Log (spawnPoint.y);
+			if (spawnPoint.x > 0f) {
+				spawnPoint.x += (xOffset * spawnPoint.x);
+			} else if (spawnPoint.x < 0f) {
+				spawnPoint.x -= (xOffset * Mathf.Abs (spawnPoint.x));
+			}
 		} else {
-			spawnPoint.y = (yPos - spawnHeight) - ((31 - yPos) * yOffset);
-			//Debug.Log ("P2 Block: " + spawnPoint.y);
-		}
-		//Debug.Log (spawnPoint.y);
-		if (spawnPoint.x > 0f) {
-			spawnPoint.x += (xOffset*spawnPoint.x);
-		} else if (spawnPoint.x < 0f) {
-			spawnPoint.x -= (xOffset*Mathf.Abs(spawnPoint.x));
+			float tempHpos = hPosX + (Mathf.Abs (hPosX * .15f));
+			spawnPoint = (p1)? new Vector3 (tempHpos, -1f, 0) : new Vector3 (-tempHpos, 32f, 0);
 		}
 		//newBlock.transform.position = spawnPoint;
 		//Debug.Log (spawnPoint);
@@ -85,28 +128,50 @@ public class NetworkPlayer : NetworkBehaviour {
 			block,
 			spawnPoint,
 			block.transform.rotation);
+		newBlock.GetComponent<NetBlockData> ().handPos = (drawnBlock) ? new Vector2(spawnPoint.x, spawnPoint.y) : Vector2.zero;
 		newBlock.GetComponent<NetBlockData> ().playerOne = player1;
-		newBlock.GetComponent<NetBlockData> ().gridCoord = new Vector2 (xPos, yPos);
+		newBlock.GetComponent<NetBlockData> ().gridCoord = (!drawnBlock)? new Vector2 (xPos, yPos): Vector2.zero;
 		newBlock.GetComponent<ConstantForce>().force *= (player1) ? 1f : -1f;
+		newBlock.tag = (drawnBlock) ? "inHand" : "Block";
+		newBlock.GetComponent<ConstantForce> ().enabled = !drawnBlock;
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
 		newBlock.transform.parent = this.gameObject.transform;
 		Debug.Log (yPos + ", " + xPos);
-		blocks [yPos, xPos] = newBlock;
+		if (!drawnBlock) {
+			blocks [yPos, xPos] = newBlock;
+		} else {
+			if (hand.Count < 5) {
+				hand.Add (newBlock);
+			} else {
+				hand [hPosX] = newBlock;
+			}
+		}
 		NetworkServer.Spawn (newBlock);
 		RpcCreateBlock (newBlock, newBlock.transform.parent.gameObject,
 			newBlock.transform.localPosition, newBlock.transform.localRotation,
-			newBlock.GetComponent<ConstantForce>().force, randIndex, xPos, yPos);
+			newBlock.GetComponent<ConstantForce>().force, randIndex, xPos, yPos, drawnBlock, hPosX);
 	}
 
 	[ClientRpc]
-	public void RpcCreateBlock(GameObject nb, GameObject parent, Vector3 localPos, Quaternion r, Vector3 cForce, int matIndex, int xPos, int yPos){
+	public void RpcCreateBlock(GameObject nb, GameObject parent, Vector3 localPos, Quaternion r, Vector3 cForce, int matIndex, int xPos, int yPos, bool drawnBlock, int hPosX){
+		nb.GetComponent<NetBlockData> ().handPos = (drawnBlock) ? new Vector2(localPos.x, localPos.y): Vector2.zero;
 		nb.transform.parent = parent.transform;
 		nb.transform.localPosition = localPos;
 		nb.transform.rotation = r;
 		nb.GetComponent<ConstantForce>().force = cForce;
+		nb.GetComponent<ConstantForce> ().enabled = !drawnBlock;
+		nb.tag = (drawnBlock) ? "inHand" : "Block";
 		nb.GetComponent<NetBlockData> ().playerOne = player1;
 		nb.GetComponent<Renderer> ().material = textures[matIndex];
-		blocks [yPos, xPos] = nb;
+		if (!drawnBlock) {
+			blocks [yPos, xPos] = nb;
+		} else {
+			if (hand.Count < 5) {
+				hand.Add (nb);
+			} else {
+				hand [hPosX] = nb;
+			}
+		}
 	}
 
 	public void addBlock(GameObject dropBlock){
@@ -132,7 +197,7 @@ public class NetworkPlayer : NetworkBehaviour {
 					) {
 						dropBlock.transform.position = blocks [y + 1, xPos].transform.position - new Vector3 (0, 1.1f, 0);
 					}
-					dropBlock.GetComponent<BlockData> ().gridCoord.y = y;
+					dropBlock.GetComponent<NetBlockData> ().gridCoord.y = y;
 					blocks [y, xPos] = dropBlock;
 					break;
 				}
@@ -146,7 +211,7 @@ public class NetworkPlayer : NetworkBehaviour {
 				for (int y = 0; y < maxPile; y++) {
 					//.25f
 					if (Random.value > .1f) {
-						CmdCreateBlock (x, y, player1);
+						CmdCreateBlock (x, y, player1, false, 0);
 						//StartCoroutine (waiting (x, y));
 					} else {
 						break;
@@ -157,7 +222,7 @@ public class NetworkPlayer : NetworkBehaviour {
 			for (int x = 0; x < blocks.GetLength (1); x++) {
 				for (int y = blocks.GetLength (0) - 1; y >= blocks.GetLength (0) - maxPile; y--) {
 					if (Random.value > .1f) {
-						CmdCreateBlock (x, y, false);
+						CmdCreateBlock (x, y, false, false, 0);
 						//StartCoroutine (waiting (x, y));
 					} else {
 						break;
@@ -227,6 +292,22 @@ public class NetworkPlayer : NetworkBehaviour {
 		}
 	}
 
+	[Command]
+	void CmdSetAuthority (NetworkIdentity grabID, NetworkIdentity playerID){
+		grabID.AssignClientAuthority (playerID.connectionToClient);
+	}
+
+	[Command]
+	void CmdRemoveAuthority (NetworkIdentity grabID, NetworkIdentity playerID){
+		grabID.RemoveClientAuthority (playerID.connectionToClient);
+	}
+
+	[Command]
+	void CmdPush(float forceApplied, bool player1){
+		bar.GetComponent<NetBarScript> ().pushAway (forceApplied, player1);
+	}
+
+
 	public void removeMarked(bool inGame){
 		int tempColor = 0;
 		for (int x = 0; x < blocks.GetLength (1); x++) {
@@ -243,9 +324,13 @@ public class NetworkPlayer : NetworkBehaviour {
 			Debug.Log ("Boosted: " + (minForce + (boostCount * boostBase)));
 			float forceApplied = minForce + (boostCount * boostBase);
 			forceApplied *= (player1) ? 1f : -1f;
-			bar = GameObject.FindGameObjectWithTag ("Finish");
+			//bar = GameObject.FindGameObjectWithTag ("Finish");
+			//bar = GameObject.Find("NetBar(Clone)");
+			//CmdSetAuthority (bar.GetComponent<NetworkIdentity> (), this.GetComponent<NetworkIdentity> ());
 			Debug.Log ("PUSHED");
-			bar.GetComponent<NetBarScript> ().pushAway (forceApplied, player1);
+			//bar.GetComponent<NetBarScript> ().pushAway (forceApplied, player1);
+			CmdPush(forceApplied, player1);
+			//CmdRemoveAuthority (bar.GetComponent<NetworkIdentity> (), this.GetComponent<NetworkIdentity> ());
 			//GameObject.Find ("PowerUpManager").GetComponent<PowerUpManager> ().addPowerUp (tempColor);
 			GameObject[] managers;
 			managers = GameObject.FindGameObjectsWithTag ("PowerUpManager");
@@ -404,13 +489,13 @@ public class NetworkPlayer : NetworkBehaviour {
 			if (player1) {
 				Destroy (blocks [0, x]);
 				blocks [0, x] = null;
-				CmdCreateBlock (x, 0, true);
+				CmdCreateBlock (x, 0, true, false, 0);
 			} else {
 				Destroy (blocks [31, x]);
 				blocks [31, x] = null;
 				//Destroy (blocks [31, x]);
 				//blocks [31, x] = null;
-				CmdCreateBlock (x, 31, false);
+				CmdCreateBlock (x, 31, false, false, 0);
 			}
 		}
 		printGrid ();
@@ -432,8 +517,5 @@ public class NetworkPlayer : NetworkBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

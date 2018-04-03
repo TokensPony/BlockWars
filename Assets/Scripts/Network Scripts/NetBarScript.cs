@@ -44,7 +44,14 @@ public class NetBarScript : NetworkBehaviour {
 		fastVelocity = sVelocity * 1.5f;
 		waiting = false;
 		onP1 = true;
+		setSelf ();
+	}
 
+	public void setSelf(){
+		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		foreach (GameObject player in players) {
+			player.GetComponent<NetworkPlayer> ().bar = this.gameObject;
+		}
 	}
 
 	// Update is called once per frame
