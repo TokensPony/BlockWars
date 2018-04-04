@@ -24,6 +24,7 @@ public class BlockData : NetworkBehaviour{
 	public float boardWidth;
 	private float xOffset;
 	private float offset = .15f;
+	public float dragOffset;
 
 	public float barOffset;
 
@@ -192,9 +193,9 @@ public class BlockData : NetworkBehaviour{
 				}
 				float ySnap = 0f;
 				if (playerOne) { 
-					ySnap = (pos_move.y > bar.transform.position.y - 1f) ? bar.transform.position.y - 1f : pos_move.y;
+					ySnap = (pos_move.y + dragOffset > bar.transform.position.y - 1f) ? bar.transform.position.y - 1f : pos_move.y + dragOffset;
 				} else {
-					ySnap = (pos_move.y < bar.transform.position.y + 1f) ? bar.transform.position.y + 1f : pos_move.y;
+					ySnap = (pos_move.y - dragOffset < bar.transform.position.y + 1f) ? bar.transform.position.y + 1f : pos_move.y - dragOffset;
 				}
 				transform.position = new Vector3 (snapPosition, ySnap, -2f);
 			}

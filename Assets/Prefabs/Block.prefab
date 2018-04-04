@@ -164,6 +164,7 @@ MonoBehaviour:
   handM: {fileID: 0}
   manager: {fileID: 0}
   boardWidth: 0
+  dragOffset: 0.8
   barOffset: 0
   marked: 0
   playerOne: 1

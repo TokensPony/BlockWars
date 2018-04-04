@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour {
 
 	public GameObject levelSelect;
+	public GameObject loading;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,7 @@ public class MainMenu : MonoBehaviour {
 	public void startGame(int input){
 		switch (input) {
 		case 0:
+			loading.gameObject.SetActive (true);
 			SceneManager.LoadScene ("Local2Player");
 			break;
 		default:
@@ -30,6 +32,7 @@ public class MainMenu : MonoBehaviour {
 
 	public void startAIGame(int diff){
 		PlayerPrefs.SetInt ("diffLev", diff);
+		loading.gameObject.SetActive (true);
 		SceneManager.LoadScene("AIScene");
 	}
 

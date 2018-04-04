@@ -1,15 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Network Scripts\NetworkPlayer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PyroParticles\Prefab\Script\FireBaseScript.cs">
     <Files>
       <File FileName="Assets\Scripts\BoutManager.cs" Line="218" Column="3" />
-      <File FileName="Assets\Scripts\BlockData.cs" Line="229" Column="14" />
-      <File FileName="Assets\Scripts\Network Scripts\BarSpawner.cs" Line="33" Column="18" />
-      <File FileName="..\Network Play Test\Assets\Scripts\PlayerController.cs" Line="51" Column="3" />
-      <File FileName="Assets\Scripts\Network Scripts\NetworkPlayer.cs" Line="247" Column="25" />
-      <File FileName="Assets\Scripts\Network Scripts\NetBarScript.cs" Line="57" Column="17" NotebookId="1" />
-      <File FileName="Assets\Scripts\Network Scripts\NetBlockData.cs" Line="103" Column="19" NotebookId="1" />
-      <File FileName="Assets\Scripts\Network Scripts\NetHandManager.cs" Line="38" Column="2" NotebookId="1" />
+      <File FileName="Assets\Scripts\Network Scripts\BarSpawner.cs" Line="1" Column="1" />
+      <File FileName="..\Network Play Test\Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Network Scripts\NetworkPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BlockData.cs" Line="206" Column="58" />
+      <File FileName="Assets\Scripts\MainMenu.cs" Line="25" Column="40" />
+      <File FileName="Assets\PyroParticles\Prefab\Script\FireBaseScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Network Scripts\NetBarScript.cs" Line="52" Column="39" NotebookId="1" />
+      <File FileName="Assets\Scripts\Network Scripts\NetBlockData.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\Network Scripts\NetHandManager.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\HandManager.cs" Line="1" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
