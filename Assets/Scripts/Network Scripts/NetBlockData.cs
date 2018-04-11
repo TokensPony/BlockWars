@@ -122,6 +122,30 @@ public class NetBlockData : NetworkBehaviour{
 		//yield return null;
 	}
 
+	/*Slow down velocity upon hitting a block*/
+	void OnCollisionEnter(Collision collision){
+		if(collision.gameObject.tag == "Block" || collision.gameObject.tag == "Floor"){
+			//Debug.Log ("Hit");
+			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			if (collision.gameObject.tag == "Block") {
+				collision.gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			}
+		}
+		if (collision.gameObject == bar) {
+			Debug.Log ("Bar Hit");
+		}
+	}
+
+	void OnCollisionExit(Collision collision){
+		if(collision.gameObject.tag == "Block" || collision.gameObject.tag == "Floor"){
+			//Debug.Log ("Hit");
+			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			if (collision.gameObject.tag == "Block") {
+				collision.gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			}
+		}
+	}
+
 	void OnMouseDown(){
 		RaycastHit hitInfo = new RaycastHit();
 		bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);

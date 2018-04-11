@@ -25,7 +25,8 @@ public class BoutManager : MonoBehaviour {
 	public float boostBase;
 	public int maxPile;
 
-	public List<Material> textures;
+	public List<Material> hackerTextures;
+	public List<Material> securityTextures;
 	public List<string> colorNames;
 
 	private int matchCount;
@@ -53,7 +54,7 @@ public class BoutManager : MonoBehaviour {
 			Debug.Log ("Server Spawn");
 			NetworkServer.Spawn (bar);
 		}
-		ai = GameObject.FindGameObjectWithTag ("AI");
+		//ai = GameObject.FindGameObjectWithTag ("AI");
 		GameObject hm = Instantiate (handManager);
 		hm.GetComponent<HandManager> ().p1 = true;
 		hm.GetComponent<HandManager> ().populateHand ();
@@ -66,6 +67,7 @@ public class BoutManager : MonoBehaviour {
 		printGrid ();
 		if (string.Equals (SceneManager.GetActiveScene ().name, "AIScene")) {
 			aiOpp = Instantiate (aiOpp);
+			ai = aiOpp;
 		}
 	}
 	
@@ -114,8 +116,8 @@ public class BoutManager : MonoBehaviour {
 
 	public void createBlock(int xPos, int yPos, bool p1){
 		GameObject newBlock = Instantiate (block);
-
-		newBlock.GetComponent<BlockData> ().blockSetup (xPos, yPos, p1, textures, spawnHeight, xOffset, yOffset, boardWidth);
+		List<Material> textures = (p1)? hackerTextures : securityTextures;
+		newBlock.GetComponent<BlockData> ().blockSetup (xPos, yPos, p1, textures, spawnHeight, xOffset, yOffset, boardWidth, colorNames);
 		//CmdSetBlock(newBlock, xPos, yPos, p1);
 		/*int randIndex = Random.Range (0, textures.Count);
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
@@ -229,7 +231,7 @@ public class BoutManager : MonoBehaviour {
 						//if (matchMade (blocks [y, x])) {
 						if (ai != null) {
 							Debug.Log ("Have AI");
-							ai.GetComponent<AIOpponent> ().setHMC (matchCount-1);
+							ai.GetComponent<AIOpponent> ().setHMC (matchCount-1, blocks[y,x].GetComponent<BlockData>().sColor);
 						}
 						boostCount = (matchCount > minMatch)?matchCount-minMatch:0;
 						removeMarked (true);
@@ -437,8 +439,9 @@ public class BoutManager : MonoBehaviour {
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				if (blocks [y, x] != null) {
-					int randIndex = Random.Range (0, textures.Count);
-					blocks[y,x].GetComponent<Renderer> ().material = textures[randIndex];
+					int randIndex = Random.Range (0, 5);
+					bool p1 = blocks [y, x].GetComponent<BlockData> ().playerOne;
+					blocks[y,x].GetComponent<Renderer> ().material = (p1)? hackerTextures[randIndex]: securityTextures[randIndex];
 					blocks[y,x].GetComponent<BlockData> ().color = randIndex;
 				}
 			}

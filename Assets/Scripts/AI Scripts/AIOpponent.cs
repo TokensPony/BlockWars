@@ -18,11 +18,13 @@ public class AIOpponent : MonoBehaviour {
 	public int diff;
 
 	public int humanMatchCount;
+	public string humanColorLast;
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log(PlayerPrefs.GetInt("diffLev"));
 		diff = PlayerPrefs.GetInt ("diffLev");
+		//diff = 1;
 		humanMatchCount = 0;
 		handObject = GameObject.FindGameObjectWithTag ("HandManager");
 		aihand = handObject.GetComponent<HandManager> ();
@@ -169,31 +171,36 @@ public class AIOpponent : MonoBehaviour {
 		int currentMax = 0;
 
 		for (int h = 0; h < aihand.hand.Count; h++) {
-			Material startMat = aihand.hand [h].GetComponent<Renderer> ().sharedMaterial;
-			for (int x = 0; x < board.GetLength (1); x++) {
-				for (int y = 0; y < board.GetLength (0) - 1; y++) {
-					aihand.hand [h].GetComponent<BlockData> ().gridCoord = new Vector2 (x, y);
-					if (board [y, x] == null && y != board.GetLength (1) - 1) {
-						if (((x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-							(y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-							(x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))){
-							//Debug.Log (y + "," + x + "," + startMat);
-							Debug.Log ("Match Count: " + matchCount);
-							matchMade (aihand.hand [h]);
-							boardMan.GetComponent<BoutManager> ().unmark ();
-							if (humanMatchCount == 0 || (matchCount > currentMax && matchCount <= humanMatchCount)) {
-								currentMax = matchCount;
-								tempHand = h;
-								tempPos = new Vector2 (x, y);
+			string tempSColor = aihand.hand [h].GetComponent<BlockData> ().sColor;
+			if (string.IsNullOrEmpty(humanColorLast) || string.Equals (tempSColor, humanColorLast)) {
+				Material startMat = aihand.hand [h].GetComponent<Renderer> ().sharedMaterial;
+				for (int x = 0; x < board.GetLength (1); x++) {
+					for (int y = 0; y < board.GetLength (0) - 1; y++) {
+						aihand.hand [h].GetComponent<BlockData> ().gridCoord = new Vector2 (x, y);
+						if (board [y, x] == null && y != board.GetLength (1) - 1) {
+							if (((x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat) ||
+							    (y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
+							    (x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
+								//Debug.Log (y + "," + x + "," + startMat);
+								Debug.Log ("Match Count: " + matchCount);
+								matchMade (aihand.hand [h]);
+								boardMan.GetComponent<BoutManager> ().unmark ();
+								if (humanMatchCount == 0 || (matchCount > currentMax && matchCount <= humanMatchCount)) {
+									currentMax = matchCount;
+									tempHand = h;
+									tempPos = new Vector2 (x, y);
+								}
+								matchCount = 0;
+								break;
+							} else {
+								matchCount = 0;
+								break;
 							}
-							matchCount = 0;
-							break;
-						} else {
-							matchCount = 0;
-							break;
 						}
 					}
 				}
+			} else {
+				Debug.Log ("MUST MATCH HOOMAN COLOR LOLNOPE");
 			}
 		}
 		if (currentMax > 0) {
@@ -265,7 +272,8 @@ public class AIOpponent : MonoBehaviour {
 		return found;
 	}
 
-	public void setHMC(int humanCount){
+	public void setHMC(int humanCount, string humanColor){
 		humanMatchCount = humanCount;
+		humanColorLast = humanColor;
 	}
 }

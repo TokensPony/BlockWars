@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 public class BlockData : NetworkBehaviour{
 
 	public int color;
+	public string sColor;
 	//public Vector3 position;
 	[SyncVar]
 	public Vector2 gridCoord;
@@ -66,7 +67,7 @@ public class BlockData : NetworkBehaviour{
 
 	}
 
-	public void blockSetup(int xPos, int yPos, bool p1, List<Material> textures, float spawnHeight, float xOffset, float yOffset, float bw){
+	public void blockSetup(int xPos, int yPos, bool p1, List<Material> textures, float spawnHeight, float xOffset, float yOffset, float bw, List<string> colorNames){
 		//Debug.Log (scene.name);
 		/*if (string.Equals (SceneManager.GetActiveScene().name, "Network")) {
 			Debug.Log ("In Network Scene");
@@ -78,6 +79,7 @@ public class BlockData : NetworkBehaviour{
 			int randIndex = Random.Range (0, textures.Count);
 			this.GetComponent<Renderer> ().material = textures [randIndex];
 			color = randIndex;
+		sColor = colorNames [randIndex];
 			//Vector3 spawnPoint = new Vector3 (Mathf.Floor (Random.value * boardWidth - (boardWidth/2f)), Mathf.Floor (Random.value * 10f) + spawnHeight++, 0f);
 			Vector3 spawnPoint = new Vector3 (xPos - (boardWidth / 2f), 0f, 0f);
 			//Debug.Log (xPos);
