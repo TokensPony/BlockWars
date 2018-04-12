@@ -47,6 +47,7 @@ public class NetworkPlayer : NetworkBehaviour {
 		GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraControls> ().setCamera (player1);
 
 		turnCount = 0;
+		Debug.Log (Network.player.ipAddress);
 		StartCoroutine (waitForSecondPlayer ());
 	}
 

@@ -93,7 +93,7 @@ MonoBehaviour:
   boardWidth: 8
   xOffset: 0.15
   yOffset: 0.15
-  minMatch: 3
+  minMatch: 5
   minForce: 4
   boostCount: 0
   boostBase: 1

@@ -153,12 +153,12 @@ public class NetBlockData : NetworkBehaviour{
 		{
 			GameObject target = hitInfo.transform.gameObject;
 			Debug.Log("Hit " + target.name);
-			if (hitInfo.transform.gameObject.tag == "Block"){
+			/*(if (hitInfo.transform.gameObject.tag == "Block"){
 				marked = true;
 				this.transform.parent.gameObject.GetComponent<NetworkPlayer> ().isMarked ();
 			} else {
 				//Debug.Log ("nopz");
-			}
+			}*/
 		} else {
 			//Debug.Log("No hit");
 		}

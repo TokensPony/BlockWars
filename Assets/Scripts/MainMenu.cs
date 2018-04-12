@@ -20,10 +20,14 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void startGame(int input){
+		loading.gameObject.SetActive (true);
 		switch (input) {
 		case 0:
-			loading.gameObject.SetActive (true);
+			
 			SceneManager.LoadScene ("Local2Player");
+			break;
+		case 1:
+			SceneManager.LoadScene ("Network");
 			break;
 		default:
 			break;

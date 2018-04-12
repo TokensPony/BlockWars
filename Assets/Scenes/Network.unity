@@ -396,9 +396,40 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114216606764965228, guid: 5849dcb322eadbc4cad8abf217b851d5,
+        type: 2}
+      propertyPath: m_UseSimulator
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5849dcb322eadbc4cad8abf217b851d5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &908716649 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1910736768631224, guid: 5849dcb322eadbc4cad8abf217b851d5,
+    type: 2}
+  m_PrefabInternal: {fileID: 900448151}
+--- !u!114 &908716650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 908716649}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1553936188, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BroadcastPort: 47777
+  m_BroadcastKey: 2222
+  m_BroadcastVersion: 1
+  m_BroadcastSubVersion: 1
+  m_BroadcastInterval: 1000
+  m_UseNetworkManager: 0
+  m_BroadcastData: HELLO
+  m_ShowGUI: 1
+  m_OffsetX: 0
+  m_OffsetY: 0
 --- !u!1 &936373635
 GameObject:
   m_ObjectHideFlags: 0

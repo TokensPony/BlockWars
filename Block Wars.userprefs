@@ -1,18 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BoutManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Network Scripts\NetBlockData.cs">
     <Files>
       <File FileName="Assets\Scripts\BoutManager.cs" Line="70" Column="15" />
       <File FileName="Assets\Scripts\Network Scripts\BarSpawner.cs" Line="1" Column="1" />
       <File FileName="..\Network Play Test\Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Network Scripts\NetworkPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BlockData.cs" Line="82" Column="35" />
+      <File FileName="Assets\Scripts\Network Scripts\NetworkPlayer.cs" Line="479" Column="43" />
+      <File FileName="Assets\Scripts\MainMenu.cs" Line="44" Column="13" />
+      <File FileName="Assets\Scripts\BlockData.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Network Scripts\NetBarScript.cs" Line="52" Column="39" NotebookId="1" />
-      <File FileName="Assets\Scripts\Network Scripts\NetBlockData.cs" Line="168" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\Network Scripts\NetBlockData.cs" Line="161" Column="7" NotebookId="1" />
       <File FileName="Assets\Scripts\Network Scripts\NetHandManager.cs" Line="1" Column="1" NotebookId="1" />
-      <File FileName="Assets\Scripts\HandManager.cs" Line="22" Column="5" NotebookId="1" />
-      <File FileName="Assets\Scripts\AI Scripts\AIOpponent.cs" Line="271" Column="31" NotebookId="1" />
+      <File FileName="Assets\Scripts\HandManager.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\AI Scripts\AIOpponent.cs" Line="1" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
