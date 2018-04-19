@@ -197,11 +197,13 @@ public class AIOpponent : MonoBehaviour
 							boardMan.GetComponent<BoutManager> ().unmark ();
 							if (humanMatchCount == 0 || matchCount < 4 ||(humanMatchCount == matchCount)) {
 								//Debug.Log ("Attempting");
-								if ((matchCount > currentMax && (matchCount <= humanMatchCount || humanMatchCount == 0) && !savedCC)) {
+								if ((matchCount > currentMax && (matchCount <= humanMatchCount || humanMatchCount == 0))) {
 									//Debug.Log ("Attempting2");
-									currentMax = matchCount;
-									tempHand = h;
-									tempPos = new Vector2 (x, y);
+									if (!savedCC || matchCount == humanMatchCount/*|| nextToCCProgressBlock(aihand[h])*/) {
+										currentMax = matchCount;
+										tempHand = h;
+										tempPos = new Vector2 (x, y);
+									}
 								}
 							} else {
 								Debug.Log ("Would make " + matchCount + " at hand block " + h + " at position: " + y + "," + x + "," + startMat);
@@ -224,10 +226,13 @@ public class AIOpponent : MonoBehaviour
 				}
 			}
 		}
-		if (currentMax > 0) {
+		if (currentMax > 0 || savedCC) {
 			Vector3 temp = (tempPos.y > 0f) ? board [(int)tempPos.y - 1, (int)tempPos.x].transform.position : new Vector3 (tempPos.x - 4f, 0f, 0f);
 			temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
 			temp.y += 2f;
+			if (savedCC) {
+				aihand.hand [tempHand].GetComponent<BlockData> ().ccInProgress = true;
+			}
 			aihand.hand [tempHand].GetComponent<BlockData> ().dragBlock (temp, false);
 			aihand.hand [tempHand].GetComponent<BlockData> ().release ();
 			return true;

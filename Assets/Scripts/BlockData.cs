@@ -17,6 +17,8 @@ public class BlockData : NetworkBehaviour{
 	public Vector3 handPos;
 	public GameObject handM;
 
+	public bool ccInProgress;
+
 	GameObject bar;
 
 	public BoutManager manager;

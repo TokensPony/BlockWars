@@ -7,12 +7,12 @@
       <File FileName="..\Network Play Test\Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Network Scripts\NetworkPlayer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\MainMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BlockData.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BlockData.cs" Line="20" Column="27" />
       <File FileName="Assets\Scripts\Network Scripts\NetBarScript.cs" Line="1" Column="1" NotebookId="1" />
       <File FileName="Assets\Scripts\Network Scripts\NetBlockData.cs" Line="1" Column="1" NotebookId="1" />
       <File FileName="Assets\Scripts\Network Scripts\NetHandManager.cs" Line="1" Column="1" NotebookId="1" />
       <File FileName="Assets\Scripts\HandManager.cs" Line="1" Column="1" NotebookId="1" />
-      <File FileName="Assets\Scripts\AI Scripts\AIOpponent.cs" Line="248" Column="33" NotebookId="1" />
+      <File FileName="Assets\Scripts\AI Scripts\AIOpponent.cs" Line="202" Column="92" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

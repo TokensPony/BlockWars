@@ -159,7 +159,7 @@ MonoBehaviour:
   m_MinSize: {x: 817, y: 492}
   m_MaxSize: {x: 22012, y: 14042}
   vertical: 0
-  controlID: 107
+  controlID: 86
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 108
+  controlID: 130
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -445,9 +445,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.14948958, y: 20.166933, z: -13.785588}
+    m_Target: {x: 1.507129, y: 19.11703, z: -17.60332}
     speed: 2
-    m_Value: {x: -0.14948958, y: 20.166933, z: -13.785588}
+    m_Value: {x: 1.507129, y: 19.11703, z: -17.60332}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -474,9 +474,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.104360186, y: 0.051606406, z: 0.0054211845, w: -0.9931849}
   m_Size:
-    m_Target: -1.4033496
+    m_Target: -8.104673
     speed: 2
-    m_Value: -1.4033496
+    m_Value: -8.104673
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -640,7 +640,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 521af8ff444bf8ff4ac5f8ffa20cf9ff6060f9fff27bf9ff88a4f9fffcc7f9ffc472faffc07dfbff5a08fcffaa1ffcff7888fdff068cfdff76a1fdffaa5dffffa6fbffff00000000
+    m_ExpandedIDs: 9496fdffd6e1ffffa6fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -701,7 +701,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/AI Scripts
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -737,7 +737,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 642}
+    scrollPos: {x: 0, y: 596}
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: 00000000c0060000482700005e2700007e270000842700009a270000a2270000b2270000cc270000d4270000dc270000ec2700000c280000542900005629000058290000
