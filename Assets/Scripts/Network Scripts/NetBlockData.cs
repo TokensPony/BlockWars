@@ -45,6 +45,7 @@ public class NetBlockData : NetworkBehaviour{
 			//Debug.Log ("Set Bar");
 			bar = GameObject.FindGameObjectWithTag ("Finish");
 		}
+		//this.GetComponent<ConstantForce> ().enabled = true;
 	}
 
 	void OnMouseDrag(){

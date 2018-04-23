@@ -308,6 +308,11 @@ public class NetworkPlayer : NetworkBehaviour {
 		bar.GetComponent<NetBarScript> ().pushAway (forceApplied, player1);
 	}
 
+	[Command]
+	void CmdDestroy(GameObject tBD){
+		NetworkServer.Destroy (tBD);
+	}
+
 
 	public void removeMarked(bool inGame){
 		int tempColor = 0;
@@ -315,7 +320,8 @@ public class NetworkPlayer : NetworkBehaviour {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				if (blocks [y, x] != null && blocks[y,x].GetComponent<NetBlockData>().marked) {
 					tempColor = blocks [y, x].GetComponent<NetBlockData> ().color;
-					Destroy (blocks [y, x].gameObject);
+					//NetworkServer.Destroy (blocks [y, x].gameObject);
+					CmdDestroy(blocks [y, x].gameObject);
 					blocks [y, x] = null;
 				}
 			}
@@ -345,7 +351,7 @@ public class NetworkPlayer : NetworkBehaviour {
 			if (++turnCount % 4 == 0) {
 				//bar.GetComponent<BarScript> ().increaseSpeed ();
 				addRows ();
-				recolor ();
+				//recolor ();
 			}
 		}
 	}
@@ -488,11 +494,13 @@ public class NetworkPlayer : NetworkBehaviour {
 
 			blocks = newGrid;
 			if (player1) {
-				Destroy (blocks [0, x]);
+				//NetworkServer.Destroy (blocks [0, x]);
+				CmdDestroy(blocks[0, x].gameObject);
 				blocks [0, x] = null;
 				CmdCreateBlock (x, 0, true, false, 0);
 			} else {
-				Destroy (blocks [31, x]);
+				//NetworkServer.Destroy (blocks [31, x]);
+				CmdDestroy(blocks[31, x].gameObject);
 				blocks [31, x] = null;
 				//Destroy (blocks [31, x]);
 				//blocks [31, x] = null;
@@ -507,6 +515,10 @@ public class NetworkPlayer : NetworkBehaviour {
 	}
 
 	public void recolor(){
+		if (!isLocalPlayer) {
+			return;
+		}
+
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				if (blocks [y, x] != null) {

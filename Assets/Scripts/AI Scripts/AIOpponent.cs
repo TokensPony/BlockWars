@@ -189,17 +189,35 @@ public class AIOpponent : MonoBehaviour
 					aihand.hand [h].GetComponent<BlockData> ().gridCoord = new Vector2 (x, y);
 					if (board [y, x] == null && y != board.GetLength (1) - 1) {
 						if (((x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-						     (y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-						     (x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
+						    (y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
+						    (x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
 							//Debug.Log (y + "," + x + "," + startMat);
 							//Debug.Log ("Match Count: " + matchCount);
 							matchMade (aihand.hand [h], true);
 							boardMan.GetComponent<BoutManager> ().unmark ();
+
+							/*if (humanMatchCount == 0 || (matchCount < 4 && matchCount >= currentMax && !savedCC) || matchCount == humanMatchCount) {
+								currentMax = matchCount;
+								tempHand = h;
+								tempPos = new Vector2 (x, y);
+							} else if (matchCount >= 4) {
+								Debug.Log ("Would make " + matchCount + " at hand block " + h + " at position: " + y + "," + x + "," + startMat);
+								Vector2 adj = findAdjacent (board, x, y, startMat);
+								Debug.Log ("Checking Caddy corners at position: " + adj.y + ", " + adj.x);
+								Vector2 check = checkCaddyCorner (board, (int)adj.x, (int)adj.y, startMat);
+								if (check != Vector2.zero) {
+									savedCC = true;
+									tempHand = h;
+									tempPos = check;
+								}
+							}
+							matchCount = 0;
+							break;*/
 							if (humanMatchCount == 0 || matchCount < 4 ||(humanMatchCount == matchCount)) {
 								//Debug.Log ("Attempting");
 								if ((matchCount > currentMax && (matchCount <= humanMatchCount || humanMatchCount == 0))) {
 									//Debug.Log ("Attempting2");
-									if (!savedCC || matchCount == humanMatchCount/*|| nextToCCProgressBlock(aihand[h])*/) {
+									if (!savedCC || matchCount == humanMatchCount) {
 										currentMax = matchCount;
 										tempHand = h;
 										tempPos = new Vector2 (x, y);

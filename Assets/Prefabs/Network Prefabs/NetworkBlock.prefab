@@ -190,3 +190,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca71b82bdb4f04409127e9c4c1c1f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: 0
+  gridCoord: {x: 0, y: 0}
+  handPos: {x: 0, y: 0, z: 0}
+  handM: {fileID: 0}
+  bar: {fileID: 0}
+  manager: {fileID: 0}
+  boardWidth: 0
+  barOffset: 0
+  marked: 0
+  playerOne: 0
+  cForce: {x: 0, y: 0, z: 0}
+  cForceActive: 0
