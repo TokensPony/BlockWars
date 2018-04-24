@@ -98,7 +98,14 @@ MonoBehaviour:
   boostCount: 0
   boostBase: 1
   maxPile: 5
-  textures:
+  textures: []
+  hackerTextures:
+  - {fileID: 2100000, guid: 2279eb9127a61354181c4f2227339003, type: 2}
+  - {fileID: 2100000, guid: 545d65a36f5267c458dfa52733b2489f, type: 2}
+  - {fileID: 2100000, guid: de1428786120256409d17f77bb522d45, type: 2}
+  - {fileID: 2100000, guid: d68c19a31a28fe44aaf3639709c69bc7, type: 2}
+  - {fileID: 2100000, guid: 43ec722f8bdcb56429cb024968bbbd57, type: 2}
+  securityTextures:
   - {fileID: 2100000, guid: 9fe69349063a88e4aadab7e507234b56, type: 2}
   - {fileID: 2100000, guid: 077f0b3b1c44f1d4c8f1c967c87122a2, type: 2}
   - {fileID: 2100000, guid: a03696af2da50dc418ae5f7ed5e88601, type: 2}

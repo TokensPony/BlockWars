@@ -45,7 +45,14 @@ public class NetBlockData : NetworkBehaviour{
 			//Debug.Log ("Set Bar");
 			bar = GameObject.FindGameObjectWithTag ("Finish");
 		}
+
+		float currVel = this.GetComponent<Rigidbody> ().velocity.y;
+
+		if (playerOne && currVel > 0 || !playerOne && currVel<0) {
+			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		}
 		//this.GetComponent<ConstantForce> ().enabled = true;
+
 	}
 
 	void OnMouseDrag(){
@@ -54,6 +61,7 @@ public class NetBlockData : NetworkBehaviour{
 		} 
 	}
 
+	//[Command]
 	public void dragBlock(Vector2 inputPos, bool human){
 		if (true || !GameObject.FindGameObjectWithTag ("Finish").GetComponent<BarScript> ().locked && !handM.GetComponent<HandManager> ().handLocked) {
 			//THIS TRUE SHIT IS TEMPORARY
@@ -77,10 +85,16 @@ public class NetBlockData : NetworkBehaviour{
 					ySnap = (pos_move.y < bar.transform.position.y + 1f) ? bar.transform.position.y + 1f : pos_move.y;
 				}
 				transform.position = new Vector3 (snapPosition, ySnap, -2f);
+				//RpcDragBlock (snapPosition, ySnap);
 			}
 		}
 	}
 
+	[ClientRpc]
+	public void RpcDragBlock(float snapPosition, float ySnap){
+		transform.position = new Vector3 (snapPosition, ySnap, -2f);
+	}
+		
 	public void release(){
 		transform.position = new Vector3 (transform.position.x, transform.position.y, 0f);
 		if(this.tag == "inHand"){

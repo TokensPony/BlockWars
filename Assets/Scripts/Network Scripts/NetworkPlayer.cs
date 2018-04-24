@@ -31,7 +31,9 @@ public class NetworkPlayer : NetworkBehaviour {
 	public float boostBase;
 	public int maxPile;
 
-	public List<Material> textures;
+	//public List<Material> textures;
+	public List<Material> hackerTextures;
+	public List<Material> securityTextures;
 	public List<string> colorNames;
 
 	private int matchCount;
@@ -41,15 +43,20 @@ public class NetworkPlayer : NetworkBehaviour {
 		if (!isLocalPlayer) {
 			return;
 		}
+
+
 		//hand = new List<GameObject>(5);
 		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
 		player1 = (players.GetLength (0) == 1) ? true : false;
 		GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraControls> ().setCamera (player1);
+		//List<Material> textures = (player1)? hackerTextures : securityTextures;
 
 		turnCount = 0;
 		Debug.Log (Network.player.ipAddress);
 		StartCoroutine (waitForSecondPlayer ());
 	}
+
+	/**/
 
 	IEnumerator waitForSecondPlayer(){
 		while(NetworkManager.singleton.numPlayers < 2 && NetworkManager.singleton.numPlayers != 0){
@@ -101,7 +108,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
 	[Command]
 	public void CmdCreateBlock(int xPos, int yPos, bool p1, bool drawnBlock, int hPosX){
-		int randIndex = Random.Range (0, textures.Count);
+		int randIndex = Random.Range (0, 5);
 		Vector3 spawnPoint;// = new Vector3 (xPos - (boardWidth/2f), 0f, 0f);
 		//Debug.Log (spawnPoint.x);
 		if (!drawnBlock) {
@@ -135,6 +142,7 @@ public class NetworkPlayer : NetworkBehaviour {
 		newBlock.GetComponent<ConstantForce>().force *= (player1) ? 1f : -1f;
 		newBlock.tag = (drawnBlock) ? "inHand" : "Block";
 		newBlock.GetComponent<ConstantForce> ().enabled = !drawnBlock;
+		List<Material> textures = (player1)? hackerTextures : securityTextures;
 		newBlock.GetComponent<Renderer> ().material = textures[randIndex];
 		newBlock.transform.parent = this.gameObject.transform;
 		Debug.Log (yPos + ", " + xPos);
@@ -148,6 +156,17 @@ public class NetworkPlayer : NetworkBehaviour {
 			}
 		}
 		NetworkServer.Spawn (newBlock);
+		var playerID = this.GetComponent<NetworkIdentity> ();
+		var networkIdentity = newBlock.GetComponent<NetworkIdentity> ();
+		var otherOwner = networkIdentity.clientAuthorityOwner;
+		if (otherOwner == playerID.connectionToClient) {
+		} else {
+			if (otherOwner != null) {
+				networkIdentity.RemoveClientAuthority (otherOwner);
+			}
+			networkIdentity.AssignClientAuthority (playerID.connectionToClient);
+		}
+
 		RpcCreateBlock (newBlock, newBlock.transform.parent.gameObject,
 			newBlock.transform.localPosition, newBlock.transform.localRotation,
 			newBlock.GetComponent<ConstantForce>().force, randIndex, xPos, yPos, drawnBlock, hPosX);
@@ -163,6 +182,7 @@ public class NetworkPlayer : NetworkBehaviour {
 		nb.GetComponent<ConstantForce> ().enabled = !drawnBlock;
 		nb.tag = (drawnBlock) ? "inHand" : "Block";
 		nb.GetComponent<NetBlockData> ().playerOne = player1;
+		List<Material> textures = (player1)? hackerTextures : securityTextures;
 		nb.GetComponent<Renderer> ().material = textures[matIndex];
 		if (!drawnBlock) {
 			blocks [yPos, xPos] = nb;
@@ -495,13 +515,17 @@ public class NetworkPlayer : NetworkBehaviour {
 			blocks = newGrid;
 			if (player1) {
 				//NetworkServer.Destroy (blocks [0, x]);
-				CmdDestroy(blocks[0, x].gameObject);
-				blocks [0, x] = null;
+				if (blocks [0, x] != null) {
+					CmdDestroy (blocks [0, x].gameObject);
+					blocks [0, x] = null;
+				}
 				CmdCreateBlock (x, 0, true, false, 0);
 			} else {
 				//NetworkServer.Destroy (blocks [31, x]);
-				CmdDestroy(blocks[31, x].gameObject);
-				blocks [31, x] = null;
+				if (blocks [31, x] != null) {
+					CmdDestroy (blocks [31, x].gameObject);
+					blocks [31, x] = null;
+				}
 				//Destroy (blocks [31, x]);
 				//blocks [31, x] = null;
 				CmdCreateBlock (x, 31, false, false, 0);
@@ -518,11 +542,11 @@ public class NetworkPlayer : NetworkBehaviour {
 		if (!isLocalPlayer) {
 			return;
 		}
-
+		List<Material> textures = (player1)? hackerTextures : securityTextures;
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
 				if (blocks [y, x] != null) {
-					int randIndex = Random.Range (0, textures.Count);
+					int randIndex = Random.Range (0, 5);
 					blocks[y,x].GetComponent<Renderer> ().material = textures[randIndex];
 					blocks[y,x].GetComponent<NetBlockData> ().color = randIndex;
 				}
