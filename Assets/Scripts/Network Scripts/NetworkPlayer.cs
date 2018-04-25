@@ -491,7 +491,7 @@ public class NetworkPlayer : NetworkBehaviour {
 		}
 	}
 
-	public void addRows(){
+	/*public void addRows(){
 		GameObject[,] newGrid = new GameObject[32,9];
 		GameObject[,] tempGrid = blocks;
 		for (int x = 0; x < tempGrid.GetLength (1); x++) {
@@ -532,6 +532,41 @@ public class NetworkPlayer : NetworkBehaviour {
 			}
 		}
 		printGrid ();
+	}*/
+
+	public void addRows(){
+		/*GameObject[,] newGrid = new GameObject[32,9];
+		GameObject[,] tempGrid = blocks;*/
+
+		int maxY = (player1)?0:31;
+		Vector2 tempCoord;
+		if (player1) {
+			for (int x = 0; x < blocks.GetLength (1); x++) {
+				for (int y = 0; y < blocks.GetLength (0); y++) {
+					if (blocks [y, x] == null) {
+						CmdCreateBlock (x, y, true, false, 0);
+						break;
+					}
+				}
+			}
+		} else {
+			for (int x = 0; x < blocks.GetLength (1); x++) {
+				for (int y = 31; y >= 0; y--) {
+					if (blocks [y, x] == null){
+						CmdCreateBlock (x, y, false, false, 0);
+						break;
+					}
+				}
+			}
+		}
+
+		/*for (int x = 0; x < blocks.GetLength (1); x++) {
+			if (player1) {
+				CmdCreateBlock (x, maxY, true, false, 0);
+			} else {
+				CmdCreateBlock (x, maxY, false, false, 0);
+			}
+		}*/
 	}
 
 	public void restart(){
