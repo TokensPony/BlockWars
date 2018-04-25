@@ -22,6 +22,7 @@ public class AIOpponent : MonoBehaviour
 	public string humanColorLast;
 
 	public bool savedCC;
+	public bool perfectMatch;
 
 	// Use this for initialization
 	void Start ()
@@ -38,7 +39,7 @@ public class AIOpponent : MonoBehaviour
 
 		//board = boardMan.GetComponent<BoutManager> ().blocks;
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -69,7 +70,7 @@ public class AIOpponent : MonoBehaviour
 			placeBlock ();
 			break;
 		}
-			
+
 		waiting = false;
 	}
 
@@ -84,8 +85,8 @@ public class AIOpponent : MonoBehaviour
 				for (int y = 0; y < board.GetLength (0) - 1; y++) {
 					if (board [y, x] == null && y != board.GetLength (1) - 1) {
 						if (x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat ||
-						    y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat ||
-						    x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat) {
+							y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat ||
+							x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat) {
 							//Debug.Log (y + "," + x + "," + startMat);
 							Vector3 temp = (y > 0) ? board [y - 1, x].transform.position : new Vector3 (x - 4f, 0f, 0f);
 							temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
@@ -108,6 +109,7 @@ public class AIOpponent : MonoBehaviour
 
 	public void randomDrop (GameObject[,] board)
 	{
+		Debug.Log("Random Drop");
 		int randX = Random.Range (0, board.GetLength (1) - 1);
 		int randHand = Random.Range (0, aihand.hand.Count);
 
@@ -140,8 +142,8 @@ public class AIOpponent : MonoBehaviour
 					aihand.hand [h].GetComponent<BlockData> ().gridCoord = new Vector2 (x, y);
 					if (board [y, x] == null && y != board.GetLength (1) - 1) {
 						if (((x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-						    (y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-						    (x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
+							(y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
+							(x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
 							//Debug.Log (y + "," + x + "," + startMat);
 							Debug.Log ("Match Count: " + matchCount);
 							matchMade (aihand.hand [h], true);
@@ -173,6 +175,8 @@ public class AIOpponent : MonoBehaviour
 		return false;
 	}
 
+
+	/*TODO: Make it undoo CC marks from previous turns*/
 	public bool titForTat ()
 	{
 		//Debug.Log ("Place Block");
@@ -181,6 +185,7 @@ public class AIOpponent : MonoBehaviour
 		Vector2 tempPos = Vector2.zero;
 		int currentMax = 0;
 		savedCC = false;
+		perfectMatch = false;
 
 		for (int h = 0; h < aihand.hand.Count; h++) {
 			Material startMat = aihand.hand [h].GetComponent<Renderer> ().sharedMaterial;
@@ -189,31 +194,40 @@ public class AIOpponent : MonoBehaviour
 					aihand.hand [h].GetComponent<BlockData> ().gridCoord = new Vector2 (x, y);
 					if (board [y, x] == null && y != board.GetLength (1) - 1) {
 						if (((x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-						    (y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-						    (x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
+							(y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
+							(x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
 							//Debug.Log (y + "," + x + "," + startMat);
 							//Debug.Log ("Match Count: " + matchCount);
 							matchMade (aihand.hand [h], true);
 							boardMan.GetComponent<BoutManager> ().unmark ();
 
-							/*if (humanMatchCount == 0 || (matchCount < 4 && matchCount >= currentMax && !savedCC) || matchCount == humanMatchCount) {
+							if (!perfectMatch && (humanMatchCount == 0 || (matchCount < 4 && matchCount >= currentMax && !savedCC) || matchCount == humanMatchCount)) {
 								currentMax = matchCount;
 								tempHand = h;
 								tempPos = new Vector2 (x, y);
-							} else if (matchCount >= 4) {
-								Debug.Log ("Would make " + matchCount + " at hand block " + h + " at position: " + y + "," + x + "," + startMat);
-								Vector2 adj = findAdjacent (board, x, y, startMat);
-								Debug.Log ("Checking Caddy corners at position: " + adj.y + ", " + adj.x);
-								Vector2 check = checkCaddyCorner (board, (int)adj.x, (int)adj.y, startMat);
-								if (check != Vector2.zero) {
+								if (matchCount == humanMatchCount) {
+									perfectMatch = true;
+								}
+							}else if(!perfectMatch && isNextToCC(board, x, y, startMat)){
+								Debug.Log ("Stacking atop another CC");
+								savedCC = true;
+								tempHand = h;
+								tempPos = new Vector2 (x, y);
+							} else if(!perfectMatch && matchCount >= 4 ) {
+								Debug.Log("Would make " + matchCount + " at hand block " + h + " at position: " + y + "," + x + "," + startMat);
+								Vector2 adj = findAdjacent(board, x, y, startMat);
+								Debug.Log("Checking Caddy corners at position: " + adj.y + ", " + adj.x);
+								Vector2 check = checkCaddyCorner(board, (int)adj.x, (int)adj.y, startMat);
+								if (check != Vector2.zero)
+								{
 									savedCC = true;
 									tempHand = h;
 									tempPos = check;
 								}
 							}
 							matchCount = 0;
-							break;*/
-							if (humanMatchCount == 0 || matchCount < 4 ||(humanMatchCount == matchCount)) {
+							break;
+							/*if (humanMatchCount == 0 || matchCount < 4 ||(humanMatchCount == matchCount)) {
 								//Debug.Log ("Attempting");
 								if ((matchCount > currentMax && (matchCount <= humanMatchCount || humanMatchCount == 0))) {
 									//Debug.Log ("Attempting2");
@@ -235,7 +249,7 @@ public class AIOpponent : MonoBehaviour
 								}
 							}
 							matchCount = 0;
-							break;
+							break;*/
 						} else {
 							matchCount = 0;
 							break;
@@ -270,6 +284,8 @@ public class AIOpponent : MonoBehaviour
 	Even if this algorithm works perfectly, the fact it takes so long is a problem.
 	Perhaps give it a time to quit?*/
 
+
+	/*Update to not allow big gaps for left and right*/
 	public Vector2 checkCaddyCorner(GameObject[,] board, int x, int y, Material startMat){
 		int length = board.GetLength (1) - 1;
 		if (x - 1 >= 0 && board [y + 1, x - 1] == null && board [y + 1, x] == null && board [y, x - 1] != null &&
@@ -335,6 +351,35 @@ public class AIOpponent : MonoBehaviour
 		return false;
 	}
 
+	public bool isNextToCC(GameObject[,] board, int x, int y, Material startMat){
+		/*if (x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat &&
+			board [y, x - 1].GetComponent<BlockData>().ccInProgress){
+			Debug.Log ("Next to CC " + y + ", " + x + "on Left");
+			return true;
+		}*/
+		if(y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat &&
+			board [y - 1, x].GetComponent<BlockData>().ccInProgress){
+			Debug.Log ("Next to CC " + y + ", " + x + "on Bottom");
+			return true;
+		}
+		/*if	(x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat &&
+			board [y, x + 1].GetComponent<BlockData>().ccInProgress) {
+			Debug.Log ("Next to CC " + y + ", " + x + "on Right");
+			return true;
+		}*/
+		return false;
+	}
+
+	public void undoCC(){
+		for (int x = 0; x < board.GetLength (1); x++) {
+			for (int y = 0; y < board.GetLength (0); y++) {
+				if (board [y, x] != null) {
+					board [y, x].GetComponent<BlockData> ().ccInProgress = false;
+				}
+			}
+		}
+	}
+
 	public bool matchMade (GameObject startBlock, bool counting)
 	{
 		//Debug.Log ("Looked for match");
@@ -346,9 +391,9 @@ public class AIOpponent : MonoBehaviour
 		bool found = false;
 		/*Down*/
 		if (pos.y > 0f &&
-		    blocks [(int)pos.y - 1, (int)pos.x] != null &&
-		    startMat == blocks [(int)pos.y - 1, (int)pos.x].GetComponent<Renderer> ().sharedMaterial &&
-		    !blocks [(int)pos.y - 1, (int)pos.x].GetComponent<BlockData> ().marked) {
+			blocks [(int)pos.y - 1, (int)pos.x] != null &&
+			startMat == blocks [(int)pos.y - 1, (int)pos.x].GetComponent<Renderer> ().sharedMaterial &&
+			!blocks [(int)pos.y - 1, (int)pos.x].GetComponent<BlockData> ().marked) {
 			//Debug.Log ("Matched");
 			//Debug.Log("Down");
 			matchMade (blocks [(int)pos.y - 1, (int)pos.x], true);
@@ -358,9 +403,9 @@ public class AIOpponent : MonoBehaviour
 
 		/*Left*/
 		if (pos.x > 0f &&
-		   blocks [(int)pos.y, (int)pos.x - 1] != null &&
-		   startMat == blocks [(int)pos.y, (int)pos.x - 1].GetComponent<Renderer> ().sharedMaterial &&
-		   !blocks [(int)pos.y, (int)pos.x - 1].GetComponent<BlockData> ().marked) {
+			blocks [(int)pos.y, (int)pos.x - 1] != null &&
+			startMat == blocks [(int)pos.y, (int)pos.x - 1].GetComponent<Renderer> ().sharedMaterial &&
+			!blocks [(int)pos.y, (int)pos.x - 1].GetComponent<BlockData> ().marked) {
 			//Debug.Log("Left");
 			matchMade (blocks [(int)pos.y, (int)pos.x - 1], true);
 			found = true;
@@ -369,9 +414,9 @@ public class AIOpponent : MonoBehaviour
 
 		/*Up*/
 		if (pos.y < blocks.GetLength (0) - 1 &&
-		    blocks [(int)pos.y + 1, (int)pos.x] != null &&
-		    startMat == blocks [(int)pos.y + 1, (int)pos.x].GetComponent<Renderer> ().sharedMaterial &&
-		    !blocks [(int)pos.y + 1, (int)pos.x].GetComponent<BlockData> ().marked) {
+			blocks [(int)pos.y + 1, (int)pos.x] != null &&
+			startMat == blocks [(int)pos.y + 1, (int)pos.x].GetComponent<Renderer> ().sharedMaterial &&
+			!blocks [(int)pos.y + 1, (int)pos.x].GetComponent<BlockData> ().marked) {
 			//Debug.Log("Up");
 			//Debug.Log ("Matched");
 			matchMade (blocks [(int)pos.y + 1, (int)pos.x], true);
@@ -381,9 +426,9 @@ public class AIOpponent : MonoBehaviour
 
 		/*Right*/
 		if (pos.x < blocks.GetLength (1) - 1 &&
-		   blocks [(int)pos.y, (int)pos.x + 1] != null &&
-		   startMat == blocks [(int)pos.y, (int)pos.x + 1].GetComponent<Renderer> ().sharedMaterial &&
-		   !blocks [(int)pos.y, (int)pos.x + 1].GetComponent<BlockData> ().marked) {
+			blocks [(int)pos.y, (int)pos.x + 1] != null &&
+			startMat == blocks [(int)pos.y, (int)pos.x + 1].GetComponent<Renderer> ().sharedMaterial &&
+			!blocks [(int)pos.y, (int)pos.x + 1].GetComponent<BlockData> ().marked) {
 			//Debug.Log("Right");
 			matchMade (blocks [(int)pos.y, (int)pos.x + 1], true);
 			found = true;
