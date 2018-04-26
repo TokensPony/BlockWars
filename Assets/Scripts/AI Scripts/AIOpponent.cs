@@ -10,7 +10,7 @@ public class AIOpponent : MonoBehaviour
 	HandManager aihand;
 
 	public GameObject boardMan;
-	GameObject[,] board;
+	//GameObject[,] board;
 
 	public float moveDelay;
 
@@ -112,8 +112,28 @@ public class AIOpponent : MonoBehaviour
 		Debug.Log("Random Drop");
 		int randX = Random.Range (0, board.GetLength (1) - 1);
 		int randHand = Random.Range (0, aihand.hand.Count);
+		int minPos = 16;
+		int finX = 0;
 
-		for (int y = 0; y < board.GetLength (0) - 1; y++) {
+		for (int x = 0; x < board.GetLength (1); x++) {
+			for (int y = 0; y < board.GetLength (0); y++) {
+				if (board [y, x] == null) {
+					if ( (diff != 1 && minPos > y) || (diff == 1 && minPos > y && !isNextToCC(board, x, y, aihand.hand[randHand].GetComponent<Renderer>().sharedMaterial, false))) {
+						minPos = y;
+						finX = x;
+					}
+					break;
+				}
+			}
+		}
+
+		Vector3 temp = board [minPos-1, finX].transform.position;
+		temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
+		temp.y += 2f;
+		aihand.hand [randHand].GetComponent<BlockData> ().dragBlock (temp, false);
+		aihand.hand [randHand].GetComponent<BlockData> ().release ();
+
+		/*for (int y = 0; y < board.GetLength (0) - 1; y++) {
 			if (board [y, randX] != null && y != board.GetLength (1) - 1 && board [y + 1, randX] == null) {
 				Vector3 temp = board [y, randX].transform.position;
 				temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
@@ -124,7 +144,7 @@ public class AIOpponent : MonoBehaviour
 				//Debug.Log("Random Drop");
 				break;
 			}
-		}
+		}*/
 	}
 
 	public bool greedyHill ()
@@ -195,7 +215,7 @@ public class AIOpponent : MonoBehaviour
 					if (board [y, x] == null && y != board.GetLength (1) - 1) {
 						if (((x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat) ||
 							(y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat) ||
-							(x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
+							(x + 1 < board.GetLength (1) && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat))) {
 							//Debug.Log (y + "," + x + "," + startMat);
 							//Debug.Log ("Match Count: " + matchCount);
 							matchMade (aihand.hand [h], true);
@@ -208,12 +228,12 @@ public class AIOpponent : MonoBehaviour
 								if (matchCount == humanMatchCount) {
 									perfectMatch = true;
 								}
-							}else if(!perfectMatch && isNextToCC(board, x, y, startMat)){
+							}else if(!perfectMatch && isNextToCC(board, x, y, startMat, true)){
 								Debug.Log ("Stacking atop another CC");
 								savedCC = true;
 								tempHand = h;
 								tempPos = new Vector2 (x, y);
-							} else if(!perfectMatch && matchCount >= 4 ) {
+							} else if(!perfectMatch && matchCount >= 4 && !savedCC) {
 								Debug.Log("Would make " + matchCount + " at hand block " + h + " at position: " + y + "," + x + "," + startMat);
 								Vector2 adj = findAdjacent(board, x, y, startMat);
 								Debug.Log("Checking Caddy corners at position: " + adj.y + ", " + adj.x);
@@ -267,6 +287,9 @@ public class AIOpponent : MonoBehaviour
 			}
 			aihand.hand [tempHand].GetComponent<BlockData> ().dragBlock (temp, false);
 			aihand.hand [tempHand].GetComponent<BlockData> ().release ();
+			if (perfectMatch) {
+				undoCC (board);
+			}
 			return true;
 		}
 		randomDrop (board);
@@ -285,7 +308,9 @@ public class AIOpponent : MonoBehaviour
 	Perhaps give it a time to quit?*/
 
 
-	/*Update to not allow big gaps for left and right*/
+	/*Update to not allow big gaps for left and right
+
+	Keep an eye out on the isAdjacent reordering if something goes wrong*/
 	public Vector2 checkCaddyCorner(GameObject[,] board, int x, int y, Material startMat){
 		int length = board.GetLength (1) - 1;
 		if (x - 1 >= 0 && board [y + 1, x - 1] == null && board [y + 1, x] == null && board [y, x - 1] != null &&
@@ -293,28 +318,28 @@ public class AIOpponent : MonoBehaviour
 			Debug.Log ("Upper left");
 			return new Vector2 (x - 1, y + 1);
 		}
-		if (x + 1 < length && board [y + 1, x + 1] == null && board [y + 1, x] == null && board [y, x + 1] != null &&
+		if (x + 1 <= length && board [y + 1, x + 1] == null && board [y + 1, x] == null && board [y, x + 1] != null &&
 			!isAdjacent(board, x+1, y+1, startMat)) {
 			Debug.Log ("Upper Right");
 			return new Vector2 (x+1, y+1);
 		}
-		if (x+2 < length && board[y, x+2] == null && board[y,x+1] == null && 
-			(y-1 < 0 || (board[y-1, x+2] != null && !isAdjacent(board, x+2, y, startMat)))){
+		if (x+2 <= length && board[y, x+2] == null && board[y,x+1] == null && 
+			(y-1 < 0 || (board[y-1, x+2] != null && board[y-1, x+1] != null)) && !isAdjacent(board, x+2, y, startMat)){
 			Debug.Log ("Right");
 			return new Vector2 (x+2, y);
 		}
 		if(y-1 >= 0 && x+1 < length && board[y-1, x+1] == null && board[y,x+1] == null &&
-			(y-2 < 0 || (board[y-2, x+1] != null && !isAdjacent(board, x+1, y-1, startMat)))){
+			(y-2 < 0 || (board[y-2, x+1] != null)) && !isAdjacent(board, x+1, y-1, startMat)){
 			Debug.Log ("Lower Right");
 			return new Vector2 (x+1, y-1);
 		}
 		if(y-1 >= 0 && x-1 >= 0 && board[y-1, x-1] == null && board[y, x-1] == null &&
-			(y-2 < 0 || (board[y-2, x-1] != null && !isAdjacent(board, x-1, y-1, startMat)))){
+			(y-2 < 0 || (board[y-2, x-1] != null)) && !isAdjacent(board, x-1, y-1, startMat)){
 			Debug.Log ("Lower Left");
 			return new Vector2 (x-1, y-1);
 		}
 		if(x-2 >= 0 && board[y, x-2] == null && board[y, x-1] == null &&
-			(y-1 < 0 || (board[y-1, x-2] != null && !isAdjacent(board, x-2, y, startMat)))){
+			(y-1 < 0 || (board[y-1, x-2] != null && board[y-1, x-1] != null)) && !isAdjacent(board, x-2, y, startMat)){
 			Debug.Log ("Left");
 			return new Vector2 (x-2, y);
 		}
@@ -351,26 +376,26 @@ public class AIOpponent : MonoBehaviour
 		return false;
 	}
 
-	public bool isNextToCC(GameObject[,] board, int x, int y, Material startMat){
-		/*if (x - 1 >= 0 && board [y, x - 1] != null && board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat &&
+	public bool isNextToCC(GameObject[,] board, int x, int y, Material startMat, bool bottomOnly){
+		if (!bottomOnly && x - 1 >= 0 && board [y, x - 1] != null && /*board [y, x - 1].GetComponent<Renderer> ().sharedMaterial == startMat &&*/
 			board [y, x - 1].GetComponent<BlockData>().ccInProgress){
 			Debug.Log ("Next to CC " + y + ", " + x + "on Left");
 			return true;
-		}*/
-		if(y - 1 >= 0 && board [y - 1, x] != null && board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat &&
+		}
+		if(y - 1 >= 0 && board [y - 1, x] != null && /*board [y - 1, x].GetComponent<Renderer> ().sharedMaterial == startMat &&*/
 			board [y - 1, x].GetComponent<BlockData>().ccInProgress){
 			Debug.Log ("Next to CC " + y + ", " + x + "on Bottom");
 			return true;
 		}
-		/*if	(x + 1 < board.GetLength (1) - 1 && board [y, x + 1] != null && board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat &&
+		if	(!bottomOnly && x + 1 <= board.GetLength (1) - 1 && board [y, x + 1] != null && /*board [y, x + 1].GetComponent<Renderer> ().sharedMaterial == startMat &&*/
 			board [y, x + 1].GetComponent<BlockData>().ccInProgress) {
 			Debug.Log ("Next to CC " + y + ", " + x + "on Right");
 			return true;
-		}*/
+		}
 		return false;
 	}
 
-	public void undoCC(){
+	public void undoCC(GameObject[,] board){
 		for (int x = 0; x < board.GetLength (1); x++) {
 			for (int y = 0; y < board.GetLength (0); y++) {
 				if (board [y, x] != null) {
