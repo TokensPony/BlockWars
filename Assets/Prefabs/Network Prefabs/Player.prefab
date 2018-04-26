@@ -88,7 +88,7 @@ MonoBehaviour:
   player1: 0
   hand: []
   handLocked: 0
-  bar: {fileID: 0}
+  bar: {fileID: 1102519072741590, guid: a13fa862214b19046a9fcd170d5e7e0e, type: 2}
   boutUI: {fileID: 0}
   boardWidth: 8
   xOffset: 0.15
@@ -98,7 +98,6 @@ MonoBehaviour:
   boostCount: 0
   boostBase: 1
   maxPile: 5
-  textures: []
   hackerTextures:
   - {fileID: 2100000, guid: 2279eb9127a61354181c4f2227339003, type: 2}
   - {fileID: 2100000, guid: 545d65a36f5267c458dfa52733b2489f, type: 2}

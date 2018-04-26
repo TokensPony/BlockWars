@@ -55,7 +55,7 @@ public class NetBarScript : NetworkBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if ((p1Turn && this.transform.position.y > 16f || !p1Turn && this.transform.position.y < 16f) && !waiting) {
 			//Debug.Log (" Speed");
 			finalVelocity = (p1Turn) ? fastVelocity : fastVelocity * -1f;

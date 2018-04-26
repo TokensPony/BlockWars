@@ -64,14 +64,14 @@ public class NetworkPlayer : NetworkBehaviour {
 			//Debug.Log (NetworkManager.singleton.numPlayers);
 			yield return null;
 		}
-		/*if (player1) {
+		if (player1) {
 			bar = Instantiate (bar);
 			NetworkServer.Spawn (bar);
 		} else {
 			//Debug.Log
 			bar = GameObject.FindGameObjectWithTag ("Finish");
-		}*/
-		//bar = GameObject.FindGameObjectWithTag ("Finish");
+		}
+		bar = GameObject.FindGameObjectWithTag ("Finish");
 		//Debug.Log ("Found Second Player");
 		populatePile ();
 		CmdCreateHand ();
@@ -80,7 +80,7 @@ public class NetworkPlayer : NetworkBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (!isLocalPlayer) {
 			return;
 		}
@@ -329,12 +329,20 @@ public class NetworkPlayer : NetworkBehaviour {
 	}
 
 	[Command]
+	void CmdIncreaseSpeed(){
+		bar.GetComponent<BarScript> ().increaseSpeed ();
+	}
+
+	[Command]
 	void CmdDestroy(GameObject tBD){
 		NetworkServer.Destroy (tBD);
 	}
 
 
 	public void removeMarked(bool inGame){
+		if (!isLocalPlayer) {
+			return;
+		}
 		int tempColor = 0;
 		for (int x = 0; x < blocks.GetLength (1); x++) {
 			for (int y = 0; y < blocks.GetLength (0); y++) {
@@ -369,7 +377,12 @@ public class NetworkPlayer : NetworkBehaviour {
 			}*/
 			//p1Turn = !p1Turn;
 			if (++turnCount % 4 == 0) {
-				//bar.GetComponent<BarScript> ().increaseSpeed ();
+				/*if (!player1) {
+				 * 
+				 * Consider making this functionality built into the bar itself. That of course
+				 * depends on whether I keep the game turn based or not.
+					CmdIncreaseSpeed ();
+				}*/
 				addRows ();
 				//recolor ();
 			}
