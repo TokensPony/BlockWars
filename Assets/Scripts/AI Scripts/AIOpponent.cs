@@ -12,6 +12,7 @@ public class AIOpponent : MonoBehaviour
 	public GameObject boardMan;
 	//GameObject[,] board;
     //THis is a test edit
+    //THIS IS ALSO ANOTHER FUCKING TEST
 	public float moveDelay;
 
 	public bool waiting;
