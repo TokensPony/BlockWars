@@ -276,7 +276,7 @@ public class BoutManager : MonoBehaviour {
 			p1Turn = !p1Turn;
 			if (++turnCount % 8 == 0) {
 				bar.GetComponent<BarScript> ().increaseSpeed ();
-				addRows ();
+				StartCoroutine(addRows ());
 				recolor ();
 			}
 		}
@@ -397,7 +397,9 @@ public class BoutManager : MonoBehaviour {
 		}
 	}
 
-	public void addRows(){
+	IEnumerator addRows(){
+		yield return new WaitForSeconds (.5f);
+
 		GameObject[,] newGrid = new GameObject[32,9];
 		GameObject[,] tempGrid = blocks;
 		for (int x = 0; x < tempGrid.GetLength (1); x++) {

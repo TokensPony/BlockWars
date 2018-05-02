@@ -280,6 +280,7 @@ public class AIOpponent : MonoBehaviour
 			}
 		}
 		if (currentMax > 0 || savedCC) {
+			Debug.Log ((int)tempPos.y - 1 + ", " + (int)tempPos.x);
 			Vector3 temp = (tempPos.y > 0f) ? board [(int)tempPos.y - 1, (int)tempPos.x].transform.position : new Vector3 (tempPos.x - 4f, 0f, 0f);
 			temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
 			temp.y += 2f;

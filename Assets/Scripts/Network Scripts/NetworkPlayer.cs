@@ -376,14 +376,14 @@ public class NetworkPlayer : NetworkBehaviour {
 				}
 			}*/
 			//p1Turn = !p1Turn;
-			if (++turnCount % 4 == 0) {
+			if (++turnCount % 10 == 0) {
 				/*if (!player1) {
 				 * 
 				 * Consider making this functionality built into the bar itself. That of course
 				 * depends on whether I keep the game turn based or not.
 					CmdIncreaseSpeed ();
 				}*/
-				addRows ();
+				StartCoroutine(addRows ());
 				//recolor ();
 			}
 		}
@@ -547,9 +547,11 @@ public class NetworkPlayer : NetworkBehaviour {
 		printGrid ();
 	}*/
 
-	public void addRows(){
+	IEnumerator addRows(){
 		/*GameObject[,] newGrid = new GameObject[32,9];
 		GameObject[,] tempGrid = blocks;*/
+		yield return new WaitForSeconds (.5f);
+
 
 		int maxY = (player1)?0:31;
 		Vector2 tempCoord;
@@ -572,14 +574,6 @@ public class NetworkPlayer : NetworkBehaviour {
 				}
 			}
 		}
-
-		/*for (int x = 0; x < blocks.GetLength (1); x++) {
-			if (player1) {
-				CmdCreateBlock (x, maxY, true, false, 0);
-			} else {
-				CmdCreateBlock (x, maxY, false, false, 0);
-			}
-		}*/
 	}
 
 	public void restart(){
