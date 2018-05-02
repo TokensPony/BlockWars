@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 75465513726930540}
   - component: {fileID: 114989503248682336}
   - component: {fileID: 114448024085708294}
+  - component: {fileID: 82535387319225926}
   m_Layer: 0
   m_Name: Block
   m_TagString: Block
@@ -126,6 +127,86 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!82 &82535387319225926
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166482198688414}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3b05950b80c032d40a260b34224a9cfe, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114448024085708294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,9 +240,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  sColor: 
   gridCoord: {x: 0, y: 0}
   handPos: {x: 0, y: 0, z: 0}
   handM: {fileID: 0}
+  ccInProgress: 0
   manager: {fileID: 0}
   boardWidth: 0
   dragOffset: 0.8
@@ -170,6 +253,11 @@ MonoBehaviour:
   playerOne: 1
   cForce: {x: 0, y: -9, z: 0}
   cForceActive: 1
+  blockSounds:
+  - {fileID: 8300000, guid: d31ed5f1a8c770a4ca1fc81a5277a9fd, type: 3}
+  - {fileID: 8300000, guid: cb2585508b571744aa68ba6f03074f74, type: 3}
+  - {fileID: 8300000, guid: 17196820c6b07c94380cb6058b1a6614, type: 3}
+  - {fileID: 8300000, guid: 3b05950b80c032d40a260b34224a9cfe, type: 3}
 --- !u!114 &114989503248682336
 MonoBehaviour:
   m_ObjectHideFlags: 1

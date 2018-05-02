@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void startGame(int input){
+		this.GetComponent<AudioSource> ().Play ();
 		loading.gameObject.SetActive (true);
 		switch (input) {
 		case 0:
@@ -35,12 +36,14 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void startAIGame(int diff){
+		this.GetComponent<AudioSource> ().Play ();
 		PlayerPrefs.SetInt ("diffLev", diff);
 		loading.gameObject.SetActive (true);
 		SceneManager.LoadScene("AIScene");
 	}
 
 	public void levelMenu(bool op){
+		this.GetComponent<AudioSource> ().Play ();
 		levelSelect.gameObject.SetActive (op);
 	}
 }

@@ -40,6 +40,8 @@ public class BlockData : NetworkBehaviour{
 	[SyncVar]
 	public bool cForceActive;
 
+	public List<AudioClip> blockSounds;
+
 	public void Start(){
 		manager = GameObject.Find("BoutManager").GetComponent<BoutManager>();
 		marked = false;
@@ -222,8 +224,12 @@ public class BlockData : NetworkBehaviour{
 
 				this.GetComponent<Rigidbody> ().velocity = (playerOne)? new Vector3 (0, -1, 0) : new Vector3 (0, 1, 0);
 				marked = true;
+				this.GetComponent<AudioSource> ().clip = blockSounds [1];
+				this.GetComponent<AudioSource> ().Play ();
 				StartCoroutine (waitToCollide ());
 			} else {
+				this.GetComponent<AudioSource> ().clip = blockSounds [2];
+				this.GetComponent<AudioSource> ().Play ();
 				this.transform.position = handPos;
 			}
 		}
@@ -247,6 +253,8 @@ public class BlockData : NetworkBehaviour{
 				yield return null;
 			}
 		}
+		this.GetComponent<AudioSource> ().clip = blockSounds [3];
+		this.GetComponent<AudioSource> ().Play ();
 		handM.GetComponent<HandManager> ().handLocked = false;
 		manager.isMarked();
 		//yield return null;
@@ -283,7 +291,9 @@ public class BlockData : NetworkBehaviour{
 		{
 		GameObject target = hitInfo.transform.gameObject;
 		Debug.Log("Hit " + target.name);
-			if (hitInfo.transform.gameObject.tag == "Block"){
+			if (hitInfo.transform.gameObject.tag == "inHand"){
+				this.GetComponent<AudioSource> ().clip = blockSounds [0];
+				this.GetComponent<AudioSource> ().Play ();
 			} else {
 				//Debug.Log ("nopz");
 			}
