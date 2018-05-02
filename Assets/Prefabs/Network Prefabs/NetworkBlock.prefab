@@ -200,5 +200,6 @@ MonoBehaviour:
   barOffset: 0
   marked: 0
   playerOne: 0
+  dragOffset: 0.8
   cForce: {x: 0, y: 0, z: 0}
   cForceActive: 0

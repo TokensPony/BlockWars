@@ -72,7 +72,7 @@ public class NetBarScript : NetworkBehaviour {
 		//fastVelocity *= -1f;
 		//sVelocity *= -1f;
 
-		finalVelocity = (!p1Turn)? sVelocity : sVelocity*-1f;
+		finalVelocity = (!p1)? sVelocity : sVelocity*-1f;
 		waiting = true;
 		lockHands (true);
 
@@ -92,7 +92,7 @@ public class NetBarScript : NetworkBehaviour {
 			Debug.Log ("Push made when not in view");
 			finalVelocity = sVelocity;
 		}*/
-		p1Turn = !p1Turn;
+		p1Turn = !p1;
 
 
 

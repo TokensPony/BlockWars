@@ -28,6 +28,7 @@ public class NetBlockData : NetworkBehaviour{
 	[SyncVar]
 	public bool playerOne;
 
+	public float dragOffset;
 	[SyncVar]
 	public Vector3 cForce;
 	[SyncVar]
@@ -80,9 +81,9 @@ public class NetBlockData : NetworkBehaviour{
 				}
 				float ySnap = 0f;
 				if (playerOne) { 
-					ySnap = (pos_move.y > bar.transform.position.y - 1f) ? bar.transform.position.y - 1f : pos_move.y;
+					ySnap = (pos_move.y + dragOffset > bar.transform.position.y - 1f) ? bar.transform.position.y - 1f : pos_move.y + dragOffset;
 				} else {
-					ySnap = (pos_move.y < bar.transform.position.y + 1f) ? bar.transform.position.y + 1f : pos_move.y;
+					ySnap = (pos_move.y - dragOffset < bar.transform.position.y + 1f) ? bar.transform.position.y + 1f : pos_move.y - dragOffset;
 				}
 				transform.position = new Vector3 (snapPosition, ySnap, -2f);
 				//RpcDragBlock (snapPosition, ySnap);
