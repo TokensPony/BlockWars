@@ -33,7 +33,7 @@ public class NetBarScript : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//gameOver = GameObject.FindGameObjectWithTag ("GameController").GetComponent<BoutManager>().boutUI;
+		gameOver = Instantiate (gameOver);//GameObject.FindGameObjectWithTag ("GameController").GetComponent<BoutManager>().boutUI;
 		p1Turn = true;
 		this.GetComponent<ConstantForce> ().force = gForce;
 		locked = false;
@@ -123,7 +123,7 @@ public class NetBarScript : NetworkBehaviour {
 			sVelocity.y = 0f;
 			//GameObject.FindGameObjectWithTag("BoutUI").SetActive (true);
 			//gameOver.transform.GetChild(0).gameObject.SetActive(true);
-			//gameOver.SetActive (true);
+			gameOver.SetActive (true);
 			locked = true;
 		} 
 	}

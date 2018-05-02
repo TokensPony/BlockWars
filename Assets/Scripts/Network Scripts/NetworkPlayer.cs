@@ -38,6 +38,8 @@ public class NetworkPlayer : NetworkBehaviour {
 
 	private int matchCount;
 	private int turnCount;
+
+	public bool debugMode;
 	// Use this for initialization
 	void Start () {
 		if (!isLocalPlayer) {
@@ -59,7 +61,7 @@ public class NetworkPlayer : NetworkBehaviour {
 	/**/
 
 	IEnumerator waitForSecondPlayer(){
-		while(NetworkManager.singleton.numPlayers < 2 && NetworkManager.singleton.numPlayers != 0){
+		while(!debugMode && NetworkManager.singleton.numPlayers < 2 && NetworkManager.singleton.numPlayers != 0){
 
 			//Debug.Log (NetworkManager.singleton.numPlayers);
 			yield return null;
@@ -577,6 +579,7 @@ public class NetworkPlayer : NetworkBehaviour {
 	}
 
 	public void restart(){
+		NetworkServer.Shutdown ();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 

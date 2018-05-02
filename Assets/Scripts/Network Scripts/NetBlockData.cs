@@ -14,6 +14,7 @@ public class NetBlockData : NetworkBehaviour{
 	public GameObject handM;
 
 	public GameObject bar;
+	public bool handLocked;
 
 	public BoutManager manager;
 	public Scene scene;
@@ -36,8 +37,11 @@ public class NetBlockData : NetworkBehaviour{
 
 	// Use this for initialization
 	void Start () {
+		handLocked = false;
 		boardWidth = 8;
 		xOffset = .15f;
+
+		//PlayerPrefs.SetInt ("handLocked", 0);
 	}
 	
 	// Update is called once per frame
@@ -49,6 +53,7 @@ public class NetBlockData : NetworkBehaviour{
 
 		float currVel = this.GetComponent<Rigidbody> ().velocity.y;
 
+
 		if (playerOne && currVel > 0 || !playerOne && currVel<0) {
 			this.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		}
@@ -57,14 +62,14 @@ public class NetBlockData : NetworkBehaviour{
 	}
 
 	void OnMouseDrag(){
-		if (this.tag == "inHand" /*&& (playerOne && manager.p1Turn || !playerOne && !manager.p1Turn)*/) {
+		if (this.tag == "inHand" && !handLocked) {
 			dragBlock (Input.mousePosition, true);
 		} 
 	}
 
 	//[Command]
 	public void dragBlock(Vector2 inputPos, bool human){
-		if (true || !GameObject.FindGameObjectWithTag ("Finish").GetComponent<BarScript> ().locked && !handM.GetComponent<HandManager> ().handLocked) {
+		if (!GameObject.FindGameObjectWithTag ("Finish").GetComponent<NetBarScript> ().locked ) {
 			//THIS TRUE SHIT IS TEMPORARY
 			if (this.tag == "inHand") {
 				//Debug.Log (inputPos.x + ", " + inputPos.y);
@@ -123,7 +128,6 @@ public class NetBlockData : NetworkBehaviour{
 	/*Coroutine to delay the activation of the match checking until after
 	 * the block has fallen and hit the ground.*/
 	IEnumerator waitToCollide(){
-		//handM.GetComponent<HandManager> ().handLocked = true;
 		if (playerOne) {
 			while (this.GetComponent<Rigidbody> ().velocity.y < 0f) {
 				yield return null;
@@ -133,7 +137,7 @@ public class NetBlockData : NetworkBehaviour{
 				yield return null;
 			}
 		}
-		//handM.GetComponent<HandManager> ().handLocked = false;
+
 		this.transform.root.gameObject.GetComponent<NetworkPlayer>().isMarked();
 		//yield return null;
 	}
