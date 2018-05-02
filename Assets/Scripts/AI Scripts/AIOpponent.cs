@@ -222,7 +222,7 @@ public class AIOpponent : MonoBehaviour
 							matchMade (aihand.hand [h], true);
 							boardMan.GetComponent<BoutManager> ().unmark ();
 
-							if (!perfectMatch && (humanMatchCount == 0 || (matchCount < 4 && matchCount >= currentMax && !savedCC) || matchCount == humanMatchCount)) {
+							if (!perfectMatch && (humanMatchCount == 0 && matchCount >= currentMax || (matchCount < 4 && matchCount >= currentMax && !savedCC) || matchCount == humanMatchCount)) {
 								currentMax = matchCount;
 								tempHand = h;
 								tempPos = new Vector2 (x, y);
