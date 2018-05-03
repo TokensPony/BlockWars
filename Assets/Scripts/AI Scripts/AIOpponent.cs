@@ -128,7 +128,7 @@ public class AIOpponent : MonoBehaviour
 			}
 		}
 
-		Vector3 temp = board [minPos-1, finX].transform.position;
+		Vector3 temp = (minPos > 0)? board [minPos-1, finX].transform.position: board [minPos, finX].transform.position;
 		temp.x = (temp.x < 0) ? Mathf.Ceil (temp.x) : Mathf.Floor (temp.x);
 		temp.y += 2f;
 		aihand.hand [randHand].GetComponent<BlockData> ().dragBlock (temp, false);

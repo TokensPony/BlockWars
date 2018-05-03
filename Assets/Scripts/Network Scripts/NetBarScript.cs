@@ -107,6 +107,7 @@ public class NetBarScript : NetworkBehaviour {
 	public void pushAway(float yForce, bool p1){
 		//rb = this.GetComponent<Rigidbody> ();
 		//rb.useGravity = true;
+		this.GetComponent<AudioSource>().Play();
 		this.GetComponent<ConstantForce> ().force = (p1)?gForce:gForce*-1f;
 
 		this.GetComponent<ConstantForce>().enabled= true;

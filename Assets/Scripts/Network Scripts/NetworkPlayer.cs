@@ -67,6 +67,7 @@ public class NetworkPlayer : NetworkBehaviour {
 			yield return null;
 		}
 		if (player1) {
+			this.GetComponent<AudioSource> ().Play ();
 			bar = Instantiate (bar);
 			NetworkServer.Spawn (bar);
 		} else {
@@ -378,7 +379,7 @@ public class NetworkPlayer : NetworkBehaviour {
 				}
 			}*/
 			//p1Turn = !p1Turn;
-			if (++turnCount % 10 == 0) {
+			if (++turnCount % 6 == 0) {
 				/*if (!player1) {
 				 * 
 				 * Consider making this functionality built into the bar itself. That of course

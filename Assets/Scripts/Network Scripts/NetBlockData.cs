@@ -35,6 +35,7 @@ public class NetBlockData : NetworkBehaviour{
 	[SyncVar]
 	public bool cForceActive;
 
+	public List<AudioClip> blockSounds;
 	// Use this for initialization
 	void Start () {
 		handLocked = false;
@@ -114,8 +115,12 @@ public class NetBlockData : NetworkBehaviour{
 
 				this.GetComponent<Rigidbody> ().velocity = (playerOne)? new Vector3 (0, -1, 0) : new Vector3 (0, 1, 0);
 				marked = true;
+				this.GetComponent<AudioSource> ().clip = blockSounds [1];
+				this.GetComponent<AudioSource> ().Play ();
 				StartCoroutine (waitToCollide ());
 			} else {
+				this.GetComponent<AudioSource> ().clip = blockSounds [2];
+				this.GetComponent<AudioSource> ().Play ();
 				this.transform.position = handPos;
 			}
 		}
@@ -137,7 +142,8 @@ public class NetBlockData : NetworkBehaviour{
 				yield return null;
 			}
 		}
-
+		this.GetComponent<AudioSource> ().clip = blockSounds [3];
+		this.GetComponent<AudioSource> ().Play ();
 		this.transform.root.gameObject.GetComponent<NetworkPlayer>().isMarked();
 		//yield return null;
 	}
@@ -172,7 +178,11 @@ public class NetBlockData : NetworkBehaviour{
 		if (hit) 
 		{
 			GameObject target = hitInfo.transform.gameObject;
-			Debug.Log("Hit " + target.name);
+			if (hitInfo.transform.gameObject.tag == "inHand"){
+				this.GetComponent<AudioSource> ().clip = blockSounds [0];
+				this.GetComponent<AudioSource> ().Play ();
+			} 
+			//Debug.Log("Hit " + target.name);
 			/*(if (hitInfo.transform.gameObject.tag == "Block"){
 				marked = true;
 				this.transform.parent.gameObject.GetComponent<NetworkPlayer> ().isMarked ();
